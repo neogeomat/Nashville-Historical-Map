@@ -1,0 +1,68 @@
+#map {
+    width: calc(100% - 230px);
+    margin: 0 auto;
+    display: inline-block;
+    height: 97vh;
+    float: right;
+}
+.instructions {
+    display: inline-flex;
+    flex-direction: column;
+    width: 200px;
+    vertical-align: top;
+    background: black;
+    color: white;
+    padding: 15px;
+    position: absolute;
+    z-index: 10;
+    height: 97vh;
+}
+#ul-corner{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    top: 1em;
+    left: 1em;
+}
+
+#ur-corner{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    top: 1em;
+    right: 1em;
+}
+
+#logo{
+    position: relative;
+    top: 2em;
+    /* right: 50%; */
+}
+#ll-corner{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    bottom: 1em;
+    left: 1em;
+}
+
+#lr-corner{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    bottom: 1em;
+    right: 1em;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0;
+}
+
+#interact{
+    position: relative;
+    top: 10vh;
+    height: 50vh;
+}
