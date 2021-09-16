@@ -1,4 +1,9 @@
-let map = L.map("map").setView([-25.334097, -49.3396], 7);
+const centZoom = 15;
+let map = L.map("map",{
+    minZoom: centZoom - 1,
+    maxZoom: centZoom + 1,
+    
+}).setView([36.1665, -86.79199], centZoom-1);
 
 // add svg layers
 let imageBounds = [
@@ -7,8 +12,10 @@ let imageBounds = [
     ];
 
 let nashville1864 = L.imageOverlay('data/1864.svg', imageBounds,{
-    opacity:1
+    opacity:1,
+    // interactive:true
 }).addTo(map);
+// nashville1864.on('click',(e) => console.log(e));
 let nashville1871 = L.imageOverlay('data/1871.svg', imageBounds,{
     opacity:1
 });
@@ -22,9 +29,9 @@ let nashville1952 = L.imageOverlay('data/1952.svg', imageBounds,{
     opacity:1
 });
 let nashville2016 = L.imageOverlay('data/2016.svg', imageBounds,{
-    opacity:0.5
+    opacity:1
 });
-map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
+// map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
 // add the OpenStreetMap tiles
 let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -37,7 +44,8 @@ let baselayers = {
     "1871":nashville1871,
     "1903":nashville1903,
     "1929":nashville1929,
-    "1952":nashville1952
+    "1952":nashville1952,
+    "osm":osm
 };
 
 let overlays = {
@@ -74,7 +82,7 @@ function selectYear(elem){
         map.removeLayer(baselayers[i]);
     }
     map.addLayer(baselayers[year]);
-    map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
+    // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
 // debugger;
 }
 
@@ -85,6 +93,26 @@ function selectMode(elem){
         map.removeLayer(overlays[i]);
     }
     map.addLayer(overlays[mode]);
-    map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
+    // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
 // debugger;
+}
+
+function zoomInMap(){
+    map.zoomIn();
+}
+
+function zoomOutMap(){
+    map.zoomOut();
+}
+
+map.on('zoomend',updateZoomText);
+function updateZoomText(){
+    if(map.getZoom() == centZoom){
+        $('#zoomText').html('1x')
+    }
+    else if (map.getZoom() < centZoom) {
+        $('#zoomText').html('0.5x')
+    } else {
+        $('#zoomText').html('2x')
+    }
 }

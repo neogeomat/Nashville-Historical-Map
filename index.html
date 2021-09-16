@@ -30,21 +30,26 @@
             <img src="data/lr-corner.png" id="lr-corner" alt="">
 
             <div id="interact">
-                <div>
-                    <span>Mode</span>
+                <span style="width:40%;" >Mode</span>
+                <div id='modeDiv' style="width:40%;" class="custom-select">
                     <select name="mode" id="mode" onchange='selectMode(this)'></select>
                 </div>
-                <div>
-                    <span>Year</span>
+                <span>Year</span>
+                <div id='yearDiv' style="width:100px;" class="custom-select">
                     <select name='year' id='year' onchange='selectYear(this)'></select>
                 </div>
-                <span>Zoom</span>
+                <div>
+                    <span>Zoom</span>
+                    <img src="data/magnifybutton.png" onclick="zoomInMap()">
+                    <span id="zoomText">0.5</span>
+                    <img src="data/reducebutton.png" onclick="zoomOutMap()" alt="" srcset="">
+                </div>
             </div>
         </div>
         <div id="map"></div>
     </div>
 </body>
 <script src='prototype.js'></script>
-
-
+<script src="lib/custom-select.js"></script>
+<link rel="stylesheet" href="lib/custom-select.css">
 </html>
