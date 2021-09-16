@@ -14,7 +14,8 @@ let imageBounds = [
 let nashville1864 = L.imageOverlay('data/1864.svg', imageBounds,{
     opacity:1,
     // interactive:true
-}).addTo(map);
+})
+.addTo(map);
 // nashville1864.on('click',(e) => console.log(e));
 let nashville1871 = L.imageOverlay('data/1871.svg', imageBounds,{
     opacity:1
@@ -45,7 +46,7 @@ let baselayers = {
     "1903":nashville1903,
     "1929":nashville1929,
     "1952":nashville1952,
-    "osm":osm
+    // "osm":osm
 };
 
 let overlays = {
@@ -75,26 +76,23 @@ L.control.coordinates({
 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
 }).addTo(map);
 
-function selectYear(elem){
-    // console.log(elem);
-    const year = elem.item(elem.selectedIndex).innerText;
-    for( i in baselayers){
-        map.removeLayer(baselayers[i]);
-    }
-    map.addLayer(baselayers[year]);
-    // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
-// debugger;
-}
+// $('div#year').click(e=>console.log(e));
+
 
 function selectMode(elem){
-    // console.log(elem);
-    const mode = elem.item(elem.selectedIndex).innerText;
-    for( i in overlays){
+    const mode = elem.innerText;
+    for(let i in overlays){
         map.removeLayer(overlays[i]);
     }
     map.addLayer(overlays[mode]);
-    // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]])
-// debugger;
+}
+
+function selectYear(elem){
+    const year = elem.innerText;
+    for( let i in baselayers){
+        map.removeLayer(baselayers[i]);
+    }
+    map.addLayer(baselayers[year]);
 }
 
 function zoomInMap(){
@@ -115,4 +113,5 @@ function updateZoomText(){
     } else {
         $('#zoomText').html('2x')
     }
+    console.log('zoom change')
 }

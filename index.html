@@ -29,17 +29,27 @@
             <img src="data/ll-corner.png" id="ll-corner">
             <img src="data/lr-corner.png" id="lr-corner" alt="">
 
-            <div id="interact">
-                <span style="width:40%;" >Mode</span>
-                <div id='modeDiv' style="width:40%;" class="custom-select">
-                    <select name="mode" id="mode" onchange='selectMode(this)'></select>
+            <div id="interact" class="grid-container">
+                <div class="grid-item">
+                    <span style="width:40%;" >Mode</span>
                 </div>
-                <span>Year</span>
-                <div id='yearDiv' style="width:100px;" class="custom-select">
-                    <select name='year' id='year' onchange='selectYear(this)'></select>
+                <div class="grid-item">
+                    <div id='modeDiv' class="custom-select" onclick='selectMode(this)'>
+                        <select name="mode" id="mode"></select>
+                    </div>
                 </div>
-                <div>
+                <div class="grid-item">
+                    <span>Year</span>
+                </div>
+                <div class="grid-item">
+                    <div id='yearDiv' class="custom-select" onclick='selectYear(this)'>
+                        <select name='year' id='year'></select>
+                    </div>
+                </div>
+                <div class="grid-item">
                     <span>Zoom</span>
+                </div>
+                <div class="grid-item">
                     <img src="data/magnifybutton.png" onclick="zoomInMap()">
                     <span id="zoomText">0.5</span>
                     <img src="data/reducebutton.png" onclick="zoomOutMap()" alt="" srcset="">
