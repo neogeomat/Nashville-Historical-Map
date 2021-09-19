@@ -1,15 +1,22 @@
-const centZoom = 15;
+const centZoom = 8;
 let map = L.map("map",{
-    minZoom: centZoom - 1,
-    maxZoom: centZoom + 1,
+    // minZoom: centZoom - 1,
+    // maxZoom: centZoom + 1,
+    crs: L.CRS.Simple,
     zoomControl: false
-}).setView([36.1665, -86.79199], centZoom-1);
+}).setView([45, 50], centZoom-1);
+// .setView([36.1665, -86.79199], centZoom-1);
 
 // add svg layers
+// let imageBounds = [
+//         [35.96967, -87.05589],
+//         [36.41016, -86.51555]
+//     ];
 let imageBounds = [
-        [35.96967, -87.05589],
-        [36.41016, -86.51555]
-    ];
+    [0, 0],
+    [100, 100]
+];
+
 
 let nashville1864 = L.imageOverlay('data/1864.svg', imageBounds,{
     opacity:1,
@@ -64,21 +71,21 @@ for( i in overlays){$('#mode').append('<option>'+i)}
 
 // let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 
-// L.control.coordinates({
-// 	position:"bottomleft", //optional default "bootomright"
-// 	decimals:2, //optional default 4
-// 	decimalSeperator:".", //optional default "."
-// 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-// 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-// 	enableUserInput:true, //optional default true
-// 	useDMS:false, //optional default false
-// 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
-// 	markerType: L.marker, //optional default L.marker
-// 	markerProps: {}, //optional default {},
-// 	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
-// 	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
-// 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
-// }).addTo(map);
+L.control.coordinates({
+	position:"bottomleft", //optional default "bootomright"
+	decimals:2, //optional default 4
+	decimalSeperator:".", //optional default "."
+	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+	enableUserInput:true, //optional default true
+	useDMS:false, //optional default false
+	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+	markerType: L.marker, //optional default L.marker
+	markerProps: {}, //optional default {},
+	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+}).addTo(map);
 
 // $('div#year').click(e=>console.log(e));
 

@@ -1,5 +1,5 @@
 #map {
-    width: calc(100% - 230px);
+    width: 75%;
     margin: 0 auto;
     display: inline-block;
     height: 97vh;
@@ -8,7 +8,7 @@
 .instructions {
     display: inline-flex;
     flex-direction: column;
-    width: 200px;
+    width: calc(25% - 30px);
     vertical-align: top;
     background: black;
     color: white;
