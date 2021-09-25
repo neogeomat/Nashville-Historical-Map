@@ -1,7 +1,7 @@
 const centZoom = 8;
 let map = L.map("map",{
-    minZoom: centZoom - 1,
-    maxZoom: centZoom + 1,
+    // minZoom: centZoom - 1,
+    // maxZoom: centZoom + 1,
     crs: L.CRS.Simple,
     zoomControl: false
 }).setView([45, 50], centZoom-1);
@@ -21,8 +21,7 @@ let imageBounds = [
 let nashville1864 = L.imageOverlay('data/1864.svg', imageBounds,{
     opacity:1,
     // interactive:true
-})
-.addTo(map);
+});
 // nashville1864.on('click',(e) => console.log(e));
 let nashville1871 = L.imageOverlay('data/1871.svg', imageBounds,{
     opacity:1
@@ -45,16 +44,39 @@ let nashville1864png = L.imageOverlay('data/1864.png', imageBounds,{
 let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
     opacity:1
 });
-// map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
-let tileLayer = L.gridLayer('data/tiles/{z}/{x}/{y}.gif',{
-    maxNativeZoom:centZoom,
-    minNativeZoom:centZoom,
-    bounds:imageBounds
-});
-// tileLayer.addTo(map);
-tileLayer.createTile = function(coords){
-    console.log(coords)
+
+let nashville1929Tile = L.tileLayer('data/tiles1929/',{
+    minZoom: centZoom -1,
+    maxZoom: centZoom +1,
+    tms:    true,
+    tileSize: 1024,
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1929Tile.getTileUrl = function(coords){
+    console.log(coords);
+    // debugger;
+    return this._url+'8/52/'+(625 -(25 - coords.x) + (coords.y +1)*25)+'.gif'
 }
+// map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
+nashville1929Tile.addTo(map)
+
+L.GridLayer.DebugCoords = L.GridLayer.extend({
+    createTile: function (coords) {
+        var tile = document.createElement('div');
+        tile.innerHTML = [ coords.z, coords.x, coords.y].join(', ');
+        tile.style.outline = '1px solid red';
+        return tile;
+    }
+});
+
+L.gridLayer.debugCoords = function(opts) {
+    return new L.GridLayer.DebugCoords(opts);
+};
+let grid = L.gridLayer.debugCoords({tileSize:1024});
+// map.addLayer(  );
+
 // add the OpenStreetMap tiles
 let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -63,6 +85,7 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // osm.addTo(map);
 
 let baselayers = {
+    "tile":nashville1929Tile,
     "1864":nashville1864,
     "1864png":nashville1864png,
     "1871":nashville1871,
@@ -78,28 +101,30 @@ let overlays = {
     "Landmarks":L.layerGroup(),
     "Streets":L.layerGroup(),
     "2016 Overlay":nashville2016,
-    "tile":tileLayer
+    
+    "grid":grid
+    
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
 let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 
-// L.control.coordinates({
-// 	position:"bottomleft", //optional default "bootomright"
-// 	decimals:2, //optional default 4
-// 	decimalSeperator:".", //optional default "."
-// 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-// 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-// 	enableUserInput:true, //optional default true
-// 	useDMS:false, //optional default false
-// 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
-// 	markerType: L.marker, //optional default L.marker
-// 	markerProps: {}, //optional default {},
-// 	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
-// 	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
-// 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
-// }).addTo(map);
+L.control.coordinates({
+	position:"bottomleft", //optional default "bootomright"
+	decimals:2, //optional default 4
+	decimalSeperator:".", //optional default "."
+	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+	enableUserInput:true, //optional default true
+	useDMS:false, //optional default false
+	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+	markerType: L.marker, //optional default L.marker
+	markerProps: {}, //optional default {},
+	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+}).addTo(map);
 
 function selectMode(elem){
     const mode = elem.innerText;
