@@ -1,7 +1,7 @@
 const centZoom = 8;
 let map = L.map("map",{
-    // minZoom: centZoom - 1,
-    // maxZoom: centZoom + 1,
+    minZoom: centZoom - 1,
+    maxZoom: centZoom + 1,
     crs: L.CRS.Simple,
     zoomControl: false
 }).setView([45, 50], centZoom-1);
@@ -39,10 +39,22 @@ let nashville1952 = L.imageOverlay('data/1952.svg', imageBounds,{
 let nashville2016 = L.imageOverlay('data/2016.svg', imageBounds,{
     opacity:1
 });
+let nashville1864png = L.imageOverlay('data/1864.png', imageBounds,{
+    opacity:1
+});
 let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
     opacity:1
 });
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
+let tileLayer = L.gridLayer('data/tiles/{z}/{x}/{y}.gif',{
+    maxNativeZoom:centZoom,
+    minNativeZoom:centZoom,
+    bounds:imageBounds
+});
+// tileLayer.addTo(map);
+tileLayer.createTile = function(coords){
+    console.log(coords)
+}
 // add the OpenStreetMap tiles
 let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -52,11 +64,12 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let baselayers = {
     "1864":nashville1864,
+    "1864png":nashville1864png,
     "1871":nashville1871,
     "1903":nashville1903,
     "1929":nashville1929,
     "1952":nashville1952,
-    "2016png":nashville2016png
+    // "2016png":nashville2016png
     // "osm":osm
 };
 
@@ -64,31 +77,29 @@ let overlays = {
     "Just Maps": L.layerGroup(),
     "Landmarks":L.layerGroup(),
     "Streets":L.layerGroup(),
-    "2016 Overlay":nashville2016
+    "2016 Overlay":nashville2016,
+    "tile":tileLayer
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
-// let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
+let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 
-L.control.coordinates({
-	position:"bottomleft", //optional default "bootomright"
-	decimals:2, //optional default 4
-	decimalSeperator:".", //optional default "."
-	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-	enableUserInput:true, //optional default true
-	useDMS:false, //optional default false
-	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
-	markerType: L.marker, //optional default L.marker
-	markerProps: {}, //optional default {},
-	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
-	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
-	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
-}).addTo(map);
-
-// $('div#year').click(e=>console.log(e));
-
+// L.control.coordinates({
+// 	position:"bottomleft", //optional default "bootomright"
+// 	decimals:2, //optional default 4
+// 	decimalSeperator:".", //optional default "."
+// 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+// 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+// 	enableUserInput:true, //optional default true
+// 	useDMS:false, //optional default false
+// 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+// 	markerType: L.marker, //optional default L.marker
+// 	markerProps: {}, //optional default {},
+// 	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+// 	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+// 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+// }).addTo(map);
 
 function selectMode(elem){
     const mode = elem.innerText;
