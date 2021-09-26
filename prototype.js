@@ -1,10 +1,10 @@
-const centZoom = 8;
+const centZoom = 8, zoomStep = 2;
 let map = L.map("map",{
     // minZoom: centZoom - 1,
     // maxZoom: centZoom + 1,
     crs: L.CRS.Simple,
     zoomControl: false
-}).setView([45, 50], centZoom-1);
+}).setView([45, 50], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
 
 // add svg layers
@@ -46,8 +46,8 @@ let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
 });
 
 let nashville1929Tile = L.tileLayer('data/tiles1929/',{
-    minZoom: centZoom -1,
-    maxZoom: centZoom +1,
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
     tms:    true,
     tileSize: 1024,
     maxNativeZoom: 8,
@@ -143,11 +143,11 @@ function selectYear(elem){
 }
 
 function zoomInMap(){
-    map.zoomIn();
+    map.zoomIn(2);
 }
 
 function zoomOutMap(){
-    map.zoomOut();
+    map.zoomOut(2);
 }
 
 map.on('zoomend',updateZoomText);
@@ -162,3 +162,4 @@ function updateZoomText(){
     }
     console.log('zoom change')
 }
+updateZoomText()
