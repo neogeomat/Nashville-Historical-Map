@@ -1,10 +1,12 @@
-const centZoom = 8, zoomStep = 2;
+const centZoom = 8, zoomStep = 3;
 let map = L.map("map",{
     // minZoom: centZoom - 1,
     // maxZoom: centZoom + 1,
     crs: L.CRS.Simple,
-    zoomControl: false
-}).setView([45, 50], centZoom-zoomStep);
+    // zoomControl: false
+});
+map.setView([47, 50], centZoom-zoomStep);
+// map.setView([0, 0], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
 
 // add svg layers
@@ -44,28 +46,92 @@ let nashville1864png = L.imageOverlay('data/1864.png', imageBounds,{
 let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
     opacity:1
 });
+// nashville2016.addTo(map);
 
-let nashville1929Tile = L.tileLayer('data/tiles1929/',{
+// let nashville1929Tile = L.tileLayer('data/tiles1929/',{
+//     minZoom: centZoom - zoomStep,
+//     maxZoom: centZoom + zoomStep,
+//     tms:    true,
+//     tileSize: 1024,
+//     maxNativeZoom: 8,
+//     minNativeZoom: 8,
+//     zoomReverse: true
+// })
+// nashville1929Tile.getTileUrl = function(coords){
+//     const tile = (650 -(25 - coords.x -1) + (coords.y)*25);
+//     console.log(coords,tile);
+//     // debugger;
+//     return this._url+'8/52/'+tile+'.gif'
+// }
+// nashville1929Tile.addTo(map)
+
+let nashville1871Tile1444 = L.tileLayer('data/1871Tiles1444/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + zoomStep,
     tms:    true,
-    tileSize: 1024,
+    tileSize: 714,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
 })
-nashville1929Tile.getTileUrl = function(coords){
-    console.log(coords);
+nashville1871Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
     // debugger;
-    return this._url+'8/52/'+(625 -(25 - coords.x) + (coords.y +1)*25)+'.gif'
+    return this._url+'/1871-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
+
+let nashville1929Tile1444 = L.tileLayer('data/1929Tiles1444/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1929Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1929-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
+let nashville1952Tile1444 = L.tileLayer('data/1952Tiles1444/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1952Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1952-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
+let nashville2016Tile1444 = L.tileLayer('data/2016Tiles1444/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville2016Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/2016-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
-nashville1929Tile.addTo(map)
+// nashville1929Tile1444.addTo(map)
 
 L.GridLayer.DebugCoords = L.GridLayer.extend({
     createTile: function (coords) {
         var tile = document.createElement('div');
-        tile.innerHTML = [ coords.z, coords.x, coords.y].join(', ');
+        tile.innerHTML = [ coords.z, coords.x, coords.y, (1444 -(38 - coords.x +1) + (coords.y -1 )*38)].join(', ');
         tile.style.outline = '1px solid red';
         return tile;
     }
@@ -85,13 +151,11 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // osm.addTo(map);
 
 let baselayers = {
-    "tile":nashville1929Tile,
     "1864":nashville1864,
-    "1864png":nashville1864png,
-    "1871":nashville1871,
+    "1871":nashville1871Tile1444,
     "1903":nashville1903,
-    "1929":nashville1929,
-    "1952":nashville1952,
+    "1929":nashville1929Tile1444,
+    "1952":nashville1952Tile1444,
     // "2016png":nashville2016png
     // "osm":osm
 };
@@ -100,7 +164,7 @@ let overlays = {
     "Just Maps": L.layerGroup(),
     "Landmarks":L.layerGroup(),
     "Streets":L.layerGroup(),
-    "2016 Overlay":nashville2016,
+    "2016 Overlay":nashville2016Tile1444,
     
     "grid":grid
     
