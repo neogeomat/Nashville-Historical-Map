@@ -64,6 +64,20 @@ let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
 //     return this._url+'8/52/'+tile+'.gif'
 // }
 // nashville1929Tile.addTo(map)
+let nashville1864Tile1444 = L.tileLayer('data/1864Tiles1444/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1864Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1864-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
 
 let nashville1871Tile1444 = L.tileLayer('data/1871Tiles1444/',{
     minZoom: centZoom - zoomStep,
@@ -78,6 +92,21 @@ nashville1871Tile1444.getTileUrl = function(coords){
     // console.log(coords);
     // debugger;
     return this._url+'/1871-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
+let nashville1903Tile1444 = L.tileLayer('data/1903Tiles1444/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1903Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1903-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
 
 let nashville1929Tile1444 = L.tileLayer('data/1929Tiles1444/',{
@@ -151,9 +180,9 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // osm.addTo(map);
 
 let baselayers = {
-    "1864":nashville1864,
+    "1864":nashville1864Tile1444,
     "1871":nashville1871Tile1444,
-    "1903":nashville1903,
+    "1903":nashville1903Tile1444,
     "1929":nashville1929Tile1444,
     "1952":nashville1952Tile1444,
     // "2016png":nashville2016png
