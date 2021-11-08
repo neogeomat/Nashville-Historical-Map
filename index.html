@@ -50,11 +50,14 @@
                     <span>Zoom</span>
                 </div>
                 <div class="grid-item">
-                    <img src="data/magnifybutton.png" onclick="zoomInMap()">
+                    <img src="data/magnifybutton.png" onclick="zoomInMap()" style="float: left;">
                     <span id="zoomText"></span>
-                    <img src="data/reducebutton.png" onclick="zoomOutMap()" alt="" srcset="">
+                    <img src="data/reducebutton.png" onclick="zoomOutMap()" style="float: right;" alt="" srcset="">
                 </div>
             </div>
+        </div>
+        <div id="gridCollapse" class="collapsible">
+            <img src="data/collapsebutton.png">
         </div>
         <div id="map"></div>
     </div>
@@ -62,4 +65,29 @@
 <script src='prototype.js'></script>
 <script src="lib/custom-select.js"></script>
 <link rel="stylesheet" href="lib/custom-select.css">
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.previousElementSibling;
+            var map = this.nextElementSibling;
+            // debugger;
+            if(this.classList[1] == 'active'){
+                content.style.width = "0px";
+                map.style.width = "100%";
+                this.style.left = "0px";
+                this.style.margin = '-15px';
+                this.firstElementChild.src = 'http://127.0.0.1:5500/data/expandbutton.png'
+            }else{
+                content.style.width = "calc(25% - 30px)";
+                map.style.width = "75%";
+                this.style.left = "calc(25%)";
+                this.firstElementChild.src = 'http://127.0.0.1:5500/data/collapsebutton.png'
+            }
+        });
+    }
+</script>
 </html>

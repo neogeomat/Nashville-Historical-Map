@@ -1,9 +1,9 @@
-const centZoom = 8, zoomStep = 3;
+const centZoom = 8, zoomStep = 2;
 let map = L.map("map",{
-    // minZoom: centZoom - 1,
-    // maxZoom: centZoom + 1,
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
     crs: L.CRS.Simple,
-    // zoomControl: false
+    zoomControl: false
 });
 map.setView([47, 50], centZoom-zoomStep);
 // map.setView([0, 0], centZoom-zoomStep);
@@ -195,29 +195,30 @@ let overlays = {
     "Streets":L.layerGroup(),
     "2016 Overlay":nashville2016Tile1444,
     
-    "grid":grid
+    // "grid":grid
     
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
-let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
+nashville1952Tile1444.addTo(map);
+// let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 
-L.control.coordinates({
-	position:"bottomleft", //optional default "bootomright"
-	decimals:2, //optional default 4
-	decimalSeperator:".", //optional default "."
-	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-	enableUserInput:true, //optional default true
-	useDMS:false, //optional default false
-	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
-	markerType: L.marker, //optional default L.marker
-	markerProps: {}, //optional default {},
-	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
-	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
-	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
-}).addTo(map);
+// L.control.coordinates({
+// 	position:"bottomleft", //optional default "bootomright"
+// 	decimals:2, //optional default 4
+// 	decimalSeperator:".", //optional default "."
+// 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+// 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+// 	enableUserInput:true, //optional default true
+// 	useDMS:false, //optional default false
+// 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+// 	markerType: L.marker, //optional default L.marker
+// 	markerProps: {}, //optional default {},
+// 	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+// 	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+// 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+// }).addTo(map);
 
 function selectMode(elem){
     const mode = elem.innerText;
@@ -236,11 +237,11 @@ function selectYear(elem){
 }
 
 function zoomInMap(){
-    map.zoomIn(2);
+    map.zoomIn(zoomStep);
 }
 
 function zoomOutMap(){
-    map.zoomOut(2);
+    map.zoomOut(zoomStep);
 }
 
 map.on('zoomend',updateZoomText);

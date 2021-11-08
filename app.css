@@ -81,3 +81,10 @@ body {
     text-align: center;
     height: 2em;
   }
+
+.collapsible {
+    position: absolute;
+    top: 50%;
+    left: calc(25% - 20px);
+    z-index: 500;
+}
