@@ -2,6 +2,7 @@ const centZoom = 8, zoomStep = 2;
 let map = L.map("map",{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + zoomStep,
+    wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
     zoomControl: false
 });
@@ -68,7 +69,8 @@ let nashville1864Tile1444 = L.tileLayer('data/1864Tiles1444/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    // tileSize: 714,
+    tileSize:1428,
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -201,7 +203,7 @@ let overlays = {
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
-nashville1952Tile1444.addTo(map);
+nashville1864Tile1444.addTo(map);
 // let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 
 // L.control.coordinates({
@@ -254,6 +256,6 @@ function updateZoomText(){
     } else {
         $('#zoomText').html('2x')
     }
-    console.log('zoom change')
+    console.log('zoom change to'+map.getZoom());
 }
 updateZoomText()

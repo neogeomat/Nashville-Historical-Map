@@ -1,3 +1,17 @@
+/* Webfont: BloggerSans */
+@font-face {
+    font-family: 'BloggerSans';
+    src: url('lib/BloggerSans/BloggerSans.eot'); /* IE9 Compat Modes */
+    src: url('lib/BloggerSans/BloggerSans.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('lib/BloggerSans/BloggerSans.woff') format('woff'), /* Modern Browsers */
+         url('lib/BloggerSans/BloggerSans.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('lib/BloggerSans/BloggerSans.svg#BloggerSans') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+
 #map {
     width: 75%;
     margin: 0 auto;
@@ -16,6 +30,8 @@
     position: absolute;
     z-index: 10;
     height: 97vh;
+    font-size: 20px; 
+    font-family: "BloggerSans", Georgia; 
 }
 #ul-corner{
     position: absolute;
