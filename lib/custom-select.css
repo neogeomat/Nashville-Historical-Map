@@ -1,6 +1,6 @@
 .custom-select {
     position: relative;
-    font-family: Arial;
+    /* font-family: Arial; */
     background-image: url(data/dropsowntriangle.png) no-repeat right white;
     border: #f2c885;
 }
@@ -9,9 +9,9 @@
     display: none; /*hide original SELECT element: */
   }
 
-  .select-selected {
-    /* background-color: #f2c885; */
-  }
+.select-selected {
+/* background-color: #f2c885; */
+}
 
   /* Style the arrow inside the select element: */
 .select-selected:after {
