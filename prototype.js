@@ -20,54 +20,9 @@ let imageBounds = [
     [100, 100]
 ];
 
-
-let nashville1864 = L.imageOverlay('data/1864.svg', imageBounds,{
-    opacity:1,
-    // interactive:true
-});
-// nashville1864.on('click',(e) => console.log(e));
-let nashville1871 = L.imageOverlay('data/1871.svg', imageBounds,{
-    opacity:1
-});
-let nashville1903 = L.imageOverlay('data/1903.svg', imageBounds,{
-    opacity:1
-});
-let nashville1929 = L.imageOverlay('data/1929.svg', imageBounds,{
-    opacity:1
-});
-let nashville1952 = L.imageOverlay('data/1952.svg', imageBounds,{
-    opacity:1
-});
-let nashville2016 = L.imageOverlay('data/2016.svg', imageBounds,{
-    opacity:1
-});
-let nashville1864png = L.imageOverlay('data/1864.png', imageBounds,{
-    opacity:1
-});
-let nashville2016png = L.imageOverlay('data/2016.png', imageBounds,{
-    opacity:1
-});
-// nashville2016.addTo(map);
-
-// let nashville1929Tile = L.tileLayer('data/tiles1929/',{
-//     minZoom: centZoom - zoomStep,
-//     maxZoom: centZoom + zoomStep,
-//     tms:    true,
-//     tileSize: 1024,
-//     maxNativeZoom: 8,
-//     minNativeZoom: 8,
-//     zoomReverse: true
-// })
-// nashville1929Tile.getTileUrl = function(coords){
-//     const tile = (650 -(25 - coords.x -1) + (coords.y)*25);
-//     console.log(coords,tile);
-//     // debugger;
-//     return this._url+'8/52/'+tile+'.gif'
-// }
-// nashville1929Tile.addTo(map)
 let nashville1864Tile1444 = L.tileLayer('data/1864Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     // tileSize: 714,
     tileSize:1428,
@@ -83,7 +38,7 @@ nashville1864Tile1444.getTileUrl = function(coords){
 
 let nashville1871Tile1444 = L.tileLayer('data/1871Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
@@ -98,7 +53,7 @@ nashville1871Tile1444.getTileUrl = function(coords){
 
 let nashville1903Tile1444 = L.tileLayer('data/1903Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
@@ -113,7 +68,7 @@ nashville1903Tile1444.getTileUrl = function(coords){
 
 let nashville1929Tile1444 = L.tileLayer('data/1929Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
@@ -128,7 +83,7 @@ nashville1929Tile1444.getTileUrl = function(coords){
 
 let nashville1952Tile1444 = L.tileLayer('data/1952Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
@@ -143,7 +98,7 @@ nashville1952Tile1444.getTileUrl = function(coords){
 
 let nashville1952Tile1444_578 = L.tileLayer('data/1952Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
@@ -158,7 +113,7 @@ nashville1952Tile1444_578.getTileUrl = function(coords){
 
 let nashville2016Tile1444 = L.tileLayer('data/2016Tiles1444/',{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     tms:    true,
     tileSize: 714,// 725-750
     maxNativeZoom: 8,
