@@ -16,7 +16,7 @@
     width: 75%;
     margin: 0 auto;
     display: inline-block;
-    height: 97vh;
+    height: 100vh;
     float: right;
 }
 .instructions {
@@ -29,12 +29,12 @@
     padding: 15px;
     position: absolute;
     z-index: 10;
-    height: 97vh;
+    height: 100vh;
     font-size: 20px; 
     font-family: "BloggerSans", Georgia; 
 }
 #ul-corner{
-    position: absolute;
+    position: inherit;
     height: 2em;
     width: 2em;
     top: 1em;
@@ -42,7 +42,7 @@
 }
 
 #ur-corner{
-    position: absolute;
+    position: inherit;
     height: 2em;
     width: 2em;
     top: 1em;
@@ -55,7 +55,7 @@
     /* right: 50%; */
 }
 #ll-corner{
-    position: absolute;
+    position: inherit;
     height: 2em;
     width: 2em;
     bottom: 1em;
@@ -63,7 +63,7 @@
 }
 
 #lr-corner{
-    position: absolute;
+    position: inherit;
     height: 2em;
     width: 2em;
     bottom: 1em;
@@ -80,7 +80,7 @@ body {
 #interact{
     position: relative;
     top: 10vh;
-    height: 50vh;
+    height: 20vh;
 }
 
 .grid-container {
@@ -101,6 +101,6 @@ body {
 .collapsible {
     position: absolute;
     top: 50%;
-    left: calc(25% - 20px);
+    left: calc(25% - 25px);
     z-index: 500;
 }

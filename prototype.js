@@ -1,12 +1,12 @@
-const centZoom = 8, zoomStep = 2;
+const centZoom = 6, zoomStep = 2;
 let map = L.map("map",{
     minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
     wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
     zoomControl: false
 });
-map.setView([47, 50], centZoom-zoomStep);
+map.setView([47, 50], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
 
@@ -141,6 +141,21 @@ nashville1952Tile1444.getTileUrl = function(coords){
     return this._url+'/1952-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
 
+let nashville1952Tile1444_578 = L.tileLayer('data/1952Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1952Tile1444_578.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1952-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
 let nashville2016Tile1444 = L.tileLayer('data/2016Tiles1444/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + zoomStep,
@@ -186,25 +201,24 @@ let baselayers = {
     "1871":nashville1871Tile1444,
     "1903":nashville1903Tile1444,
     "1929":nashville1929Tile1444,
-    "1952":nashville1952Tile1444,
+    // "1952":nashville1952Tile1444,
+    "1952":nashville1952Tile1444_578
     // "2016png":nashville2016png
     // "osm":osm
 };
 
 let overlays = {
     "Just Maps": L.layerGroup(),
-    "Landmarks":L.layerGroup(),
-    "Streets":L.layerGroup(),
+    // "Landmarks":L.layerGroup(),
+    // "Streets":L.layerGroup(),
     "2016 Overlay":nashville2016Tile1444,
-    
-    // "grid":grid
-    
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
 nashville1864Tile1444.addTo(map);
-// let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
+let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
+layerSwitcher.getContainer().style.display='none';
 
 // L.control.coordinates({
 // 	position:"bottomleft", //optional default "bootomright"
@@ -253,8 +267,10 @@ function updateZoomText(){
     }
     else if (map.getZoom() < centZoom) {
         $('#zoomText').html('0.5x')
-    } else {
+    } else if (map.getZoom() <= centZoom + zoomStep){
         $('#zoomText').html('2x')
+    } else{
+        $('#zoomText').html('4x')
     }
     console.log('zoom change to'+map.getZoom());
 }
