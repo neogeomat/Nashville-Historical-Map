@@ -1,4 +1,4 @@
-const centZoom = 6, zoomStep = 4;
+const centZoom = 7, zoomStep = 4;
 let imageBounds = [
     [0, 0],
     [100, 100]
@@ -12,7 +12,7 @@ let map = L.map("map",{
     zoomControl: false,
     maxBounds: imageBounds
 });
-map.setView([47, 50], centZoom);
+map.setView([45, 53], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
 
