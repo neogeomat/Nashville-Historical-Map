@@ -1,12 +1,12 @@
-const centZoom = 6, zoomStep = 2;
+const centZoom = 6, zoomStep = 4;
 let imageBounds = [
     [0, 0],
     [100, 100]
 ];
 
 let map = L.map("map",{
-    minZoom: centZoom - zoomStep,
-    maxZoom: centZoom + 2*zoomStep,
+    // minZoom: centZoom - zoomStep,
+    // maxZoom: centZoom + 2*zoomStep,
     wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
     zoomControl: false,
@@ -212,11 +212,42 @@ function selectYear(elem){
 }
 
 function zoomInMap(){
-    map.zoomIn(zoomStep);
+    // map.zoomIn(zoomStep);
+    $zoomText = parseFloat($('#zoomText').html());
+    // debugger;
+    switch($zoomText){
+        case 0.5:
+            map.setZoom(centZoom);
+            break;
+        case 1:
+            map.setZoom(centZoom + 4);    
+            break;
+        case 2:
+            map.setZoom(centZoom + 8);
+            break;
+        case 4:
+            map.setZoom(centZoom + 8);
+            break;
+    }
 }
 
 function zoomOutMap(){
-    map.zoomOut(zoomStep);
+    // map.zoomOut(zoomStep);
+    $zoomText = parseFloat($('#zoomText').html());
+    switch($zoomText){
+        case 0.5:
+            map.setZoom(centZoom - 4);
+            break;
+        case 1:
+            map.setZoom(centZoom - 4);
+            break;
+        case 2:
+            map.setZoom(centZoom);
+            break;
+        case 4:
+            map.setZoom(centZoom + 4);
+            break;
+    }
 }
 
 map.on('zoomend',updateZoomText);
