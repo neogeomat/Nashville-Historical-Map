@@ -37,9 +37,10 @@
     color: #f2c885;
     padding: 8px 16px;
     border: 1px solid;
-    border-color: #f2c885;;
+    border-color: #666056;;
     cursor: pointer;
     background-color: black;
+    border-radius: 6px;
 }
   
   /* Style items (options): */
@@ -51,7 +52,9 @@
     right: 0;
     z-index: 99;
     /* height: 15px; */
-    display: inline-block;
+    /* display: inline-table; */
+    display: grid; */
+    grid-auto-columns: max-content;
   }
   
   /* Hide the items when the select box is closed: */
