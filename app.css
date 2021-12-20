@@ -29,45 +29,49 @@
     padding: 15px;
     position: absolute;
     z-index: 10;
-    height: 100vh;
+    height: 96vh;
     font-size: 20px; 
     font-family: "BloggerSans", Georgia; 
 }
 #ul-corner{
     position: inherit;
-    height: 2em;
-    width: 2em;
-    top: 1em;
-    left: 1em;
+    height: 1em;
+    width: 1em;
+    top: 0.5em;
+    left: 0.5em;
 }
 
 #ur-corner{
     position: inherit;
-    height: 2em;
-    width: 2em;
-    top: 1em;
-    right: 1em;
+    height: 1em;
+    width: 1em;
+    top: 0.5em;
+    right: 0.5em;
 }
 
 #logo{
     position: relative;
-    top: 2em;
+    top: 0em;
+    /* width: 5em; */
+    height: 5em;
     /* right: 50%; */
+    padding-left: 1em;
+    padding-right: 1em;
 }
 #ll-corner{
     position: inherit;
-    height: 2em;
-    width: 2em;
-    bottom: 1em;
-    left: 1em;
+    height: 1em;
+    width: 1em;
+    bottom: 0.5em;
+    left: 0.5em;
 }
 
 #lr-corner{
     position: inherit;
-    height: 2em;
-    width: 2em;
-    bottom: 1em;
-    right: 1em;
+    height: 1em;
+    width: 1em;
+    bottom: 0.5em;
+    right: 0.5em;
 }
 
 body {
