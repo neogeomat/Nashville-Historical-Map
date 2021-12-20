@@ -1,10 +1,16 @@
 const centZoom = 6, zoomStep = 2;
+let imageBounds = [
+    [0, 0],
+    [100, 100]
+];
+
 let map = L.map("map",{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
-    zoomControl: false
+    zoomControl: false,
+    maxBounds: imageBounds
 });
 map.setView([47, 50], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
@@ -15,10 +21,6 @@ map.setView([47, 50], centZoom);
 //         [35.96967, -87.05589],
 //         [36.41016, -86.51555]
 //     ];
-let imageBounds = [
-    [0, 0],
-    [100, 100]
-];
 
 let nashville1864Tile1444 = L.tileLayer('data/1864Tiles1444/',{
     minZoom: centZoom - zoomStep,
@@ -127,7 +129,6 @@ nashville2016Tile1444.getTileUrl = function(coords){
 }
 
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
-// nashville1929Tile1444.addTo(map)
 
 L.GridLayer.DebugCoords = L.GridLayer.extend({
     createTile: function (coords) {
@@ -152,12 +153,13 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // osm.addTo(map);
 
 let baselayers = {
+    "1952":nashville1952Tile1444_578,
     "1864":nashville1864Tile1444,
     "1871":nashville1871Tile1444,
     "1903":nashville1903Tile1444,
     "1929":nashville1929Tile1444,
     // "1952":nashville1952Tile1444,
-    "1952":nashville1952Tile1444_578
+
     // "2016png":nashville2016png
     // "osm":osm
 };
@@ -171,7 +173,9 @@ let overlays = {
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
-nashville1864Tile1444.addTo(map);
+
+nashville1952Tile1444_578.addTo(map);
+$('#year').children()[4].selected = true;
 let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display='none';
 
@@ -229,4 +233,4 @@ function updateZoomText(){
     }
     console.log('zoom change to'+map.getZoom());
 }
-updateZoomText()
+updateZoomText();
