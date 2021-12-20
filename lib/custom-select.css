@@ -50,6 +50,8 @@
     left: 0;
     right: 0;
     z-index: 99;
+    /* height: 15px; */
+    display: inline-block;
   }
   
   /* Hide the items when the select box is closed: */

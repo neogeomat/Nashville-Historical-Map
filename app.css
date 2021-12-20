@@ -10,10 +10,13 @@
     font-weight: normal;
     text-rendering: optimizeLegibility;
 }
-
+:root{
+    --CPwidth: 300px;
+}
 
 #map {
     width: 75%;
+    /* width: calc(100% - var(--CPwidth)); */
     margin: 0 auto;
     display: inline-block;
     height: 100vh;
@@ -22,6 +25,7 @@
 .instructions {
     display: inline-flex;
     flex-direction: column;
+    /* width: var(--CPwidth); */
     width: calc(25% - 30px);
     vertical-align: top;
     background: black;
@@ -91,16 +95,16 @@ body {
     display: inline-grid;
     grid-template-columns: auto auto;
     /* padding: 10px; */
-  }
-  
-  .grid-item {
+}
+
+.grid-item {
     /* background-color: rgba(255, 255, 255, 0.8); */
     border: 1px solid rgba(0, 0, 0, 0.8);
     /* padding: 20px; */
     /* font-size: 30px; */
     text-align: center;
     height: 2em;
-  }
+}
 
 .collapsible {
     position: absolute;
