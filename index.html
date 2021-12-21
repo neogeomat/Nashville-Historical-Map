@@ -30,15 +30,15 @@
             <img src="data/lr-corner.png" id="lr-corner" alt="">
 
             <div id="interact" class="grid-container">
-                <div class="grid-item">
-                    <span style="width:40%;" >Mode</span>
+                <div class="grid-item labeltxt">
+                    <span >Mode</span>
                 </div>
                 <div class="grid-item">
                     <div id='modeDiv' class="custom-select" onclick='selectMode(this)'>
                         <select name="mode" id="mode"></select>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item labeltxt">
                     <span>Year</span>
                 </div>
                 <div class="grid-item">
@@ -46,13 +46,13 @@
                         <select name='year' id='year'></select>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item labeltxt">
                     <span>Zoom</span>
                 </div>
-                <div class="grid-item">
-                    <img src="data/reducebutton.png" onclick="zoomOutMap()" style="float: left;" alt="" srcset="">
+                <div class="grid-item zoombtn">
+                    <img src="data/reducebutton.png" onclick="zoomOutMap()" alt="" srcset="">
                     <span id="zoomText"></span>
-                    <img src="data/magnifybutton.png" onclick="zoomInMap()" style="float: right;">                    
+                    <img src="data/magnifybutton.png" onclick="zoomInMap()" >                    
                 </div>
             </div>
         </div>
@@ -77,16 +77,18 @@
             var map = this.nextElementSibling;
             // debugger;
             if(this.classList[1] == 'active'){
-                content.style.width = "5px";
-                map.style.width = "calc(100% - 5px)";
+                content.style.display = "none";
+                // content.style.width = "5px";
+                map.style.width = "calc(100%)";
                 this.style.left = "0px";
                 this.style.margin = '-15px';
-                this.firstElementChild.src = 'data/expandbutton.png'
+                this.firstElementChild.src = 'data/expandbutton.png';                
             }else{
+                content.style.display = "inline-flex";
                 content.style.width = "calc(25% - 30px)";
                 map.style.width = "75%";
                 this.style.left = "calc(25%)";
-                this.firstElementChild.src = 'data/collapsebutton.png'
+                this.firstElementChild.src = 'data/collapsebutton.png';
             }
         });
     }
