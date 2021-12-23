@@ -82,19 +82,20 @@
         coll[i].addEventListener("click", function() {
             this.classList.toggle("active");
             var content = this.previousElementSibling;
-            var map = this.nextElementSibling;
+            var mapDiv = this.nextElementSibling;
             // debugger;
             if(this.classList[1] == 'active'){
                 content.style.display = "none";
                 // content.style.width = "5px";
-                map.style.width = "calc(100%)";
+                mapDiv.style.width = "calc(100%)";
+                map.invalidateSize();
                 this.style.left = "0px";
                 this.style.margin = '-15px';
                 this.firstElementChild.src = 'data/expandbutton.png';                
             }else{
                 content.style.display = "inline-flex";
                 content.style.width = "calc(25% - 30px)";
-                map.style.width = "75%";
+                mapDiv.style.width = "75%";
                 this.style.left = "calc(25%)";
                 this.firstElementChild.src = 'data/collapsebutton.png';
             }
