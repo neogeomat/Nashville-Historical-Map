@@ -130,3 +130,29 @@ body {
     position: relative;
     top: 8px;
 }
+
+#gridCollapse{
+    cursor: pointer;
+}
+
+.legend{
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+    margin-right:-15px;
+    margin-left:-15px;    
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 5em;
+}
+#downarrow{
+    position: relative;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-top: 1px solid #;
+}
