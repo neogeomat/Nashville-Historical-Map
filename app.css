@@ -15,7 +15,7 @@
 }
 
 #map {
-    width: 75%;
+    width: 80%;
     /* width: calc(100% - var(--CPwidth)); */
     margin: 0 auto;
     display: inline-block;
@@ -26,7 +26,7 @@
     display: inline-flex;
     flex-direction: column;
     /* width: var(--CPwidth); */
-    width: calc(25% - 30px);
+    width: calc(20% - 30px);
     vertical-align: top;
     background: black;
     color: white;
@@ -122,7 +122,7 @@ body {
 .collapsible {
     position: absolute;
     top: 50%;
-    left: calc(25% - 25px);
+    left: calc(20% - 25px);
     z-index: 500;
 }
 .labeltxt {
@@ -136,7 +136,7 @@ body {
 #gridCollapse{
     cursor: pointer;
 }
-.legend h4{
+.legend h5{
     margin-top: 10px;
     width: 250px;
     text-align: center;
