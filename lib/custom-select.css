@@ -20,7 +20,7 @@
     position: relative;
     content: "";
     top: 14px;
-    left: 5px;
+    left: 15px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
@@ -37,7 +37,7 @@
 /* style the items (options), including the selected item: */
 .select-items div,.select-selected {
     color: #f2c885;
-    padding: 8px 22px 8px 8px;
+    padding: 8px 25px 8px 8px;
     border: 1px solid;
     border-color: #666056;
     cursor: pointer;
