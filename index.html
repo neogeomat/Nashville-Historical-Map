@@ -57,8 +57,11 @@
                 
             </div>
             <div class="legend">
-                <img src="data/legend.png" />
-                <div id="downarrow"><img src="data/dropdowntriangle.png"></div>
+                <h4>Legend</h4>
+                
+                <img id="legend_content" src="data/legend/legendcontent.png" />
+                <div id="uparrow"><img src="data/legend/expandedlegendbar.png"></div>
+                <div id="downarrow" style="display: none;"><img src="data/legend/collapsedlegendbar.png"></div>
             </div>
         </div>
         <div id="gridCollapse" class="collapsible">
@@ -97,5 +100,16 @@
             }
         });
     }
+
+    $('#uparrow').click(function(){
+        $('#legend_content').hide();
+        $(this).hide();
+        $('#downarrow').show();
+    });
+    $('#downarrow').click(function(){
+        $('#legend_content').show();
+        $(this).hide();
+        $('#uparrow').show();
+    });
 </script>
 </html>

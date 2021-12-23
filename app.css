@@ -56,10 +56,10 @@
 #logo{
     position: relative;
     top: 0em;
-    width: 225px;
-    height: 100px;
+    width: 250px;
+    height: 140px;
     /* right: 50%; */
-    margin: 10px auto;
+    margin: 5px auto;
     padding-left: 1em;
     padding-right: 1em;
 }
@@ -86,11 +86,11 @@ body {
     margin: 0;
 }
 
-#interact{
-    position: relative;
-    top: 10vh;
-    height: 20vh;
-}
+/* #interact{ */
+    /* position: relative;
+    top: 5vh;
+    height: 20vh; */
+/* } */
 
 .grid-container {
     display: inline-grid;
@@ -134,24 +134,23 @@ body {
 #gridCollapse{
     cursor: pointer;
 }
-
+.legend h4{
+    margin-top: 10px;
+    width: 250px;
+    text-align: center;
+}
 .legend{
     display:-ms-flexbox;
     display:flex;
     -ms-flex-wrap:wrap;
-    flex-wrap:wrap;
-    margin-right:-15px;
-    margin-left:-15px;    
-    width: 280px;
+    flex-wrap:wrap; 
+    width: 250px;
     margin-left: auto;
     margin-right: auto;
-    position: relative;
-    top: 5em;
 }
-#downarrow{
-    position: relative;
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+#downarrow, #uparrow{
+    cursor: pointer;
+}
+#uparrow{
+    margin-top: 15px;    
 }
