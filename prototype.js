@@ -1,4 +1,4 @@
-const centZoom = 7, zoomStep = 4;
+const centZoom = 6, zoomStep = 2;
 let imageBounds = [
     [0, 0],
     [100, 100]
@@ -220,13 +220,13 @@ function zoomInMap(){
             map.setZoom(centZoom);
             break;
         case 1:
-            map.setZoom(centZoom + 4);    
+            map.setZoom(centZoom + 2);    
             break;
         case 2:
-            map.setZoom(centZoom + 8);
+            map.setZoom(centZoom + 4);
             break;
         case 4:
-            map.setZoom(centZoom + 8);
+            map.setZoom(centZoom + 4);
             break;
     }
 }
@@ -236,16 +236,16 @@ function zoomOutMap(){
     $zoomText = parseFloat($('#zoomText').html());
     switch($zoomText){
         case 0.5:
-            map.setZoom(centZoom - 4);
+            map.setZoom(centZoom - 2);
             break;
         case 1:
-            map.setZoom(centZoom - 4);
+            map.setZoom(centZoom - 2);
             break;
         case 2:
             map.setZoom(centZoom);
             break;
         case 4:
-            map.setZoom(centZoom + 4);
+            map.setZoom(centZoom + 2);
             break;
     }
 }
