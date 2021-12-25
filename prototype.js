@@ -37,6 +37,20 @@ nashville1864Tile1444.getTileUrl = function(coords){
     // debugger;
     return this._url+'/1864-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
+let nashville1864Tile1444_578 = L.tileLayer('data/1864Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1864Tile1444_578.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1864-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
 
 let nashville1871Tile1444 = L.tileLayer('data/1871Tiles1444/',{
     minZoom: centZoom - zoomStep,
@@ -48,6 +62,20 @@ let nashville1871Tile1444 = L.tileLayer('data/1871Tiles1444/',{
     zoomReverse: true
 })
 nashville1871Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1871-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+let nashville1871Tile1444_578 = L.tileLayer('data/1871Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1871Tile1444_578.getTileUrl = function(coords){
     // console.log(coords);
     // debugger;
     return this._url+'/1871-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
@@ -67,6 +95,20 @@ nashville1903Tile1444.getTileUrl = function(coords){
     // debugger;
     return this._url+'/1903-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
+let nashville1903Tile1444_578 = L.tileLayer('data/1903Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1903Tile1444_578.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1903-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
 
 let nashville1929Tile1444 = L.tileLayer('data/1929Tiles1444/',{
     minZoom: centZoom - zoomStep,
@@ -78,6 +120,20 @@ let nashville1929Tile1444 = L.tileLayer('data/1929Tiles1444/',{
     zoomReverse: true
 })
 nashville1929Tile1444.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/1929-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+let nashville1929Tile1444_578 = L.tileLayer('data/1929Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville1929Tile1444_578.getTileUrl = function(coords){
     // console.log(coords);
     // debugger;
     return this._url+'/1929-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
@@ -127,6 +183,20 @@ nashville2016Tile1444.getTileUrl = function(coords){
     // debugger;
     return this._url+'/2016-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
+let nashville2016Tile1444_578 = L.tileLayer('data/2016Tiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: 714,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville2016Tile1444_578.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/2016-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
 
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
 
@@ -154,10 +224,10 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let baselayers = {
     "1952":nashville1952Tile1444_578,
-    "1864":nashville1864Tile1444,
-    "1871":nashville1871Tile1444,
-    "1903":nashville1903Tile1444,
-    "1929":nashville1929Tile1444,
+    "1864":nashville1864Tile1444_578,
+    "1871":nashville1871Tile1444_578,
+    "1903":nashville1903Tile1444_578,
+    "1929":nashville1929Tile1444_578,
     // "1952":nashville1952Tile1444,
 
     // "2016png":nashville2016png
