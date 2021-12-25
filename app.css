@@ -15,8 +15,8 @@
 }
 
 #map {
-    width: 80%;
-    /* width: calc(100% - var(--CPwidth)); */
+    /* width: 80%; */
+    width: calc(100% - var(--CPwidth));
     margin: 0 auto;
     height: 100vh;
     float: right;
@@ -24,8 +24,7 @@
 .instructions {
     display: inline-flex;
     flex-direction: column;
-    /* width: var(--CPwidth); */
-    width: calc(20% - 30px);
+    width: var(--CPwidth);
     vertical-align: top;
     background: black;
     color: white;
@@ -127,7 +126,7 @@ body {
 .collapsible {
     position: absolute;
     top: 50%;
-    left: calc(20% - 25px);
+    left: calc(var(--CPwidth) - 25px);
     z-index: 500;
 }
 

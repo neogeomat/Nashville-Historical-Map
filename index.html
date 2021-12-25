@@ -85,18 +85,18 @@
             var mapDiv = this.nextElementSibling;
             // debugger;
             if(this.classList[1] == 'active'){
-                content.style.display = "none";
-                // content.style.width = "5px";
-                mapDiv.style.width = "calc(100%)";
+                // content.style.display = "none";
+                content.style.width = "5px";
+                mapDiv.style.width = "calc(100% - 5px)";
                 map.invalidateSize();
                 this.style.left = "0px";
                 this.style.margin = '-15px';
                 this.firstElementChild.src = 'data/expandbutton.png';                
             }else{
                 content.style.display = "inline-flex";
-                content.style.width = "calc(20% - 30px)";
-                mapDiv.style.width = "80%";
-                this.style.left = "calc(20%)";
+                content.style.width = "calc(var(--CPwidth))";
+                mapDiv.style.width = "calc(100% - var(--CPwidth))";
+                this.style.left = "calc(var(--CPwidth))";
                 this.firstElementChild.src = 'data/collapsebutton.png';
             }
         });
