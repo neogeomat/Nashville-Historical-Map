@@ -16,7 +16,7 @@
 
 #map {
     /* width: 80%; */
-    width: calc(100% - var(--CPwidth));
+    width: calc(100% - var(--CPwidth) - 30px);
     margin: 0 auto;
     height: 100vh;
     float: right;
@@ -126,7 +126,7 @@ body {
 .collapsible {
     position: absolute;
     top: 50%;
-    left: calc(var(--CPwidth) - 25px);
+    left: 315px;
     z-index: 500;
 }
 
