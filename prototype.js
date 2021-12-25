@@ -1,4 +1,4 @@
-const centZoom = 6, zoomStep = 2;
+const centZoom = 6, zoomStep = 1;
 let imageBounds = [
     [0, 0],
     [100, 100]
@@ -10,7 +10,8 @@ let map = L.map("map",{
     wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
     zoomControl: false,
-    maxBounds: imageBounds
+    maxBounds: imageBounds,
+    maxBoundsViscosity:1
 });
 map.setView([45, 53], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
@@ -290,13 +291,13 @@ function zoomInMap(){
             map.setZoom(centZoom);
             break;
         case 1:
-            map.setZoom(centZoom + 2);    
+            map.setZoom(centZoom + 1);    
             break;
         case 2:
-            map.setZoom(centZoom + 4);
+            map.setZoom(centZoom + 2);
             break;
         case 4:
-            map.setZoom(centZoom + 4);
+            map.setZoom(centZoom + 2);
             break;
     }
 }
@@ -306,16 +307,16 @@ function zoomOutMap(){
     $zoomText = parseFloat($('#zoomText').html());
     switch($zoomText){
         case 0.5:
-            map.setZoom(centZoom - 2);
+            map.setZoom(centZoom - 1);
             break;
         case 1:
-            map.setZoom(centZoom - 2);
+            map.setZoom(centZoom - 1);
             break;
         case 2:
             map.setZoom(centZoom);
             break;
         case 4:
-            map.setZoom(centZoom + 2);
+            map.setZoom(centZoom + 1);
             break;
     }
 }
