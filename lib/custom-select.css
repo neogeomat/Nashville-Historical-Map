@@ -24,7 +24,7 @@
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-color: #f2c885 transparent transparent transparent;
+    border-color: #221d1f transparent transparent transparent;
   }
 
   
@@ -43,7 +43,7 @@
     width: 110px;
     border-color: #666056;
     cursor: pointer;
-    background-color: black;
+    background-color: #221d1f;
     border-radius: 6px;
 }
 
