@@ -114,7 +114,7 @@ body {
     top: 5px;
 }
 .labeltxt {
-    text-align: right;
+    text-align: left;
 }
 #zoomText{
     display: inline-block;
