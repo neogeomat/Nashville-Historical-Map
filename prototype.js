@@ -1,7 +1,7 @@
-const centZoom = 6, zoomStep = 1;
+const centZoom = 6, zoomStep = 1, tileSize_578 = 700;
 let imageBounds = [
     [0, 0],
-    [100, 100]
+    [115, 105]
 ];
 
 let map = L.map("map",{
@@ -11,7 +11,7 @@ let map = L.map("map",{
     crs: L.CRS.Simple,
     zoomControl: false,
     maxBounds: imageBounds,
-    maxBoundsViscosity:1
+    maxBoundsViscosity:0.5
 });
 map.setView([45, 53], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
@@ -42,7 +42,7 @@ let nashville1864Tile1444_578 = L.tileLayer('data/1864Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -71,7 +71,7 @@ let nashville1871Tile1444_578 = L.tileLayer('data/1871Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -100,7 +100,7 @@ let nashville1903Tile1444_578 = L.tileLayer('data/1903Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -129,7 +129,7 @@ let nashville1929Tile1444_578 = L.tileLayer('data/1929Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -159,7 +159,7 @@ let nashville1952Tile1444_578 = L.tileLayer('data/1952Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
@@ -188,7 +188,7 @@ let nashville2016Tile1444_578 = L.tileLayer('data/2016Tiles1444-5.78/',{
     minZoom: centZoom - zoomStep,
     maxZoom: centZoom + 2*zoomStep,
     tms:    true,
-    tileSize: 714,// 725-750
+    tileSize: tileSize_578,// 725-750
     maxNativeZoom: 8,
     minNativeZoom: 8,
     zoomReverse: true
