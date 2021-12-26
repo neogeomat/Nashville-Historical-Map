@@ -26,7 +26,8 @@
     flex-direction: column;
     width: var(--CPwidth);
     vertical-align: top;
-    background: black;
+    /* background: black; */
+    background-color: #221D1F;
     color: white;
     padding: 15px;
     position: absolute;
@@ -95,8 +96,9 @@ body {
 }
 
 .grid-item {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: #221D1F;
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    border: 1px solid #221D1F;
     padding: 6px;
     /* font-size: 30px; */
     text-align: center;
@@ -128,6 +130,7 @@ body {
     top: 50%;
     left: 315px;
     z-index: 500;
+    /* background: #221D1F; */
 }
 
 .labeltxt span{
@@ -137,6 +140,7 @@ body {
 
 #gridCollapse{
     cursor: pointer;
+    
 }
 .legend span{
     display: inline;
