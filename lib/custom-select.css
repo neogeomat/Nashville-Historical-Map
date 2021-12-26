@@ -3,8 +3,8 @@
     /* font-family: Arial; */
     /* background-image: url(data/dropdowntriangle.png) no-repeat right white; */
     border: #f2c885;
-    display: grid;
-    grid-auto-columns: max-content;
+    /* display: grid; */
+    /* grid-auto-columns: max-content; */
 }
 
 .custom-select select {
@@ -20,7 +20,7 @@
     position: relative;
     content: "";
     top: 14px;
-    left: 15px;
+    left: 20px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
@@ -39,10 +39,20 @@
     color: #f2c885;
     padding: 8px 25px 8px 8px;
     border: 1px solid;
+    text-align: left;
+    width: 60%;
     border-color: #666056;
     cursor: pointer;
     background-color: black;
     border-radius: 6px;
+}
+
+#year{
+  width: 40%;
+}
+
+#year + div > div {
+  width: 40%;
 }
   
   /* Style items (options): */
@@ -55,8 +65,8 @@
     z-index: 99;
     /* height: 15px; */
     /* display: inline-table; */
-    display: grid;
-    grid-auto-columns: max-content;
+    /* display: grid; */
+    /* grid-auto-columns: max-content; */
   }
   
   /* Hide the items when the select box is closed: */
