@@ -17,21 +17,21 @@
 
   /* Style the arrow inside the select element: */
 .select-selected:after {
-    position: relative;
+    position: absolute;
     content: "";
-    top: 14px;
-    left: 20px;
+    top: 16px;
+    left: 120px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-color: #221d1f transparent transparent transparent;
+    border-color: #f2c885 transparent transparent transparent;
   }
 
   
 /* Point the arrow upwards when the select box is open (active): */
 .select-selected, .select-arrow-active:after {
     border-color: transparent transparent #f2c885 transparent;
-    top: -12px;
+    top: 10px;
   }
   
 /* style the items (options), including the selected item: */
@@ -40,7 +40,7 @@
     padding: 8px 25px 8px 8px;
     border: 1px solid;
     text-align: left;
-    width: 60%;
+    width: 110px;
     border-color: #666056;
     cursor: pointer;
     background-color: #221d1f;
@@ -48,11 +48,13 @@
 }
 
 #year{
-  width: 40%;
+  width: 60px;
 }
-
+#year::after{
+  left: 70px;
+}
 #year + div > div {
-  width: 40%;
+  width: 60px;
 }
   
   /* Style items (options): */
