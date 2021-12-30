@@ -239,7 +239,7 @@ let overlays = {
     "Just Maps": L.layerGroup(),
     // "Landmarks":L.layerGroup(),
     // "Streets":L.layerGroup(),
-    "2016 Overlay":nashville2016Tile1444,
+    "2016 Overlay":nashville2016Tile1444_578,
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
