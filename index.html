@@ -101,16 +101,21 @@
             }
         });
     }
+        $( document ).ready(function(){
+            $('#legend_content').hide();
+            $('#uparrow').hide();
+            $('#downarrow').show();
 
-    $('#uparrow').click(function(){
-        $('#legend_content').hide();
-        $(this).hide();
-        $('#downarrow').show();
-    });
-    $('#downarrow').click(function(){
-        $('#legend_content').show();
-        $(this).hide();
-        $('#uparrow').show();
-    });
-</script>
+            $('#uparrow').click(function(){
+                $('#legend_content').hide();
+                $(this).hide();
+                $('#downarrow').show();
+            });
+            $('#downarrow').click(function(){
+                $('#legend_content').show();
+                $(this).hide();
+                $('#uparrow').show();
+            });
+        });
+    </script>
 </html>
