@@ -32,7 +32,7 @@
     padding: 15px;
     position: absolute;
     z-index: 10;
-    height: 96vh;
+    height: calc(100vh - 30px);
     font-size: 20px; 
     font-family: "BloggerSans", Georgia; 
 }
