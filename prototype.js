@@ -13,7 +13,7 @@ let map = L.map("map",{
     maxBounds: imageBounds,
     maxBoundsViscosity:0.5
 });
-map.attributionControl.setPrefix('Historical Atlas of Nashville by William Gregg(wrgregg@gmail.com). &copy; 2020')
+map.attributionControl.setPrefix('Historical Atlas of Nashville by William Gregg (wrgregg@gmail.com). &copy; 2022')
 map.setView([45, 53], centZoom);
 // map.setView([0, 0], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
