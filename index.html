@@ -58,8 +58,9 @@
             </div>
             <div class="legend">
                 <span>Legend</span>
-                
-                <img id="legend_content" src="data/legend/legendcontent.png" />
+                <div id="legend_img">
+                    <img id="legend_content" src="data/legend/legendcontent.png" />
+                </div>
                 <div id="uparrow"><img src="data/legend/expandedlegendbar.png"></div>
                 <div id="downarrow" style="display: none;"><img src="data/legend/collapsedlegendbar.png"></div>
             </div>
@@ -103,16 +104,19 @@
     }
         $( document ).ready(function(){
             $('#legend_content').hide();
+            $('#legend_img').hide();
             $('#uparrow').hide();
             $('#downarrow').show();
 
             $('#uparrow').click(function(){
                 $('#legend_content').hide();
+                $('#legend_img').hide();
                 $(this).hide();
                 $('#downarrow').show();
             });
             $('#downarrow').click(function(){
                 $('#legend_content').show();
+                $('#legend_img').show();
                 $(this).hide();
                 $('#uparrow').show();
             });

@@ -146,7 +146,7 @@ body {
     display: inline;
     margin-top: 10px;
     margin-bottom: 25px;
-    width: 250px;
+    width: 300px;
     text-align: center;
 }
 .legend{
@@ -154,13 +154,35 @@ body {
     display:flex;
     -ms-flex-wrap:wrap;
     flex-wrap:wrap; 
-    width: 250px;
+    /* width: 375px; */
     margin-left: auto;
     margin-right: auto;
 }
 #downarrow, #uparrow{
     cursor: pointer;
+    margin-left: 20px;
 }
 #uparrow{
     margin-top: 15px;    
+}
+
+
+#legend_img {
+    overflow-y: scroll;
+    height: 200px;
+    padding: 5px;
+}
+
+#legend_img::-webkit-scrollbar {
+    width: 5px;
+}
+
+#legend_img::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#legend_img::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px red;
 }
