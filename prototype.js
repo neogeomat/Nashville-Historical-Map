@@ -13,8 +13,19 @@ let map = L.map("map",{
     maxBounds: imageBounds,
     maxBoundsViscosity:0.5
 });
+
+let zoomControl = L.control.zoom({
+    zoomInText:'<img src="data/magnifybutton.png" alt="" srcset="">',
+    zoomOutText:'<img src="data/reducebutton.png" alt="" srcset="">',
+}).addTo(map);
+let zoomText = L.DomUtil.create('div', 'zoom-text');
+zoomText.id = 'zoomText';
+zoomText.style.color = 'white';
+zoomControl.getContainer().firstChild.after(zoomText);
+
 map.attributionControl.setPrefix('Historical Atlas of Nashville by William Gregg (wrgregg@gmail.com). &copy; 2022')
 map.setView([45, 53], centZoom);
+
 // map.setView([0, 0], centZoom-zoomStep);
 // .setView([36.1665, -86.79199], centZoom-1);
 
