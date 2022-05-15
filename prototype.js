@@ -230,28 +230,21 @@ let baselayers = {
     "1871":nashville1871Tile1444_578,
     "1903":nashville1903Tile1444_578,
     "1929":nashville1929Tile1444_578,
-    
-    // "1952":nashville1952Tile1444,
-
-    // "2016png":nashville2016png
-    // "osm":osm
+    "2016":nashville2016Tile1444_578,
 };
 
 let overlays = {
     "Just Maps": L.layerGroup(),
     // "Landmarks":L.layerGroup(),
-    // "Streets":L.layerGroup(),
-    // "2016 Overlay":nashville2016Tile1444_578,
-    
+    "Streets":L.layerGroup(),
     "2016 Overlay":nashville2016Tile1444_578,
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
 
-
 nashville1952Tile1444_578.addTo(map);
 $('#year').children()[4].selected = true;
-let layerSwitcher = L.control.layers(baselayers, overlays).addTo(map);
+let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display='none';
 
 // L.control.coordinates({
@@ -276,6 +269,31 @@ function selectMode(elem){
         map.removeLayer(overlays[i]);
     }
     map.addLayer(overlays[mode]);
+    switch(mode){
+        case 'Just Maps':
+            if(map.previousYear){
+                map.addLayer(baselayers[map.previousYear]);
+                console.log(map.previousYear);
+            }
+            break;
+        case 'Landmarks':
+            break;
+        case 'Streets':
+            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            console.log(map.previousYear);
+            for( let i in baselayers){
+                map.removeLayer(baselayers[i]);
+            }
+            map.addLayer(nashville2016Tile1444_578);
+            break;
+        case '2016 Overlay':
+            if(map.previousYear){
+                map.addLayer(baselayers[map.previousYear]);
+                console.log(map.previousYear);
+            }
+            map.addLayer(nashville2016Tile1444_578);
+            break;
+    }
 }
 
 function selectYear(elem){
