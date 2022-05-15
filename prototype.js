@@ -230,6 +230,7 @@ let baselayers = {
     "1871":nashville1871Tile1444_578,
     "1903":nashville1903Tile1444_578,
     "1929":nashville1929Tile1444_578,
+    
     // "1952":nashville1952Tile1444,
 
     // "2016png":nashville2016png
@@ -240,6 +241,8 @@ let overlays = {
     "Just Maps": L.layerGroup(),
     // "Landmarks":L.layerGroup(),
     // "Streets":L.layerGroup(),
+    // "2016 Overlay":nashville2016Tile1444_578,
+    
     "2016 Overlay":nashville2016Tile1444_578,
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
