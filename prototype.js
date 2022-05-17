@@ -234,6 +234,34 @@ let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 });
 // osm.addTo(map);
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#211c1f",
+    color: "#fff",
+    weight: 3,
+    opacity: 1,
+    fillOpacity: 0.8,
+};
+
+let landmarksLayer = L.geoJSON(landmarks_data,{
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    }
+});
+// landmarksLayer.addTo(map);
+
+let streetsLayer = L.geoJSON(streets_data,{
+    style: function (feature) {
+        return {color:'#ffd6a5',
+            weight:10,
+            opacity:0.5
+        }
+    },
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup("Test Popup");
+    }
+});
+// streetsLayer.addTo(map);
 
 let baselayers = {
     "1952":nashville1952Tile1444_578,
@@ -242,12 +270,14 @@ let baselayers = {
     "1903":nashville1903Tile1444_578,
     "1929":nashville1929Tile1444_578,
     "2016":nashville2016Tile1444_578,
+    // "OSM": osm
 };
 
 let overlays = {
-    "Just Maps": L.layerGroup(),
     // "Landmarks":L.layerGroup(),
-    "Streets":L.layerGroup(),
+    "Just Maps": L.layerGroup(),
+    "Landmarks": landmarksLayer,
+    "Streets":streetsLayer,
     "2016 Overlay":nashville2016Tile1444_578,
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
@@ -282,12 +312,19 @@ function selectMode(elem){
     map.addLayer(overlays[mode]);
     switch(mode){
         case 'Just Maps':
+            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
             if(map.previousYear){
                 map.addLayer(baselayers[map.previousYear]);
                 console.log(map.previousYear);
             }
             break;
         case 'Landmarks':
+            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            console.log(map.previousYear);
+            for( let i in baselayers){
+                map.removeLayer(baselayers[i]);
+            }
+            map.addLayer(baselayers[map.previousYear]);
             break;
         case 'Streets':
             map.previousYear = layerSwitcher._findActiveBaseLayer().name;
