@@ -312,22 +312,34 @@ function selectMode(elem){
     map.addLayer(overlays[mode]);
     switch(mode){
         case 'Just Maps':
-            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            try{
+                map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            } catch(e){
+                map.previousYear = map.previousYear;
+            }
             if(map.previousYear){
                 map.addLayer(baselayers[map.previousYear]);
                 console.log(map.previousYear);
             }
             break;
         case 'Landmarks':
-            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
-            console.log(map.previousYear);
-            for( let i in baselayers){
-                map.removeLayer(baselayers[i]);
+            try{
+                map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            } catch(e){
+                map.previousYear = map.previousYear;
             }
-            map.addLayer(baselayers[map.previousYear]);
+            console.log(map.previousYear);
+            if(map.previousYear){
+                map.addLayer(baselayers[map.previousYear]);
+                console.log(map.previousYear);
+            }
             break;
         case 'Streets':
-            map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            try{
+                map.previousYear = layerSwitcher._findActiveBaseLayer().name;
+            } catch(e){
+                map.previousYear = map.previousYear;
+            }
             console.log(map.previousYear);
             for( let i in baselayers){
                 map.removeLayer(baselayers[i]);
