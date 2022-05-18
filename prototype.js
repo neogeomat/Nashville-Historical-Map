@@ -321,6 +321,9 @@ function selectMode(elem){
                 map.addLayer(baselayers[map.previousYear]);
                 console.log(map.previousYear);
             }
+            if($('#yearDiv').hasClass('disabled')){
+                $('#yearDiv').removeClass('disabled');
+            }
             break;
         case 'Landmarks':
             try{
@@ -332,6 +335,9 @@ function selectMode(elem){
             if(map.previousYear){
                 map.addLayer(baselayers[map.previousYear]);
                 console.log(map.previousYear);
+            }
+            if($('#yearDiv').hasClass('disabled')){
+                $('#yearDiv').removeClass('disabled');
             }
             break;
         case 'Streets':
@@ -345,6 +351,9 @@ function selectMode(elem){
                 map.removeLayer(baselayers[i]);
             }
             map.addLayer(nashville2016Tile1444_578);
+            if(!$('#yearDiv').hasClass('disabled')){
+                $('#yearDiv').addClass('disabled');
+            }
             break;
         case '2016 Overlay':
             if(map.previousYear){
@@ -352,6 +361,9 @@ function selectMode(elem){
                 console.log(map.previousYear);
             }
             map.addLayer(nashville2016Tile1444_578);
+            if($('#yearDiv').hasClass('disabled')){
+                $('#yearDiv').removeClass('disabled');
+            }
             break;
     }
 }

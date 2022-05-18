@@ -204,3 +204,8 @@ body {
     border-radius: 15px;
     background-color: #221D1F;
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
