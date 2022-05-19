@@ -258,7 +258,15 @@ let streetsLayer = L.geoJSON(streets_data,{
         }
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup("Test Popup");
+        // layer.bindPopup("Test Popup");
+        // layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [0,0], className: 'css_SO_coverage_wgs_0_0'});
+        layer.setText(feature.properties['name']!== null?feature.properties['name']:'',{
+            attributes :{
+                style:"font-size: 1.5em;",
+                class:'labelText'
+            },
+        });
+            
     }
 });
 // streetsLayer.addTo(map);
