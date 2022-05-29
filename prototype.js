@@ -258,9 +258,30 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8,
 };
 
+var previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(landmarks_data,{
     pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, geojsonMarkerOptions);
+        // return L.circleMarker(latlng, geojsonMarkerOptions);
+        return L.marker(latlng, {
+            icon: L.icon({
+                'iconUrl': 'images/landmarks_streets/unselectedlandmark.png'
+            })
+        });
+    },
+    onEachFeature: function (feature, layer) {
+        // previousselectedlandmark = null;
+        layer.on('click', function (e) {
+            if(previousselectedlandmark != null){
+                previousselectedlandmark.setIcon(L.icon({
+                    'iconUrl': 'images/landmarks_streets/unselectedlandmark.png'
+                }));
+            }
+
+            layer.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
+            }));
+            previousselectedlandmark = layer;
+        });
     }
 });
 // landmarksLayer.addTo(map);
