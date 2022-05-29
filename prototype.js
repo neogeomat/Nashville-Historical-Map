@@ -258,7 +258,7 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8,
 };
 
-var previousselectedlandmark = null;
+let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(landmarks_data,{
     pointToLayer: function (feature, latlng) {
         // return L.circleMarker(latlng, geojsonMarkerOptions);
@@ -286,24 +286,42 @@ let landmarksLayer = L.geoJSON(landmarks_data,{
 });
 // landmarksLayer.addTo(map);
 
+let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data,{
-    style: function (feature) {
-        return {color:'#ffd6a5',
-            weight:10,
-            opacity:0.5
-        }
+    pointToLayer: function (feature, latlng) {
+        // return L.circleMarker(latlng, geojsonMarkerOptions);
+        return L.marker(latlng, {
+            icon: L.icon({
+                'iconUrl': 'images/landmarks_streets/unselectedstreet.png'
+            })
+        });
     },
     onEachFeature: function (feature, layer) {
-        // layer.bindPopup("Test Popup");
-        // layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [0,0], className: 'css_SO_coverage_wgs_0_0'});
-        layer.setText(feature.properties['name']!== null?feature.properties['name']:'',{
-            attributes :{
-                style:"font-size: 1.5em;",
-                class:'labelText'
-            },
+        // previousselectedlandmark = null;
+        layer.on('click', function (e) {
+            if(previousselectedstreet != null){
+                previousselectedlandmark.setIcon(L.icon({
+                    'iconUrl': 'images/landmarks_streets/unselectedstreet.png'
+                }));
+            }
+
+            layer.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedstreet.png'
+            }));
+            previousselectedstreet = layer;
         });
-            
     }
+    // onEachFeature: function (feature, layer) {
+    //     // layer.bindPopup("Test Popup");
+    //     // layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [0,0], className: 'css_SO_coverage_wgs_0_0'});
+    //     layer.setText(feature.properties['name']!== null?feature.properties['name']:'',{
+    //         attributes :{
+    //             style:"font-size: 1.5em;",
+    //             class:'labelText'
+    //         },
+    //     });
+            
+    // }
 });
 // streetsLayer.addTo(map);
 
