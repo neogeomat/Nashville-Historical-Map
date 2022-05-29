@@ -15,10 +15,13 @@
     <script src="lib/Leaflet.Coordinates-0.1.3.min.js"></script>
     <script src="lib/leaflet.textpath.js"></script>
     <link rel="stylesheet" href="lib/Leaflet.Coordinates-0.1.3.css">
+    <link rel="stylesheet" href="lib/tab.css">
+    <script src="lib/tab.js"></script>
     <title>Nashville Historical Map</title>
 
     <script src="data/vector/landmarks_test_data.js"></script>
     <script src="data/vector/streets_test_data.js"></script>
+    
 
 </head>
 
@@ -61,14 +64,32 @@
                 </div> -->
                 
             </div>
-            <div class="legend">
+
+            <!-- Tab links -->
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
+                <button class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
+                <button class="tablinks" onclick="openCity(event, 'About')">About</button>
+            </div>
+            <!-- Tab content -->
+            <div id="Selection" class="tabcontent">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+            </div>
+            
+            <div id="Legend" class="legend tabcontent">
                 <span>Legend</span>
                 <div id="legend_img">
                     <img id="legend_content" src="images/legend/legendcontent_22may2022.png" />
                 </div>
-                <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
-                <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div>
+                <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div> -->
+                <!-- <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
             </div>
+            <div id="About" class="tabcontent">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+            
         </div>
         <div id="gridCollapse" class="collapsible">
             <img src="images/collapsebutton.png">
@@ -126,6 +147,9 @@
                 $(this).hide();
                 $('#uparrow').show();
             });
+                        
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("Legend").click();
         });
     </script>
 </html>
