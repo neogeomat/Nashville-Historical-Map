@@ -208,7 +208,22 @@ let nashville2016Tile1444_578 = L.tileLayer('data/2016Tiles1444-5.78/',{
 nashville2016Tile1444_578.getTileUrl = function(coords){
     // console.log(coords);
     // debugger;
-    return this._url+'/2016-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+    return this._url+'/2016m-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
+}
+
+let nashville2016OverlayTile1444_578 = L.tileLayer('data/2016OverlayTiles1444-5.78/',{
+    minZoom: centZoom - zoomStep,
+    maxZoom: centZoom + 2*zoomStep,
+    tms:    true,
+    tileSize: tileSize_578,// 725-750
+    maxNativeZoom: 8,
+    minNativeZoom: 8,
+    zoomReverse: true
+})
+nashville2016OverlayTile1444_578.getTileUrl = function(coords){
+    // console.log(coords);
+    // debugger;
+    return this._url+'/2016o-'+(1444 -(38 - coords.x -1) + (coords.y )*38)+'.png'
 }
 
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
@@ -286,7 +301,7 @@ let overlays = {
     "Just Maps": L.layerGroup(),
     "Landmarks": landmarksLayer,
     "Streets":streetsLayer,
-    "2016 Overlay":nashville2016Tile1444_578,
+    "2016 Overlay":nashville2016OverlayTile1444_578,
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
