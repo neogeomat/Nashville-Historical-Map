@@ -27,11 +27,11 @@
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
             
-            <img src="data/ul-corner.png" id="ul-corner">
-            <img src="data/ur-corner.png" id="ur-corner"alt="">
-            <img src="data/han-logo_22may2022.png" id='logo'>
-            <img src="data/ll-corner.png" id="ll-corner">
-            <img src="data/lr-corner.png" id="lr-corner" alt="">
+            <img src="images/ul-corner.png" id="ul-corner">
+            <img src="images/ur-corner.png" id="ur-corner"alt="">
+            <img src="images/han-logo_22may2022.png" id='logo'>
+            <img src="images/ll-corner.png" id="ll-corner">
+            <img src="images/lr-corner.png" id="lr-corner" alt="">
 
             <div id="interact" class="grid-container">
                 <div class="grid-item labeltxt">
@@ -64,14 +64,14 @@
             <div class="legend">
                 <span>Legend</span>
                 <div id="legend_img">
-                    <img id="legend_content" src="data/legend/legendcontent_22may2022.png" />
+                    <img id="legend_content" src="images/legend/legendcontent_22may2022.png" />
                 </div>
-                <div id="uparrow"><img src="data/legend/expandedlegendbar.png"></div>
-                <div id="downarrow" style="display: none;"><img src="data/legend/collapsedlegendbar.png"></div>
+                <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
+                <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div>
             </div>
         </div>
         <div id="gridCollapse" class="collapsible">
-            <img src="data/collapsebutton.png">
+            <img src="images/collapsebutton.png">
         </div>
         <div id="map"></div>
     </div>
@@ -98,13 +98,13 @@
                 map.invalidateSize();
                 this.style.left = "0px";
                 this.style.marginLeft = '-15px';
-                this.firstElementChild.src = 'data/expandbutton.png';                
+                this.firstElementChild.src = 'images/expandbutton.png';                
             }else{
                 content.style.display = "inline-flex";
                 content.style.width = "calc(var(--CPwidth))";
                 mapDiv.style.width = "calc(100% - var(--CPwidth) - 30px)";
                 this.style.left = "calc(330px)";
-                this.firstElementChild.src = 'data/collapsebutton.png';
+                this.firstElementChild.src = 'images/collapsebutton.png';
             }
         });
     }

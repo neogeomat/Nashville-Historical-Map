@@ -15,8 +15,8 @@ let map = L.map("map",{
 });
 
 let zoomControl = L.control.zoom({
-    zoomInText:'<img src="data/magnifybutton.png" alt="" srcset="">',
-    zoomOutText:'<img src="data/reducebutton.png" alt="" srcset="">',
+    zoomInText:'<img src="images/magnifybutton.png" alt="" srcset="">',
+    zoomOutText:'<img src="images/reducebutton.png" alt="" srcset="">',
 }).addTo(map);
 let zoomText = L.DomUtil.create('div', 'zoom-text');
 zoomText.id = 'zoomText';
