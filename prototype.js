@@ -1,4 +1,5 @@
 const centZoom = 6, zoomStep = 1, tileSize_578 = 700;
+const debugMode = false;
 let imageBounds = [
     [0, 0],
     [115, 105]
@@ -288,6 +289,36 @@ let landmarksLayer = L.geoJSON(landmarks_data,{
 });
 // landmarksLayer.addTo(map);
 
+let csv = omnivore.csv('Landmarks (stub).csv',{
+    latfield: 'Y',
+    lonfield: 'X Location',
+    delimiter: ','
+}).on('ready', function(layer) {
+    // An example of customizing marker styles based on an attribute.
+    // In this case, the data, a CSV file, has a column called 'state'
+    // with values referring to states. Your data might have different
+    // values, so adjust to fit.
+    this.eachLayer(function(marker) {
+        if (marker.toGeoJSON().properties.state === 'CA') {
+            // The argument to L.mapbox.marker.icon is based on the
+            // simplestyle-spec: see that specification for a full
+            // description of options.
+            marker.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
+            }));
+        } else {
+            marker.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
+            }));
+        }
+        // Bind a popup to each icon based on the same properties
+        marker.bindPopup(marker.toGeoJSON().properties.Landmark + ', ' +
+            marker.toGeoJSON().properties.state);
+            
+            marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
+    });
+}).addTo(map);
+
 let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data,{
     pointToLayer: function (feature, latlng) {
@@ -343,6 +374,7 @@ let overlays = {
     "Landmarks": landmarksLayer,
     "Streets":streetsLayer,
     "2016 Overlay":nashville2016OverlayTile1444_578,
+    "CSV": csv
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
@@ -352,22 +384,24 @@ $('#year').children()[4].selected = true;
 let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display='none';
 
-// L.control.coordinates({
-// 	position:"bottomleft", //optional default "bootomright"
-// 	decimals:2, //optional default 4
-// 	decimalSeperator:".", //optional default "."
-// 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-// 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-// 	enableUserInput:true, //optional default true
-// 	useDMS:false, //optional default false
-// 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
-// 	markerType: L.marker, //optional default L.marker
-// 	markerProps: {}, //optional default {},
-// 	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
-// 	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
-// 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
-// }).addTo(map);
-
+if(debugMode){
+    layerSwitcher.getContainer().style.display='block';
+    L.control.coordinates({
+        position:"bottomleft", //optional default "bootomright"
+        decimals:2, //optional default 4
+        decimalSeperator:".", //optional default "."
+        labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+        labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+        enableUserInput:true, //optional default true
+        useDMS:false, //optional default false
+        useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+        markerType: L.marker, //optional default L.marker
+        markerProps: {}, //optional default {},
+        labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+        labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+        customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+    }).addTo(map);
+}
 function selectMode(elem){
     const mode = elem.innerText;
     for(let i in overlays){
