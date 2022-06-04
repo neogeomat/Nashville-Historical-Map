@@ -262,11 +262,13 @@ let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(landmarks_data,{
     pointToLayer: function (feature, latlng) {
         // return L.circleMarker(latlng, geojsonMarkerOptions);
-        return L.marker(latlng, {
+        var m = L.marker(latlng, {
             icon: L.icon({
                 'iconUrl': 'images/landmarks_streets/unselectedlandmark.png'
             })
         });
+        m.bindTooltip(feature.properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
+        return m;
     },
     onEachFeature: function (feature, layer) {
         // previousselectedlandmark = null;
