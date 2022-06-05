@@ -1,5 +1,5 @@
 const centZoom = 6, zoomStep = 1, tileSize_578 = 700;
-const debugMode = false;
+const debugMode = true;
 let imageBounds = [
     [0, 0],
     [115, 105]
@@ -11,7 +11,7 @@ let map = L.map("map",{
     wheelPxPerZoomLevel: 60*zoomStep,
     crs: L.CRS.Simple,
     zoomControl: false,
-    maxBounds: imageBounds,
+    // maxBounds: imageBounds,
     maxBoundsViscosity:0.5
 });
 
@@ -242,8 +242,9 @@ L.gridLayer.debugCoords = function(opts) {
     return new L.GridLayer.DebugCoords(opts);
 };
 let grid = L.gridLayer.debugCoords({tileSize:1024});
-// map.addLayer(  );
-
+if(debugMode){
+    map.addLayer(grid);
+}
 // add the OpenStreetMap tiles
 let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -317,6 +318,37 @@ let csv = omnivore.csv('Landmarks (stub).csv',{
             
             marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
     });
+});
+// csv.addTo(map);
+
+let csvAdjust = omnivore.csv('transform_test.csv',{
+    latfield: 'y',
+    lonfield: 'x',
+    delimiter: ','
+}).on('ready', function(layer) {
+    // An example of customizing marker styles based on an attribute.
+    // In this case, the data, a CSV file, has a column called 'state'
+    // with values referring to states. Your data might have different
+    // values, so adjust to fit.
+    this.eachLayer(function(marker) {
+        if (marker.toGeoJSON().properties.state === 'CA') {
+            // The argument to L.mapbox.marker.icon is based on the
+            // simplestyle-spec: see that specification for a full
+            // description of options.
+            marker.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
+            }));
+        } else {
+            marker.setIcon(L.icon({
+                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
+            }));
+        }
+        // Bind a popup to each icon based on the same properties
+        marker.bindPopup(marker.toGeoJSON().properties.Landmark + ', ' +
+            marker.toGeoJSON().properties.state);
+            
+            marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
+    });
 }).addTo(map);
 
 let previousselectedstreet = null;
@@ -365,7 +397,7 @@ let baselayers = {
     "1903":nashville1903Tile1444_578,
     "1929":nashville1929Tile1444_578,
     "2016":nashville2016Tile1444_578,
-    // "OSM": osm
+    "none":L.layerGroup()
 };
 
 let overlays = {
