@@ -1,5 +1,5 @@
 const centZoom = 6, zoomStep = 1, tileSize_578 = 700;
-const debugMode = true;
+const debugMode = false;
 let imageBounds = [
     [0, 0],
     [115, 105]
@@ -289,67 +289,38 @@ let landmarksLayer = L.geoJSON(landmarks_data,{
     }
 });
 // landmarksLayer.addTo(map);
-
-let csv = omnivore.csv('Landmarks (stub).csv',{
-    latfield: 'Y',
-    lonfield: 'X Location',
-    delimiter: ','
-}).on('ready', function(layer) {
-    // An example of customizing marker styles based on an attribute.
-    // In this case, the data, a CSV file, has a column called 'state'
-    // with values referring to states. Your data might have different
-    // values, so adjust to fit.
-    this.eachLayer(function(marker) {
-        if (marker.toGeoJSON().properties.state === 'CA') {
-            // The argument to L.mapbox.marker.icon is based on the
-            // simplestyle-spec: see that specification for a full
-            // description of options.
-            marker.setIcon(L.icon({
-                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
-            }));
-        } else {
-            marker.setIcon(L.icon({
-                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
-            }));
-        }
-        // Bind a popup to each icon based on the same properties
-        marker.bindPopup(marker.toGeoJSON().properties.Landmark + ', ' +
-            marker.toGeoJSON().properties.state);
-            
-            marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
-    });
-});
-// csv.addTo(map);
-
+let csvAdjustData = [];
 let csvAdjust = omnivore.csv('transform_test.csv',{
     latfield: 'y',
     lonfield: 'x',
     delimiter: ','
 }).on('ready', function(layer) {
-    // An example of customizing marker styles based on an attribute.
-    // In this case, the data, a CSV file, has a column called 'state'
-    // with values referring to states. Your data might have different
-    // values, so adjust to fit.
     this.eachLayer(function(marker) {
-        if (marker.toGeoJSON().properties.state === 'CA') {
-            // The argument to L.mapbox.marker.icon is based on the
-            // simplestyle-spec: see that specification for a full
-            // description of options.
+        marker.setIcon(L.icon({
+            'iconUrl': 'images/landmarks_streets/unselectedlandmark.png'
+        }));
+
+        marker.on('click', function (e) {
+            if(previousselectedlandmark != null){
+                previousselectedlandmark.setIcon(L.icon({
+                    'iconUrl': 'images/landmarks_streets/unselectedlandmark.png'
+                }));
+            }
+
             marker.setIcon(L.icon({
                 'iconUrl':'images/landmarks_streets/selectedlandmark.png'
             }));
-        } else {
-            marker.setIcon(L.icon({
-                'iconUrl':'images/landmarks_streets/selectedlandmark.png'
-            }));
-        }
+            previousselectedlandmark = marker;
+        });
         // Bind a popup to each icon based on the same properties
-        marker.bindPopup(marker.toGeoJSON().properties.Landmark + ', ' +
-            marker.toGeoJSON().properties.state);
+        marker.bindPopup(marker.toGeoJSON().properties.Landmark+'<br>'+marker.toGeoJSON().properties['Maps Landm']);
             
-            marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
+        // marker.bindTooltip(marker.toGeoJSON().properties.Landmark,{permanent:true,offset:[10,0]}).openTooltip();
     });
+    csvAdjustData = csvAdjust.getLayers();
 }).addTo(map);
+
+
 
 let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data,{
@@ -397,7 +368,7 @@ let baselayers = {
     "1903":nashville1903Tile1444_578,
     "1929":nashville1929Tile1444_578,
     "2016":nashville2016Tile1444_578,
-    "none":L.layerGroup()
+    // "none":L.layerGroup()
 };
 
 let overlays = {
@@ -406,7 +377,7 @@ let overlays = {
     "Landmarks": landmarksLayer,
     "Streets":streetsLayer,
     "2016 Overlay":nashville2016OverlayTile1444_578,
-    "CSV": csv
+    // "CSV": csv
 };
 for( i in baselayers){$('#year').append('<option>'+i)}
 for( i in overlays){$('#mode').append('<option>'+i)}
@@ -504,6 +475,9 @@ function selectYear(elem){
         map.removeLayer(baselayers[i]);
     }
     map.addLayer(baselayers[year]);
+    let l = csvAdjustData.filter(k=>k.feature.properties['Maps Landm'].includes(year));
+    csvAdjust.clearLayers();
+    l.forEach(m => m.addTo(csvAdjust));
 }
 
 function zoomInMap(){
