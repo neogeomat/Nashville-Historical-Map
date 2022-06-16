@@ -1,22 +1,22 @@
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #666056;
+  
   background-color: #221d1f;
   color: #f2c885;
-  border-radius: 6px;
+  
 }
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
   float: left;
-  border: none;
-  outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  padding: 14px 25.6px;
+  /* transition: 0.3s; */
   color: #f2c885;
+  border: 2px solid #666056;
+  border-radius: 6px 6px 0px 0px;
 }
 
 /* Change background color of buttons on hover */
@@ -29,11 +29,15 @@
 .tab button.active {
   background-color: #221d1f;
   color: white;
+  border-bottom: none;
 }
 
 /* Style the tab content */
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid rgb(204, 204, 204);
+  border-left: 2px solid #554E47;
+  border-right: 2px solid #554E47;
+  border-bottom: 2px solid #554E47;
+  border-radius: 6px 6px 0px 0px;
 }

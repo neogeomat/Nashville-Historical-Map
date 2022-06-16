@@ -63,9 +63,9 @@
 
             <!-- Tab links -->
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
-                <button class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
-                <button class="tablinks" onclick="openCity(event, 'About')">About</button>
+                <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
+                <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
+                <button id="about_btn" class="tablinks" onclick="openCity(event, 'About')">About</button>
             </div>
             <!-- Tab content -->
             <div id="Selection" class="tabcontent">
@@ -107,6 +107,10 @@
     // collapsible left sidebar
     var coll = document.getElementsByClassName("collapsible");
     var i;
+    $( document ).ready(function(){
+        $('#Selection').show();
+        // $('#selection_btn').css('border-bottom','none');
+    });
 
     for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function() {
