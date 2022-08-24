@@ -389,10 +389,10 @@ landmarksLayer.addTo(map);
 let csvAdjustData = [];
 let csvAdjust = omnivore
   .csv(
-    "transform_test.csv",
+    "data/Landmarks 4 (for dev).csv",
     {
       latfield: "y",
-      lonfield: "x",
+      lonfield: "X",
       delimiter: ",",
     },
     landmarksLayer
