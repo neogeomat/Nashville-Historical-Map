@@ -25,14 +25,17 @@
     <div id="route">
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
-            
+        
             <img src="images/ul-corner.png" id="ul-corner">
             <img src="images/ur-corner.png" id="ur-corner"alt="">
-            <img src="images/han-logo_22may2022.png" id='logo'>
+            
             <img src="images/ll-corner.png" id="ll-corner">
             <img src="images/lr-corner.png" id="lr-corner" alt="">
 
             <div id="interact" class="grid-container">
+                <div class="grid-item logo">
+                    <img src="images/han-logo-25aug2022.png" id='logo'>
+                </div>
                 <div class="grid-item labeltxt">
                     <span >Mode</span>
                 </div>
@@ -49,18 +52,14 @@
                         <select name='year' id='year'></select>
                     </div>
                 </div>
-<!--                 
-                <div class="grid-item labeltxt">
-                    <span>Zoom</span>
-                </div>
-                <div class="grid-item zoombtn">
-                    <img src="data/reducebutton.png" onclick="zoomOutMap()" alt="" srcset="">
-                    <span id="zoomText"></span>
-                    <img src="data/magnifybutton.png" onclick="zoomInMap()" >                    
-                </div> -->
-                
-            </div>
 
+                <div class="grid-item">
+                    <span>2016 Overlay</span>
+                    <input type="radio">On</input>
+                    <input type="radio">Off</input>
+                </div>                    
+            </div>
+         
             <!-- Tab links -->
             <div class="tab">
                 <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
@@ -100,7 +99,7 @@
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 <script src="data/vector/landmarks_test_data.js"></script>
 <script src="data/vector/streets_test_data.js"></script>
-<script src='prototype.js'></script>
+<script src='nashville.js'></script>
 <script src="lib/custom-select.js"></script>
 <link rel="stylesheet" href="lib/custom-select.css">
 <script>

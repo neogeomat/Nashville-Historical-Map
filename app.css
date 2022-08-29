@@ -92,6 +92,7 @@ body {
 .grid-container {
     display: inline-grid;
     grid-template-columns: auto auto;
+    grid-gap: 0px;
     /* padding: 10px; */
 }
 
@@ -113,6 +114,9 @@ body {
     position: relative;
     top: 5px;
 }
+.logo {
+    grid-row: 1 / span 6;
+  }
 .labeltxt {
     text-align: left;
 }
