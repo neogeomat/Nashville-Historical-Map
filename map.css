@@ -1,0 +1,56 @@
+#map {
+    width: 100%;
+    /* width: calc(100% - var(--CPwidth) - 30px); */
+    margin: 0 auto;
+    height: 100vh;
+    float: right;
+}
+
+.leaflet-tooltip{
+    border: 3px solid #000;
+    border-radius: 10px;
+    /* font-size: 20px; */
+    font-family: "BloggerSans", Georgia;
+    background-color: #221D1F;
+    color: white;
+}
+
+.leaflet-tooltip-top:before{ 
+    /* css for tip of tooltip */
+  top: 45%;
+  margin-top: 20px;
+  border-top: 20px solid #221D1F; /* increase the border width */
+}
+
+.leaflet-control-zoom.leaflet-bar a{
+    border-radius: 15px;
+    background-color: #221D1F;
+}
+
+.leaflet-verticalcenter {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    /* top: 50%; possible because the placeholder's parent is the map */
+    left: calc(var(--CPwidth));
+    /* transform: translateY(-50%); using the CSS3 Transform technique */
+    padding-top: 10px;
+}
+
+.leaflet-verticalcenter .leaflet-control {
+    margin-bottom: 10px;
+}
+
+.leaflet-control-zoom{
+    border-radius: 25px;
+    width: 30px;
+    left: calc(var(--CPwidth) + 20px);
+    background-color: #221D1F;
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    border: 1px solid #221D1F;
+    padding: 6px;
+    /* font-size: 30px; */
+    text-align: center;
+    height: 6em;
+    color: #000;
+}

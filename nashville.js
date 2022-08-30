@@ -621,7 +621,7 @@ function selectYear(elem) {
 }
 
 function select2016Overlay (elem){
-
+  alert();
 }
 function zoomInMap() {
   // map.zoomIn(zoomStep);
