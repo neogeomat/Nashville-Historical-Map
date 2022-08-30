@@ -36,8 +36,9 @@
   
 /* style the items (options), including the selected item: */
 .select-items div,.select-selected {
-    color: #f2c885;
-    padding: 8px 25px 8px 8px;
+    color: #fff;
+    /* padding: 8px 25px 8px 8px; */
+    padding: 4px 20px 4px 4px;
     border: 1px solid;
     text-align: left;
     width: 110px;

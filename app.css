@@ -95,7 +95,7 @@ body {
     background-color: #221D1F;
     /* border: 1px solid rgba(0, 0, 0, 0.8); */
     border: 1px solid #221D1F;
-    padding: 6px;
+    /* padding: 6px; */
     /* font-size: 30px; */
     text-align: center;
     /* height: 2em; */
@@ -114,6 +114,7 @@ body {
   }
 .labeltxt {
     text-align: left;
+    color: #f2c885
 }
 #zoomText{
     display: inline-block;
