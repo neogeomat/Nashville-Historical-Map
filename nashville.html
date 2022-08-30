@@ -53,43 +53,47 @@
                     </div>
                 </div>
 
-                <div class="grid-item">
+                <div class="grid-item" id="">
                     <span>2016 Overlay</span>
-                    <input type="radio">On</input>
-                    <input type="radio">Off</input>
+                    <div id='overlayRadio' onclick='select2016Overlay(this)'></div>
+                        <input type="radio" name="2016Overlay">On</input>
+                        <input type="radio" name="2016Overlay">Off</input>
+                    </div>
                 </div>                    
             </div>
          
-            <!-- Tab links -->
-            <div class="tab">
-                <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
-                <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
-                <button id="about_btn" class="tablinks" onclick="openCity(event, 'About')">About</button>
-            </div>
-            <!-- Tab content -->
-            <div id="Selection" class="tabcontent">
-                <h4>Vandertbilt Gym</h4>
-                <p id="selection_subtitle">Built in 1880</p>
-                <img id="selection_img" src="images/relotsoffiles/testimage1.png" />
-                <span id="img_caption">1969 photo, Library of congress</span>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores assumenda totam voluptatem sed, iure facilis consequatur blanditiis eos, nulla dignissimos pariatur est repudiandae eveniet rerum accusamus in at debitis provident?</p>
-            </div>
-            
-            <div id="Legend" class="legend tabcontent">
-                <span>Legend</span>
-                <div id="legend_img">
-                    <img id="legend_content" src="images/legend/legendcontent_22may2022.png" />
+            <div id="informationPanal" class="hidden">
+                <!-- Tab links -->
+                <div class="tab">
+                    <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
+                    <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
+                    <button id="about_btn" class="tablinks" onclick="openCity(event, 'About')">About</button>
                 </div>
-                <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
-                <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
-            </div>
-            <div id="About" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                <!-- Tab content -->
+                <div id="Selection" class="tabcontent">
+                    <h4>Vandertbilt Gym</h4>
+                    <p id="selection_subtitle">Built in 1880</p>
+                    <img id="selection_img" src="images/relotsoffiles/testimage1.png" />
+                    <span id="img_caption">1969 photo, Library of congress</span>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores assumenda totam voluptatem sed, iure facilis consequatur blanditiis eos, nulla dignissimos pariatur est repudiandae eveniet rerum accusamus in at debitis provident?</p>
+                </div>
+                
+                <div id="Legend" class="legend tabcontent">
+                    <span>Legend</span>
+                    <div id="legend_img">
+                        <img id="legend_content" src="images/legend/legendcontent_25aug2022.png" />
+                    </div>
+                    <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
+                    <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
+                </div>
+                <div id="About" class="tabcontent">
+                    <h3>Tokyo</h3>
+                    <p>Tokyo is the capital of Japan.</p>
+                </div>
             </div>
             
         </div>
-        <div id="gridCollapse" class="collapsible">
+        <div id="gridCollapse" class="collapsible hidden">
             <img src="images/collapsebutton.png">
         </div>
         <div id="map"></div>
@@ -114,6 +118,7 @@
     for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function() {
             this.classList.toggle("active");
+            // debugger;
             var content = this.previousElementSibling;
             var mapDiv = this.nextElementSibling;
             // debugger;
@@ -156,5 +161,8 @@
         //     // Get the element with id="defaultOpen" and click on it
         //     document.getElementById("Legend").click();
         // });
-    </script>
+</script>
+<script>
+    $('.instructions')[0].style.height = 'auto'
+</script>
 </html>

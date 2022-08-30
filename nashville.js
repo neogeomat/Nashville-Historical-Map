@@ -23,6 +23,30 @@ let zoomControl = L.control
     zoomOutText: '<img src="images/reducebutton.png" alt="" srcset="">',
   })
   .addTo(map);
+
+// Create additional Control placeholders
+function addControlPlaceholders(map) {
+  var corners = map._controlCorners,
+      l = 'leaflet-',
+      container = map._controlContainer;
+
+  function createCorner(vSide, hSide) {
+      var className = l + vSide + ' ' + l + hSide;
+
+      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+  }
+
+  createCorner('verticalcenter', 'left');
+  createCorner('verticalcenter', 'right');
+}
+addControlPlaceholders(map);
+
+// Change the position of the Zoom Control to a newly created placeholder.
+zoomControl.setPosition('verticalcenterleft');
+
+// You can also put other controls in the same placeholder.
+L.control.scale({position: 'verticalcenterright'}).addTo(map);
+
 let zoomText = L.DomUtil.create("div", "zoom-text");
 zoomText.id = "zoomText";
 zoomText.style.color = "white";
@@ -318,7 +342,7 @@ let landmarksLayer = L.geoJSON(null, {
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
-      permanent: true,
+      // permanent: true,
       direction: "top",
       offset: [0, -20],
     }).openTooltip();
@@ -460,7 +484,7 @@ let overlays = {
   "Just Maps": L.layerGroup(),
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
-  "2016 Overlay": nashville2016OverlayTile1444_578,
+  // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (i in baselayers) {
   $("#year").append("<option>" + i);
@@ -520,6 +544,13 @@ function selectMode(elem) {
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
+      if($("#overlayRadio").hasClass("disabled")){
+        $("#overlayRadio").removeClass("disabled");
+      }
+      if($("#informationPanal").is(":visible")){
+        $("#informationPanal").hide();
+        $('.instructions')[0].style.height = 'auto';
+      }
       break;
     case "Landmarks":
       try {
@@ -535,6 +566,12 @@ function selectMode(elem) {
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
+      if(!$("#overlayRadio").hasClass("disabled")){
+        $("#overlayRadio").addClass("disabled");
+      }
+      if(!$("#informationPanal").is(":visible")){
+        $("#informationPanal").show();
+      }
       break;
     case "Streets":
       try {
@@ -549,6 +586,12 @@ function selectMode(elem) {
       map.addLayer(nashville2016Tile1444_578);
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
+      }
+      if(!$("#overlayRadio").hasClass("disabled")){
+        $("#overlayRadio").addClass("disabled");
+      }
+      if(!$("#informationPanal").is(":visible")){
+        $("#informationPanal").show();
       }
       break;
     case "2016 Overlay":
@@ -577,6 +620,9 @@ function selectYear(elem) {
   l.forEach((m) => m.addTo(csvAdjust));
 }
 
+function select2016Overlay (elem){
+
+}
 function zoomInMap() {
   // map.zoomIn(zoomStep);
   $zoomText = parseFloat($("#zoomText").html());
