@@ -620,8 +620,23 @@ function selectYear(elem) {
   l.forEach((m) => m.addTo(csvAdjust));
 }
 
-function select2016Overlay (elem){
-  alert();
+function select2016Overlay ($elem){
+  // alert();
+  // debugger;
+  switch($elem.value){
+    case 'on':
+      if(!map.hasLayer(nashville2016OverlayTile1444_578)){
+        layerSwitcher.addOverlay(nashville2016OverlayTile1444_578);
+        map.addLayer(nashville2016OverlayTile1444_578);
+      }
+      break;
+    case 'off':
+      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+        layerSwitcher.removeLayer(nashville2016OverlayTile1444_578);
+        map.removeLayer(nashville2016OverlayTile1444_578);
+      }
+      break;
+  }
 }
 function zoomInMap() {
   // map.zoomIn(zoomStep);
