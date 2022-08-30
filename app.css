@@ -15,10 +15,10 @@
 }
 
 .instructions {
-    /* display: inline-flex; */
-    display: auto;
+    display: inline-flex;
+    /* display: auto; */
     flex-direction: column;
-    /* width: var(--CPwidth); */
+    width: var(--CPwidth);
     vertical-align: top;
     /* background: black; */
     background-color: #221D1F;

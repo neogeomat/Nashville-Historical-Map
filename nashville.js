@@ -45,7 +45,7 @@ addControlPlaceholders(map);
 zoomControl.setPosition('verticalcenterleft');
 
 // You can also put other controls in the same placeholder.
-L.control.scale({position: 'verticalcenterright'}).addTo(map);
+// L.control.scale({position: 'verticalcenterright'}).addTo(map);
 
 let zoomText = L.DomUtil.create("div", "zoom-text");
 zoomText.id = "zoomText";
@@ -570,6 +570,9 @@ function selectMode(elem) {
         $("#overlayRadio").addClass("disabled");
       }
       if(!$("#informationPanal").is(":visible")){
+        if ($("#informationPanal").hasClass("hidden")) {
+          $("#informationPanal").removeClass("hidden");
+        }
         $("#informationPanal").show();
       }
       break;
