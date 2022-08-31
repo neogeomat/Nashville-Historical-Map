@@ -405,7 +405,7 @@ let landmarksLayer = L.geoJSON(null, {
           layer.feature.properties["Descriptio"];
       }
 
-      openCity(event, "Selection");
+      openCity(event, "Search");
     });
   },
 });
@@ -425,6 +425,13 @@ let csvAdjust = omnivore
     csvAdjustData = csvAdjust.getLayers();
   });
 // csvAdjust.addTo(map);
+
+let landmarksSearch = new L.Control.Search({
+  layer: landmarksLayer,
+  position:'topright',
+  propertyName:'Landmark'
+});
+landmarksSearch.addTo(map);
 
 let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data, {
