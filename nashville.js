@@ -244,9 +244,9 @@ let landmarksLayer = L.geoJSON(null, {
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
-      // permanent: true,
+      permanent: true,
       direction: "top",
-      offset: [0, -20],
+      offset: [0, -22],
     }).openTooltip();
     return m;
   },
@@ -257,7 +257,8 @@ let landmarksLayer = L.geoJSON(null, {
         previousselectedlandmark.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-            iconSize: [22, 32],
+            iconSize: [18, 22],
+            offset:[9,0]
           })
         );
       }
@@ -265,7 +266,8 @@ let landmarksLayer = L.geoJSON(null, {
       layer.setIcon(
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
-          iconSize: [22, 32],
+          iconSize: [18, 22],
+          offset:[9,0]
         })
       );
       previousselectedlandmark = layer;
@@ -333,19 +335,29 @@ let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
-    return L.marker(latlng, {
+    let m = L.marker(latlng, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet.png",
+        iconSize: [20, 20],
+        offset: [10,10]
       }),
     });
+    m.bindTooltip(feature.properties.Street, {
+      permanent: true,
+      direction: "top",
+      offset: [0, -20],
+    }).openTooltip();
+    return m;
   },
   onEachFeature: function (feature, layer) {
-    // previousselectedlandmark = null;
+    // previousselectedstreet = null;
     layer.on("click", function (e) {
       if (previousselectedstreet != null) {
-        previousselectedlandmark.setIcon(
+        previousselectedstreet.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
+            iconSize: [20, 20],
+            offset: [10,10]
           })
         );
       }
@@ -353,25 +365,17 @@ let streetsLayer = L.geoJSON(streets_data, {
       layer.setIcon(
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet.png",
+          iconSize: [20, 20],
+          offset: [10,10]
         })
       );
       previousselectedstreet = layer;
     });
   },
-  // onEachFeature: function (feature, layer) {
-  //     // layer.bindPopup("Test Popup");
-  //     // layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [0,0], className: 'css_SO_coverage_wgs_0_0'});
-  //     layer.setText(feature.properties['name']!== null?feature.properties['name']:'',{
-  //         attributes :{
-  //             style:"font-size: 1.5em;",
-  //             class:'labelText'
-  //         },
-  //     });
-
-  // }
 });
+// streetsLayer.addTo(map);
 
-let landmarksSearch = new L.Control.Search({
+let searchControl = new L.Control.Search({
   // layer: L.layerGroup([landmarksLayer,streetsLayer]),
   layer: landmarksLayer,
   position:'topright',
@@ -390,8 +394,8 @@ let landmarksSearch = new L.Control.Search({
     return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
   }
 });
-landmarksSearch.addTo(map);
-// $("#Search").append(landmarksSearch.getContainer());
+searchControl.addTo(map);
+// $("#Search").append(searchControl.getContainer());
 
 // streetsLayer.addTo(map);
 
