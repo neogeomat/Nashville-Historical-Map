@@ -19,8 +19,8 @@ let map = L.map("map", {
 
 let zoomControl = L.control
   .zoom({
-    zoomInText: '<img src="images/magnifybutton.png" alt="" srcset="">',
-    zoomOutText: '<img src="images/reducebutton.png" alt="" srcset="">',
+    zoomInText: '<img src="images/leftPanalImages/magnifybutton.png" alt="" srcset="">',
+    zoomOutText: '<img src="images/leftPanalImages/reducebutton.png" alt="" srcset="">',
   })
   .addTo(map);
 
@@ -66,23 +66,6 @@ map.setView([45, 53], centZoom);
 //         [36.41016, -86.51555]
 //     ];
 
-let nashville1864Tile1444 = L.tileLayer("data/1864Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  // tileSize: 714,
-  tileSize: 1428,
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville1864Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/1864-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
 let nashville1864Tile1444_578 = L.tileLayer("data/1864Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -100,22 +83,6 @@ nashville1864Tile1444_578.getTileUrl = function (coords) {
   );
 };
 
-let nashville1871Tile1444 = L.tileLayer("data/1871Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  tileSize: 714, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville1871Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/1871-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
 let nashville1871Tile1444_578 = L.tileLayer("data/1871Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -133,22 +100,6 @@ nashville1871Tile1444_578.getTileUrl = function (coords) {
   );
 };
 
-let nashville1903Tile1444 = L.tileLayer("data/1903Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  tileSize: 714, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville1903Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/1903-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
 let nashville1903Tile1444_578 = L.tileLayer("data/1903Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -166,22 +117,6 @@ nashville1903Tile1444_578.getTileUrl = function (coords) {
   );
 };
 
-let nashville1929Tile1444 = L.tileLayer("data/1929Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  tileSize: 714, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville1929Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/1929-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
 let nashville1929Tile1444_578 = L.tileLayer("data/1929Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -196,23 +131,6 @@ nashville1929Tile1444_578.getTileUrl = function (coords) {
   // debugger;
   return (
     this._url + "/1929-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
-
-let nashville1952Tile1444 = L.tileLayer("data/1952Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  tileSize: 714, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville1952Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/1952-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
   );
 };
 
@@ -233,22 +151,6 @@ nashville1952Tile1444_578.getTileUrl = function (coords) {
   );
 };
 
-let nashville2016Tile1444 = L.tileLayer("data/2016Tiles1444/", {
-  minZoom: centZoom - zoomStep,
-  maxZoom: centZoom + 2 * zoomStep,
-  tms: true,
-  tileSize: 714, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
-  zoomReverse: true,
-});
-nashville2016Tile1444.getTileUrl = function (coords) {
-  // console.log(coords);
-  // debugger;
-  return (
-    this._url + "/2016-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
-  );
-};
 let nashville2016Tile1444_578 = L.tileLayer("data/2016Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -426,12 +328,6 @@ let csvAdjust = omnivore
   });
 // csvAdjust.addTo(map);
 
-let landmarksSearch = new L.Control.Search({
-  layer: landmarksLayer,
-  position:'topright',
-  propertyName:'Landmark'
-});
-landmarksSearch.addTo(map);
 
 let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data, {
@@ -474,6 +370,29 @@ let streetsLayer = L.geoJSON(streets_data, {
 
   // }
 });
+
+let landmarksSearch = new L.Control.Search({
+  // layer: L.layerGroup([landmarksLayer,streetsLayer]),
+  layer: landmarksLayer,
+  position:'topright',
+  propertyName:'Landmark',
+  container:"Search",
+  collapsed:false,
+  textPlaceholder: 'Search for Landmark or Streets',
+  buildTip: function(text, val) {
+    // debugger;
+    let type;
+    if(val.layer.feature.properties.Landmark){
+      type = 'Landmark';
+    } else if(val.layer.feature.properties.Street){
+      type = 'Street';
+    }
+    return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
+  }
+});
+landmarksSearch.addTo(map);
+// $("#Search").append(landmarksSearch.getContainer());
+
 // streetsLayer.addTo(map);
 
 let baselayers = {
@@ -493,10 +412,10 @@ let overlays = {
   Streets: streetsLayer,
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
-for (i in baselayers) {
+for (let i in baselayers) {
   $("#year").append("<option>" + i);
 }
-for (i in overlays) {
+for (let i in overlays) {
   $("#mode").append("<option>" + i);
 }
 
@@ -531,6 +450,8 @@ if (debugMode) {
     })
     .addTo(map);
 }
+
+
 function selectMode(elem) {
   const mode = elem.innerText;
   for (let i in overlays) {
@@ -539,6 +460,7 @@ function selectMode(elem) {
   map.addLayer(overlays[mode]);
   switch (mode) {
     case "Just Maps":
+      // find previous map
       try {
         map.previousYear = layerSwitcher._findActiveBaseLayer().name;
       } catch (e) {
@@ -548,6 +470,8 @@ function selectMode(elem) {
         map.addLayer(baselayers[map.previousYear]);
         console.log(map.previousYear);
       }
+
+      // 
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
@@ -570,6 +494,8 @@ function selectMode(elem) {
         map.addLayer(baselayers[map.previousYear]);
         console.log("map.previousYear = " + map.previousYear);
       }
+
+      //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }

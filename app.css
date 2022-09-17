@@ -200,3 +200,8 @@ body {
 .hidden{
     display: none;
 }
+
+.Landmark.search-tip b,
+.Landmark.leaflet-marker-icon {
+	background: #f66
+}

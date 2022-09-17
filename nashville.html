@@ -27,15 +27,15 @@
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
         
-            <img src="images/ul-corner.png" id="ul-corner">
-            <img src="images/ur-corner.png" id="ur-corner"alt="">
+            <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
+            <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
             
-            <img src="images/ll-corner.png" id="ll-corner">
-            <img src="images/lr-corner.png" id="lr-corner" alt="">
+            <img src="images/leftPanalImages/ll-corner.png" id="ll-corner">
+            <img src="images/leftPanalImages/lr-corner.png" id="lr-corner" alt="">
 
             <div id="interact" class="grid-container">
                 <div class="grid-item logo">
-                    <img src="images/han-logo-25aug2022.png" id='logo'>
+                    <img src="images/leftPanalImages/han-logo-25aug2022.png" id='logo'>
                 </div>
                 <div class="grid-item labeltxt">
                     <span >Mode</span>
@@ -73,7 +73,7 @@
                     <div id="Selection" class="tabcontent">
                         <h4>Vandertbilt Gym</h4>
                         <p id="selection_subtitle">Built in 1880</p>
-                        <img id="selection_img" src="images/relotsoffiles/testimage1.png" />
+                        <img id="selection_img" src="images/testimages/testimage1.png" />
                         <span id="img_caption">1969 photo, Library of congress</span>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores assumenda totam voluptatem sed, iure facilis consequatur blanditiis eos, nulla dignissimos pariatur est repudiandae eveniet rerum accusamus in at debitis provident?</p>
                     </div>
@@ -95,7 +95,7 @@
             
         </div>
         <div id="gridCollapse" class="collapsible hidden">
-            <img src="images/collapsebutton.png">
+            <img src="images/leftPanalImages/collapsebutton.png">
         </div>
         <div id="map"></div>
     </div>
@@ -133,13 +133,13 @@
                 map.invalidateSize();
                 this.style.left = "0px";
                 this.style.marginLeft = '-15px';
-                this.firstElementChild.src = 'images/expandbutton.png';                
+                this.firstElementChild.src = 'images/leftPanalImages/expandbutton.png';                
             }else{
                 content.style.display = "inline-flex";
                 content.style.width = "calc(var(--CPwidth))";
                 mapDiv.style.width = "calc(100% - var(--CPwidth) - 30px)";
                 this.style.left = "calc(330px)";
-                this.firstElementChild.src = 'images/collapsebutton.png';
+                this.firstElementChild.src = 'images/leftPanalImages/collapsebutton.png';
             }
         });
     }
