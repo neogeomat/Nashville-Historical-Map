@@ -59,7 +59,7 @@
     position: inherit;
     height: 1em;
     width: 1em;
-    bottom: 0.5em;
+    top:7.5em;
     left: 0.5em;
 }
 
@@ -67,7 +67,7 @@
     position: inherit;
     height: 1em;
     width: 1em;
-    bottom: 0.5em;
+    top: 7.5em;
     right: 0.5em;
 }
 
