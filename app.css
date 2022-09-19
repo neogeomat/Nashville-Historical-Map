@@ -205,3 +205,8 @@ body {
 .Landmark.leaflet-marker-icon {
 	background: #f66
 }
+
+.Street.search-tip b,
+.Street.leaflet-marker-icon {
+	background: #66f
+}

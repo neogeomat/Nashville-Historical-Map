@@ -244,10 +244,12 @@ let landmarksLayer = L.geoJSON(null, {
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
-      permanent: true,
+      // permanent: true,
       direction: "top",
       offset: [0, -22],
     }).openTooltip();
+    m.layerName = "Landmark";
+    feature.properties.Name = feature.properties.Landmark;
     return m;
   },
   onEachFeature: function (feature, layer) {
@@ -343,10 +345,12 @@ let streetsLayer = L.geoJSON(streets_data, {
       }),
     });
     m.bindTooltip(feature.properties.Street, {
-      permanent: true,
+      // permanent: true,
       direction: "top",
       offset: [0, -20],
     }).openTooltip();
+    m.layerName = "Street";
+    feature.properties.Name = feature.properties.Street;
     return m;
   },
   onEachFeature: function (feature, layer) {
@@ -376,10 +380,10 @@ let streetsLayer = L.geoJSON(streets_data, {
 // streetsLayer.addTo(map);
 
 let searchControl = new L.Control.Search({
-  // layer: L.layerGroup([landmarksLayer,streetsLayer]),
-  layer: landmarksLayer,
+  layer: L.layerGroup([landmarksLayer,streetsLayer]),
+  // layer: landmarksLayer,
   position:'topright',
-  propertyName:'Landmark',
+  propertyName:'Name',
   container:"Search",
   collapsed:false,
   textPlaceholder: 'Search for Landmark or Streets',
@@ -391,7 +395,7 @@ let searchControl = new L.Control.Search({
     } else if(val.layer.feature.properties.Street){
       type = 'Street';
     }
-    return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
+    return '<a href="#" class="'+type+'">'+text+'   <b>'+type+'</b></a>';
   }
 });
 searchControl.addTo(map);
