@@ -210,3 +210,8 @@ body {
 .Street.leaflet-marker-icon {
 	background: #66f
 }
+
+.centerimg {
+    display: flex;
+justify-content: center;
+  }  
