@@ -17,9 +17,92 @@
     <script src="lib/leaflet.textpath.js"></script>
     <link rel="stylesheet" href="lib/Leaflet.Coordinates-0.1.3.css">
     <link rel="stylesheet" href="lib/tab.css">
+    <link rel="stylesheet" href=
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="lib/tab.js"></script>
     <title>Nashville Historical Map</title>   
-
+    <style>
+		.slide img {
+			width: 100%;
+		}
+		.height {
+			height: 10px;
+		}
+		
+		/* Image-container design */
+		.image-container {
+			max-width: 400px;
+			position: relative;
+			margin: auto;
+		}
+		
+		.next {
+			right: 0;
+		}
+		
+		/* Next and previous icon design */
+		.previous,
+		.next {
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			padding: 10px;
+			margin-top: -25px;
+            color: #000000;
+		}
+		
+		/* caption decorate */
+		.captionText {
+			color: #f2c885;
+			font-size: 14px;
+			position: absolute;
+			padding: 12px 12px;
+			bottom: -30px;
+			width: 100%;
+			text-align: center;
+		}
+		
+		/* Slider image number */
+		.slideNumber {
+			/* background-color: #5574C5; */
+			color: black;
+			border-radius: 25px;
+			bottom: -40px;
+			opacity: .5;
+			margin: 5px;
+			/* width: 30px;
+			height: 30px; */
+			text-align: center;
+			font-weight: bold;
+			font-size: 24px;
+			position: absolute;
+		}
+		.fa {
+			font-size: 32px;
+		}
+		
+		/* .fa:hover {
+			transform: rotate(360deg);
+			transition: 1s;
+			color: white;
+		} */
+		
+		/* .footerdot {
+			cursor: pointer;
+			height: 15px;
+			width: 15px;
+			margin: 0 2px;
+			background-color: #bbbbbb;
+			border-radius: 50%;
+			display: inline-block;
+			transition: background-color 0.5s ease;
+		} */
+		
+		/* .active,
+		.footerdot:hover {
+			background-color: black;
+		} */
+	</style>
 </head>
 
 <body>
@@ -73,11 +156,27 @@
                     <div id="Selection" class="tabcontent">
                         <h4>Vandertbilt Gym</h4>
                         <p id="selection_subtitle">Built in 1880</p>
-                        <div class="centerimg">
-                            <img id="selection_img" src="images/testimages/testimage1.png" />
-                        </div>
-                        <div class="centerimg">
-                        <span id="img_caption">1969 photo, Library of congress</span>
+                        <div class="image-container">
+                            <div class="slide">                                
+                                <img src="images/testimages/testimage1.png">
+                                <div class="captionText">test teste aetas</div>
+                            </div>
+                            <div class="slide">                                
+                                <img src="images/testimages/testimage2.png">
+                                <div class="captionText">asdfate aetaedfd</div>
+                            </div>
+                            <div class="slide">                                
+                                <img src="images/testimages/testimage3.png">
+                                <div class="captionText">tesadf asdfaadfadsf asdf</div>
+                            </div>
+                    
+                            <!-- Next and Previous icon to change images -->
+                            <a class="previous" onclick="moveSlides(-1)">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            </a>
+                            <a class="next" onclick="moveSlides(1)">
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
                         </div>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores assumenda totam voluptatem sed, iure facilis consequatur blanditiis eos, nulla dignissimos pariatur est repudiandae eveniet rerum accusamus in at debitis provident?</p>
                     </div>
@@ -172,5 +271,43 @@
 </script>
 <script>
     $('.instructions')[0].style.height = 'auto'
+</script>
+<script>
+    var slideIndex = 1;
+    displaySlide(slideIndex);
+
+    function moveSlides(n) {
+        displaySlide(slideIndex += n);
+    }
+
+    function activeSlide(n) {
+        displaySlide(slideIndex = n);
+    }
+
+    /* Main function */
+    function displaySlide(n) {
+        var i;
+        var totalslides =
+            document.getElementsByClassName("slide");
+        
+        var totaldots =
+            document.getElementsByClassName("footerdot");
+        
+        if (n > totalslides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = totalslides.length;
+        }
+        for (i = 0; i < totalslides.length; i++) {
+            totalslides[i].style.display = "none";
+        }
+        for (i = 0; i < totaldots.length; i++) {
+            totaldots[i].className =
+            totaldots[i].className.replace(" active", "");
+        }
+        totalslides[slideIndex - 1].style.display = "block";
+        totaldots[slideIndex - 1].className += " active";
+    }
 </script>
 </html>

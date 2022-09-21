@@ -178,8 +178,8 @@ body {
 
 #Selection img{
     overflow: hidden;
-    max-width:300px;
-    height:150px;
+    /* max-width:300px; */
+    /* height:150px; */
 }
 #Selection h4{
     text-align: center;
