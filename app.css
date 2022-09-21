@@ -110,7 +110,10 @@ body {
     top: 5px;
 }
 .logo {
-    grid-row: 1 / span 6;
+    grid-row: 1 / span 5;
+  }
+  .informationPanal{
+    grid-column: 1/span 2;
   }
 .labeltxt {
     text-align: left;
@@ -210,8 +213,3 @@ body {
 .Street.leaflet-marker-icon {
 	background: #66f
 }
-
-.centerimg {
-    display: flex;
-justify-content: center;
-  }  
