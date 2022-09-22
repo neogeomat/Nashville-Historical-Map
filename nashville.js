@@ -276,42 +276,43 @@ let landmarksLayer = L.geoJSON(null, {
 
       // Update Side Panel
       // debugger;
+      console.log(layer.feature.properties);
       document.getElementById("SelectionName").innerText =
         layer.feature.properties["Landmark"];
       document.getElementById(
         "selection_subtitle"
-      ).innerText = `${layer.feature.properties["Constructi"]}`;
-      if (layer.feature.properties["Manner of"]) {
+      ).innerText = `${layer.feature.properties["Construction"]}`;
+      if (layer.feature.properties["Manner of Destruction"]) {
         document.getElementById(
           "selection_subtitle"
-        ).innerText += `, ${layer.feature.properties["Manner of"]}`;
+        ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
       }
-      if (layer.feature.properties["Destructio"]) {
+      if (layer.feature.properties["Destruction"]) {
         document.getElementById(
           "selection_subtitle"
-        ).innerText += ` ${layer.feature.properties["Destructio"]}`;
+        ).innerText += ` ${layer.feature.properties["Destruction"]}`;
       }
       document.getElementById(
         "selection_img"
-      ).src = `images\\relotsoffiles\\${layer.feature.properties["Test Photo"]}`;
+      ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
       document.getElementById("img_attribution").innerText = "";
-      if (layer.feature.properties["Photo Cred"]) {
+      if (layer.feature.properties["Maps Photo Should Appear on"]) {
         document.getElementById("img_attribution").innerText +=
-          layer.feature.properties["Photo Cred"];
-        if (layer.feature.properties["Year of Im"]) {
+          layer.feature.properties["Maps Photo Should Appear on"];
+        if (layer.feature.properties["Year of Image"]) {
           document.getElementById("img_attribution").innerHTML += ", ";
         }
       }
-      if (layer.feature.properties["Year of Im"]) {
+      if (layer.feature.properties["Year of Image"]) {
         document.getElementById("img_attribution").innerText +=
-          layer.feature.properties["Year of Im"];
+          layer.feature.properties["Year of Image"];
       }
-      if (layer.feature.properties["Descriptio"]) {
+      if (layer.feature.properties["Description"]) {
         document.getElementById("selection_description").innerText =
-          layer.feature.properties["Descriptio"];
+          layer.feature.properties["Description"];
       }
 
-      openCity(event, "Search");
+      // openCity(event, "Search");
     });
   },
 });
