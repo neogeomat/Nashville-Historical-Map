@@ -231,6 +231,5 @@ let streets_data = {
     { "type": "Feature", "properties": { "Street": "Woodlawn", "Type": "Drive", "Former Names": "Woodlawn Avenue, Bellair Avenue", "History": "Woodlawn Mansion at 127 Woodmont Boulevard was built in 1822 by John Nichols, and Woodlawn Drive is named for that house. Around 1930 Woodlawn Avenue and Bellair Avenue were connected and thereafter both were known as Woodlawn Drive.", "X Location": "4174", "Y Location": "6427", "field_7": null, "field_8": null, "field_9": null, "field_10": null }, "geometry": { "type": "Point", "coordinates": [ 43.375118362087441, 35.246522833849696 ] } },
     { "type": "Feature", "properties": { "Street": "Woodmont", "Type": "Boulevard", "Former Names": "Concrete Boulevard", "History": "Woodmont Boulevard took its name from Woodmont, the farm of Samuel Watkins (1792�1880). In the beginning a private road, it was the first concrete roadway in Davidson County when it was poured in 1914.", "X Location": "4625", "Y Location": "6674", "field_7": null, "field_8": null, "field_9": null, "field_10": null }, "geometry": { "type": "Point", "coordinates": [ 47.983276195322517, 32.730837682802544 ] } }
     ]
-    }
-    
+    };
     
