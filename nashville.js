@@ -318,6 +318,7 @@ let landmarksLayer = L.geoJSON(null, {
 });
 landmarksLayer.addTo(map);
 let csvAdjustData = [];
+let landmarksLayer_clone;
 let csvAdjust = omnivore
   .csv(
     "data/Landmarks 4 (for dev).csv",
@@ -330,6 +331,10 @@ let csvAdjust = omnivore
   )
   .on("ready", function (layer) {
     csvAdjustData = csvAdjust.getLayers();
+    landmarksLayer_clone = cloneLayer(landmarksLayer);
+    // landmarksLayer_clone.addTo(map);
+    searchControl.options.layer = landmarksLayer_clone;
+    searchControl._layer = landmarksLayer_clone;
   });
 // csvAdjust.addTo(map);
 
@@ -378,11 +383,15 @@ let streetsLayer = L.geoJSON(streets_data, {
     });
   },
 });
+// let streetsLayer_clone = Object.assign({},streetsLayer);
+
 // streetsLayer.addTo(map);
 
 let searchControl = new L.Control.Search({
-  layer: L.layerGroup([landmarksLayer,streetsLayer]),
+  // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
+  // layer:L.layerGroup(csvAdjustData),
   // layer: landmarksLayer,
+  layer: landmarksLayer_clone,
   position:'topright',
   propertyName:'Name',
   container:"Search",
@@ -558,11 +567,13 @@ function selectYear(elem) {
     map.removeLayer(baselayers[i]);
   }
   map.addLayer(baselayers[year]);
-  let l = csvAdjustData.filter((k) =>
-    k.feature.properties["Maps Landm"].includes(year)
+  // debugger;
+  let l = csvAdjustData.filter(k =>{
+    return k.feature.properties["Maps Photo Should Appear on"].includes(year);
+  }
   );
-  csvAdjust.clearLayers();
-  l.forEach((m) => m.addTo(csvAdjust));
+  landmarksLayer.clearLayers();
+  l.forEach((m) => m.addTo(landmarksLayer));
 }
 
 function select2016Overlay ($elem){
