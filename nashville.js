@@ -277,11 +277,21 @@ let landmarksLayer = L.geoJSON(null, {
       // Update Side Panel
       // debugger;
       console.log(layer.feature.properties);
-      document.getElementById("SelectionName").innerText =
+      if(layer.feature.properties["Landmark"]){
+        document.getElementById("SelectionName").innerText =
         layer.feature.properties["Landmark"];
-      document.getElementById(
+      }else{
+        document.getElementById("SelectionName").innerText = "";
+      }
+      if (layer.feature.properties["Construction"]) {
+        document.getElementById(
         "selection_subtitle"
       ).innerText = `${layer.feature.properties["Construction"]}`;
+      }else{
+        document.getElementById(
+          "selection_subtitle"
+        ).innerText = "";
+      }
       if (layer.feature.properties["Manner of Destruction"]) {
         document.getElementById(
           "selection_subtitle"
@@ -292,10 +302,20 @@ let landmarksLayer = L.geoJSON(null, {
           "selection_subtitle"
         ).innerText += ` ${layer.feature.properties["Destruction"]}`;
       }
-      document.getElementById(
-        "selection_img"
-      ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+      if(layer.feature.properties["Test Photo File Name"]){
+        document.getElementById(
+          "selection_img"
+        ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+      }else{
+        document.getElementById(
+          "selection_img"
+        ).src = "";
+      }
+      if (layer.feature.properties["img_attribution"]) {
       document.getElementById("img_attribution").innerText = "";
+      }else{
+        document.getElementById("img_attribution").innerText = ""
+      }
       if (layer.feature.properties["Maps Photo Should Appear on"]) {
         document.getElementById("img_attribution").innerText +=
           layer.feature.properties["Maps Photo Should Appear on"];
@@ -380,6 +400,45 @@ let streetsLayer = L.geoJSON(streets_data, {
         })
       );
       previousselectedstreet = layer;
+
+      // Update Side Panel
+      // debugger;
+      console.log(layer.feature.properties);
+      if(layer.feature.properties["Street"]){
+        document.getElementById("SelectionName").innerText =
+        layer.feature.properties["Street"];
+      }else{
+        document.getElementById("SelectionName").innerText = "";
+      }
+      if(layer.feature.properties["Construction"]){
+        document.getElementById("selection_subtitle").innerText =
+        layer.feature.properties["Construction"];
+      }else{
+        document.getElementById("selection_subtitle").innerText = "";
+      }
+      if(layer.feature.properties["Test Photo File Name"]){
+        document.getElementById(
+          "selection_img"
+        ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+      }else{
+        document.getElementById(
+          "selection_img"
+        ).src = "";
+      }
+
+      if (layer.feature.properties["img_attribution"]) {
+        document.getElementById("img_attribution").innerText =
+          layer.feature.properties["img_attribution"];
+      }else{
+        document.getElementById("img_attribution").innerText = "";
+      }
+
+      if (layer.feature.properties["History"]) {
+        document.getElementById("selection_description").innerText =
+          layer.feature.properties["History"];
+      }else{
+        document.getElementById("selection_description").innerText = "";
+      }
     });
   },
 });
