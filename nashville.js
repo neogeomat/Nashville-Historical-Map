@@ -409,9 +409,13 @@ let searchControl = new L.Control.Search({
   }
 });
 searchControl.addTo(map);
-// $("#Search").append(searchControl.getContainer());
-
-// streetsLayer.addTo(map);
+searchControl.on('search:locationfound',e=>{
+  console.log(e);
+  // debugger;
+  const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
+  $('#year.select-selected')[0].innerText = year;
+  selectYear(year);
+});
 
 let baselayers = {
   1952: nashville1952Tile1444_578,
@@ -431,10 +435,10 @@ let overlays = {
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
-  $("#year").append("<option>" + i);
+  $("#year").append(`<option value=${i}>${i}`);
 }
 for (let i in overlays) {
-  $("#mode").append("<option>" + i);
+  $("#mode").append(`<option value=${i}>${i}`);
 }
 
 nashville1952Tile1444_578.addTo(map);
@@ -562,7 +566,7 @@ function selectMode(elem) {
 }
 
 function selectYear(elem) {
-  const year = elem.innerText;
+  const year = elem.innerText||elem;
   for (let i in baselayers) {
     map.removeLayer(baselayers[i]);
   }
@@ -570,10 +574,11 @@ function selectYear(elem) {
   // debugger;
   let l = csvAdjustData.filter(k =>{
     return k.feature.properties["Maps Photo Should Appear on"].includes(year);
-  }
-  );
+  });
   landmarksLayer.clearLayers();
-  l.forEach((m) => m.addTo(landmarksLayer));
+  l.forEach(m => {
+    m.addTo(landmarksLayer);
+   });
 }
 
 function select2016Overlay ($elem){
