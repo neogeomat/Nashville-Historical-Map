@@ -81,13 +81,6 @@
 			font-size: 32px;
 		}
 
-        .leaflet-control-search.search-exp {
-        background: #221d1f;
-        border: none;
-    }
-    .leaflet-control-search .search-input{
-        float: unset;
-    }
         
 		
 		/* .fa:hover {
@@ -199,7 +192,12 @@
                         <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
                     </div>
                     <div id="Search" class="tabcontent">
-                        
+                        <p>Search For</p>
+                        <input type="radio" name="landmark" />
+                        <label for="landmark">A landmark</label>
+                        <input type="radio" name="street" />
+                        <label for="street">A Street</label>
+
                     </div>
                 </div>
 
@@ -222,7 +220,15 @@
 <script src='nashville.js'></script>
 <script src="lib/custom-select.js"></script>
 <link rel="stylesheet" href="lib/custom-select.css">
-
+<style>
+    .leaflet-control-search.search-exp {
+        background: #221d1f;
+        border: none;
+    }
+    .leaflet-control-search .search-input{
+        float: unset;
+    }
+</style>
 <script>
     // collapsible left sidebar
     var coll = document.getElementsByClassName("collapsible");
