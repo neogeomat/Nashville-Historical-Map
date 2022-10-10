@@ -30,11 +30,11 @@
 	margin-left: 10px;
 	margin-top: 10px;
 }
-.leaflet-control-search.search-exp {/*expanded*/
-	background: #fff;
+/*.leaflet-control-search.search-exp {expanded*/
+	/* background: #fff;
 	border: 2px solid rgba(0,0,0,0.2);
-	background-clip: padding-box;	
-}
+	background-clip: padding-box;	 
+}*/
 .leaflet-control-search .search-input {
 	display:block;
 	float:left;
@@ -81,8 +81,9 @@
 	display:block;
 	float:left;
 	width:30px;
-	height:30px;	
-	background: url('../images/search-icon.png') no-repeat 4px 4px #fff;
+	height:30px;
+	content: "test";	
+	/* background: url('../images/search-icon.png') no-repeat 4px 4px #fff; */
 	border-radius:4px;
 }
 .leaflet-control-search .search-button:hover {
