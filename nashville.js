@@ -336,7 +336,7 @@ let landmarksLayer = L.geoJSON(null, {
     });
   },
 });
-landmarksLayer.addTo(map);
+// landmarksLayer.addTo(map);
 let csvAdjustData = [];
 let landmarksLayer_clone;
 let csvAdjust = omnivore
@@ -470,7 +470,7 @@ let searchControl = new L.Control.Search({
 searchControl.addTo(map);
 searchControl.on('search:locationfound',e=>{
   console.log(e);
-  // debugger;
+  debugger;
   const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
   $('#year.select-selected')[0].innerText = year;
   selectYear(year);
@@ -561,7 +561,7 @@ function selectMode(elem) {
       }
       if($("#informationPanal").is(":visible")){
         $("#informationPanal").hide();
-        $('.instructions')[0].style.height = 'auto';
+        // $('.instructions')[0].style.height = 'auto';
       }
       break;
     case "Landmarks":
@@ -601,12 +601,12 @@ function selectMode(elem) {
         map.removeLayer(baselayers[i]);
       }
       map.addLayer(nashville2016Tile1444_578);
-      if (!$("#yearDiv").hasClass("disabled")) {
-        $("#yearDiv").addClass("disabled");
-      }
-      if(!$("#overlayRadio").hasClass("disabled")){
-        $("#overlayRadio").addClass("disabled");
-      }
+      // if (!$("#yearDiv").hasClass("disabled")) {
+      //   $("#yearDiv").addClass("disabled");
+      // }
+      // if(!$("#overlayRadio").hasClass("disabled")){
+      //   $("#overlayRadio").addClass("disabled");
+      // }
       if(!$("#informationPanal").is(":visible")){
         $("#informationPanal").show();
       }
@@ -711,3 +711,4 @@ function updateZoomText() {
   console.log("zoom change to" + map.getZoom());
 }
 updateZoomText();
+selectMode({innerText:'Just Maps'});
