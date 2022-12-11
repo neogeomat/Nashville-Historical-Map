@@ -470,10 +470,30 @@ let searchControl = new L.Control.Search({
 searchControl.addTo(map);
 searchControl.on('search:locationfound',e=>{
   console.log(e);
-  debugger;
+  // debugger;
+  let years = e.layer.feature.properties['Maps Photo Should Appear on'].split(',');
+  years = years.map(y => {return y.trim();}); 
+  if($('#year.select-selected')[0].innerText in years){
+    pass;
+  } else{
+    let content = '<p>The search Feature is not available in current selected year. <\p> It is available in years ';
+    for (var i = 0; i < years.length; i++) {
+      content += ('<button value=' + years[i] + ' onClick= selectYear("' + years[i] + '")>' + years[i] + '</button>');
+    }
+    content += 'Click the year to change map';
+    var tooltip = L.popup({
+      direction: "bottom",
+    })
+    .setLatLng(e.latlng)
+    .setContent(content)
+    .addTo(map);
+  }
   const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
-  $('#year.select-selected')[0].innerText = year;
-  selectYear(year);
+
+  //cahnge to ;ast found year
+  // $('#year.select-selected')[0].innerText = year;
+  // selectYear(year);
+  //
 });
 
 let baselayers = {
@@ -638,6 +658,7 @@ function selectYear(elem) {
   l.forEach(m => {
     m.addTo(landmarksLayer);
    });
+   $('#year.select-selected')[0].innerText = year;
 }
 
 function select2016Overlay ($elem){
