@@ -464,7 +464,7 @@ let searchControl = new L.Control.Search({
     } else if(val.layer.feature.properties.Street){
       type = 'Street';
     }
-    return '<a href="#" class="'+type+'">'+text+'   <b>'+type+'</b></a>';
+    return '<a href="#" class="'+type+'">'+text+'  <!-- <b>'+type+'</b> --> <span class="result-arrow">></span></a>';
   }
 });
 searchControl.addTo(map);
