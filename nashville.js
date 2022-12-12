@@ -336,7 +336,7 @@ let landmarksLayer = L.geoJSON(null, {
     });
   },
 });
-landmarksLayer.addTo(map);
+// landmarksLayer.addTo(map);
 let csvAdjustData = [];
 let landmarksLayer_clone;
 let csvAdjust = omnivore
@@ -471,9 +471,29 @@ searchControl.addTo(map);
 searchControl.on('search:locationfound',e=>{
   console.log(e);
   // debugger;
+  let years = e.layer.feature.properties['Maps Photo Should Appear on'].split(',');
+  years = years.map(y => {return y.trim();}); 
+  if($('#year.select-selected')[0].innerText in years){
+    pass;
+  } else{
+    let content = '<p>The search Feature is not available in current selected year. <\p> It is available in years ';
+    for (var i = 0; i < years.length; i++) {
+      content += ('<button value=' + years[i] + ' onClick= selectYear("' + years[i] + '")>' + years[i] + '</button>');
+    }
+    content += 'Click the year to change map';
+    var tooltip = L.popup({
+      direction: "bottom",
+    })
+    .setLatLng(e.latlng)
+    .setContent(content)
+    .addTo(map);
+  }
   const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
-  $('#year.select-selected')[0].innerText = year;
-  selectYear(year);
+
+  //cahnge to ;ast found year
+  // $('#year.select-selected')[0].innerText = year;
+  // selectYear(year);
+  //
 });
 
 let baselayers = {
@@ -561,7 +581,7 @@ function selectMode(elem) {
       }
       if($("#informationPanal").is(":visible")){
         $("#informationPanal").hide();
-        $('.instructions')[0].style.height = 'auto';
+        // $('.instructions')[0].style.height = 'auto';
       }
       break;
     case "Landmarks":
@@ -601,12 +621,12 @@ function selectMode(elem) {
         map.removeLayer(baselayers[i]);
       }
       map.addLayer(nashville2016Tile1444_578);
-      if (!$("#yearDiv").hasClass("disabled")) {
-        $("#yearDiv").addClass("disabled");
-      }
-      if(!$("#overlayRadio").hasClass("disabled")){
-        $("#overlayRadio").addClass("disabled");
-      }
+      // if (!$("#yearDiv").hasClass("disabled")) {
+      //   $("#yearDiv").addClass("disabled");
+      // }
+      // if(!$("#overlayRadio").hasClass("disabled")){
+      //   $("#overlayRadio").addClass("disabled");
+      // }
       if(!$("#informationPanal").is(":visible")){
         $("#informationPanal").show();
       }
@@ -638,6 +658,7 @@ function selectYear(elem) {
   l.forEach(m => {
     m.addTo(landmarksLayer);
    });
+   $('#year.select-selected')[0].innerText = year;
 }
 
 function select2016Overlay ($elem){
@@ -711,3 +732,4 @@ function updateZoomText() {
   console.log("zoom change to" + map.getZoom());
 }
 updateZoomText();
+selectMode({innerText:'Just Maps'});
