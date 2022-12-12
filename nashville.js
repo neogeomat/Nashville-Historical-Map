@@ -445,7 +445,7 @@ let streetsLayer = L.geoJSON(streets_data, {
 // let streetsLayer_clone = Object.assign({},streetsLayer);
 
 // streetsLayer.addTo(map);
-
+// debugger;
 let searchControl = new L.Control.Search({
   // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
   // layer:L.layerGroup(csvAdjustData),
