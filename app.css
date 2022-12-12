@@ -140,6 +140,10 @@ body {
     /* top: 8px; */
 }
 
+.tab button{
+    width: 33%;
+}
+
 #gridCollapse{
     cursor: pointer;
     
