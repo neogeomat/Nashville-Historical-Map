@@ -473,20 +473,21 @@ searchControl.on('search:locationfound',e=>{
   // debugger;
   let years = e.layer.feature.properties['Maps Photo Should Appear on'].split(',');
   years = years.map(y => {return y.trim();}); 
-  if($('#year.select-selected')[0].innerText in years){
-    pass;
+  if(years.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){
+    // pass;
   } else{
     let content = '<p>The search Feature is not available in current selected year. <\p> It is available in years ';
     for (var i = 0; i < years.length; i++) {
-      content += ('<button value=' + years[i] + ' onClick= selectYear("' + years[i] + '")>' + years[i] + '</button>');
+      content += ('<button class="popup-mapchange-button" value=' + years[i] + ' onClick= selectYear("' + years[i] + '")>' + years[i] + '</button>');
     }
     content += 'Click the year to change map';
     var tooltip = L.popup({
       direction: "bottom",
+      // className: 'instructions'
     })
     .setLatLng(e.latlng)
     .setContent(content)
-    .addTo(map);
+    .openOn(map);
   }
   const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
 
@@ -583,6 +584,11 @@ function selectMode(elem) {
         $("#informationPanal").hide();
         // $('.instructions')[0].style.height = 'auto';
       }
+
+      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+        map.removeLayer(nashville2016OverlayTile1444_578);
+        $('#overlayRadio > input')[1].checked = true; // check the off button
+      }
       break;
     case "Landmarks":
       try {
@@ -608,6 +614,13 @@ function selectMode(elem) {
           $("#informationPanal").removeClass("hidden");
         }
         $("#informationPanal").show();
+      }
+
+      
+
+      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+        map.removeLayer(nashville2016OverlayTile1444_578);
+        $('#overlayRadio > input')[1].checked = true; // check the off button
       }
       break;
     case "Streets":

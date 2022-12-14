@@ -144,6 +144,10 @@ body {
     width: 33%;
 }
 
+.tabcontent{
+    min-height: 100px;
+}
+
 #gridCollapse{
     cursor: pointer;
     
