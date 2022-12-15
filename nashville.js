@@ -277,62 +277,80 @@ let landmarksLayer = L.geoJSON(null, {
       // Update Side Panel
       // debugger;
       console.log(layer.feature.properties);
-      if(layer.feature.properties["Landmark"]){
-        document.getElementById("SelectionName").innerText =
-        layer.feature.properties["Landmark"];
-      }else{
-        document.getElementById("SelectionName").innerText = "";
-      }
-      if (layer.feature.properties["Construction"]) {
-        document.getElementById(
-        "selection_subtitle"
-      ).innerText = `${layer.feature.properties["Construction"]}`;
-      }else{
-        document.getElementById(
-          "selection_subtitle"
-        ).innerText = "";
-      }
-      if (layer.feature.properties["Manner of Destruction"]) {
-        document.getElementById(
-          "selection_subtitle"
-        ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
-      }
-      if (layer.feature.properties["Destruction"]) {
-        document.getElementById(
-          "selection_subtitle"
-        ).innerText += ` ${layer.feature.properties["Destruction"]}`;
-      }
-      if(layer.feature.properties["Test Photo File Name"]){
-        document.getElementById(
-          "selection_img"
-        ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-      }else{
-        document.getElementById(
-          "selection_img"
-        ).src = "";
-      }
-      if (layer.feature.properties["img_attribution"]) {
-      document.getElementById("img_attribution").innerText = "";
-      }else{
-        document.getElementById("img_attribution").innerText = ""
-      }
-      if (layer.feature.properties["Maps Photo Should Appear on"]) {
-        document.getElementById("img_attribution").innerText +=
-          layer.feature.properties["Maps Photo Should Appear on"];
-        if (layer.feature.properties["Year of Image"]) {
-          document.getElementById("img_attribution").innerHTML += ", ";
+      let yearslandmark = layer.feature.properties['Maps Photo Should Appear on'].split(',');
+      yearslandmark = yearslandmark.map(y => {return y.trim();});
+      if(yearslandmark.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){
+        if(layer.feature.properties["Landmark"]){
+          document.getElementById("SelectionName").innerText =
+          layer.feature.properties["Landmark"];
+        }else{
+          document.getElementById("SelectionName").innerText = "";
         }
+        if (layer.feature.properties["Construction"]) {
+          document.getElementById(
+          "selection_subtitle"
+        ).innerText = `${layer.feature.properties["Construction"]}`;
+        }else{
+          document.getElementById(
+            "selection_subtitle"
+          ).innerText = "";
+        }
+        if (layer.feature.properties["Manner of Destruction"]) {
+          document.getElementById(
+            "selection_subtitle"
+          ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
+        }
+        if (layer.feature.properties["Destruction"]) {
+          document.getElementById(
+            "selection_subtitle"
+          ).innerText += ` ${layer.feature.properties["Destruction"]}`;
+        }
+        if(layer.feature.properties["Test Photo File Name"]){
+          document.getElementById(
+            "selection_img"
+          ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+          document.getElementById(
+            "selection_img"
+          ).style.display = 'inherit';
+        }else{
+          document.getElementById("selection_img").src = "";
+          document.getElementById("selection_img").style.display = 'inherit';
+        }
+        if (layer.feature.properties["img_attribution"]) {
+        document.getElementById("img_attribution").innerText = "";
+        }else{
+          document.getElementById("img_attribution").innerText = ""
+        }
+        if (layer.feature.properties["Maps Photo Should Appear on"]) {
+          document.getElementById("img_attribution").innerText +=
+            layer.feature.properties["Maps Photo Should Appear on"];
+          if (layer.feature.properties["Year of Image"]) {
+            document.getElementById("img_attribution").innerHTML += ", ";
+          }
+        }
+        if (layer.feature.properties["Year of Image"]) {
+          document.getElementById("img_attribution").innerText +=
+            layer.feature.properties["Year of Image"];
+        }
+        if (layer.feature.properties["Description"]) {
+          document.getElementById("selection_description").innerText =
+            layer.feature.properties["Description"];
+        }
+      }else{
+        let listStreet = document.querySelectorAll('#Selection [id]');
+      listStreet.forEach(
+        node => {
+          if(node.innerText){
+          node.innerText = "";
+          }else{
+            node.src = "";
+            node.style.display = 'none';
+          }
+        }
+      );
       }
-      if (layer.feature.properties["Year of Image"]) {
-        document.getElementById("img_attribution").innerText +=
-          layer.feature.properties["Year of Image"];
-      }
-      if (layer.feature.properties["Description"]) {
-        document.getElementById("selection_description").innerText =
-          layer.feature.properties["Description"];
-      }
-
-      // openCity(event, "Search");
+      openCity({currentTarget:$('#selection_btn')[0]}, "Selection");
+      // $('#selection_btn').addClass('active');
     });
   },
 });
@@ -639,9 +657,9 @@ function selectMode(elem) {
       }
       map.addLayer(nashville2016Tile1444_578);
       $('#year.select-selected')[0].innerText = '2016';
-      // if (!$("#yearDiv").hasClass("disabled")) {
-      //   $("#yearDiv").addClass("disabled");
-      // }
+      if (!$("#yearDiv").hasClass("disabled")) {
+        $("#yearDiv").addClass("disabled");
+      }
       if(map.hasLayer(nashville2016OverlayTile1444_578)){
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
@@ -691,6 +709,12 @@ function selectYear(elem) {
     m.addTo(landmarksLayer);
    });
    $('#year.select-selected')[0].innerText = year;
+   if($('#selection_btn').hasClass('active')){
+   if(previousselectedlandmark)
+   previousselectedlandmark.fireEvent('click');
+   if(previousselectedstreet)
+   previousselectedstreet.fireEvent('click');
+   }
 }
 
 function select2016Overlay ($elem){
