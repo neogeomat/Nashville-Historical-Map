@@ -11,7 +11,8 @@
     text-rendering: optimizeLegibility;
 }
 :root{
-    --CPwidth: 33%;
+    /* --CPwidth: 33%; */
+    --CPwidth: 600px;
 }
 
 .instructions {
