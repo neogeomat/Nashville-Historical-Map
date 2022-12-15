@@ -553,7 +553,6 @@ if (debugMode) {
     .addTo(map);
 }
 
-
 function selectMode(elem) {
   const mode = elem.innerText;
   for (let i in overlays) {
@@ -615,8 +614,13 @@ function selectMode(elem) {
         }
         $("#informationPanal").show();
       }
-
       
+      let list = document.querySelectorAll('#Selection [id]');
+      list.forEach(
+        node => {
+          node.innerText = "";
+        }
+      );
 
       if(map.hasLayer(nashville2016OverlayTile1444_578)){
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -643,6 +647,17 @@ function selectMode(elem) {
       if(!$("#informationPanal").is(":visible")){
         $("#informationPanal").show();
       }
+// debugger;
+      let listStreet = document.querySelectorAll('#Selection [id]');
+      listStreet.forEach(
+        node => {
+          if(node.innerText){
+          node.innerText = "";
+          }else{
+            node.src = "";
+          }
+        }
+      );
       break;
     case "2016 Overlay":
       if (map.previousYear) {
