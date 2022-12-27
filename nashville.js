@@ -527,9 +527,10 @@ let baselayers = {
 
 let overlays = {
   // "Landmarks":L.layerGroup(),
-  "Just Maps": L.layerGroup(),
+  'Just Maps': L.layerGroup(),
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
+  'Battle of Nashville': L.layerGroup(),
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
@@ -619,6 +620,12 @@ function selectMode(elem) {
         console.log("map.previousYear = " + map.previousYear);
       }
 
+      // if($("#year.select-selected")[0].innerText in ['1984','2016']){
+      //   selectYear('1952');
+      // }
+      if(['Streets','Battle of Nashville'].includes($('#mode.select-selected')[0].getAttribute('previousMode'))){
+        selectYear('1952');
+      }
       //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
@@ -639,6 +646,7 @@ function selectMode(elem) {
           node.innerText = "";
         }
       );
+      $('#selection_description').html('Select a landmark marker on the map and information for that landmark will appear here');
 
       if(map.hasLayer(nashville2016OverlayTile1444_578)){
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -681,14 +689,29 @@ function selectMode(elem) {
         }
       );
       break;
-    case "2016 Overlay":
+    case "Battle of Nashville":
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
         console.log(map.previousYear);
       }
-      map.addLayer(nashville2016Tile1444_578);
-      if ($("#yearDiv").hasClass("disabled")) {
-        $("#yearDiv").removeClass("disabled");
+      if(!map.hasLayer(nashville2016Tile1444_578)){
+        map.addLayer(nashville2016Tile1444_578);
+      }
+      if (!$("#yearDiv").hasClass("disabled")) {
+        $("#yearDiv").addClass("disabled");
+      }
+      selectYear('1864');
+
+      if(!$("#overlayRadio").hasClass("disabled")){
+        $("#overlayRadio").addClass("disabled");
+      }
+
+      if($("#informationPanal").is(":visible")){
+        $("#informationPanal").hide();
+      }
+
+      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+        map.removeLayer(nashville2016OverlayTile1444_578);
       }
       break;
   }
