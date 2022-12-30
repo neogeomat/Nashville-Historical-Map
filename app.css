@@ -57,7 +57,7 @@
   margin: 5px auto;
   padding-left: 1em;
   padding-right: 1em;
-  width: 70%;
+  width: 180px;
 }
 #ll-corner {
   position: inherit;
@@ -118,6 +118,7 @@ body {
 }
 .informationPanal {
   grid-column: 1 / span 2;
+  margin-top: 10px;
 }
 .labeltxt {
   text-align: left;
