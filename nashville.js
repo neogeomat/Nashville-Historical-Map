@@ -13,7 +13,7 @@ let map = L.map("map", {
   wheelPxPerZoomLevel: 60 * zoomStep,
   crs: L.CRS.Simple,
   zoomControl: false,
-  // maxBounds: imageBounds,
+  maxBounds: imageBounds,
   maxBoundsViscosity: 0.5,
 });
 
@@ -473,7 +473,7 @@ let searchControl = new L.Control.Search({
   propertyName:'Name',
   container:"Search",
   collapsed:false,
-  textPlaceholder: 'Search for Landmark or Streets..........',
+  // textPlaceholder: 'Search for Landmark or Streets..........',
   buildTip: function(text, val) {
     // debugger;
     let type;

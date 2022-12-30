@@ -25,6 +25,7 @@
 .leaflet-control-zoom.leaflet-bar a {
   border-radius: 15px;
   background-color: #221d1f;
+  border-bottom: 0px;
 }
 
 .leaflet-verticalcenter {
