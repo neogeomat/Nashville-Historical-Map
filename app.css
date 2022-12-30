@@ -145,6 +145,7 @@ body {
 
 .tab button {
   width: 33%;
+  font-family: 'BloggerSans';
 }
 
 .tabcontent {
