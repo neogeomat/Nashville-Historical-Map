@@ -279,13 +279,21 @@ let landmarksLayer = L.geoJSON(null, {
       console.log(layer.feature.properties);
       let yearslandmark = layer.feature.properties['Maps Photo Should Appear on'].split(',');
       yearslandmark = yearslandmark.map(y => {return y.trim();});
-      if(yearslandmark.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){
+      
+      if(yearslandmark.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){ // landmark selected year khe lai laki malai check yaau
         if(layer.feature.properties["Landmark"]){
           document.getElementById("SelectionName").innerText =
-          layer.feature.properties["Landmark"];
+          `Also known as ${layer.feature.properties["Landmark"]}.`;
         }else{
           document.getElementById("SelectionName").innerText = "";
         }
+        if(layer.feature.properties["Also Known as"]){
+          document.getElementById("selectionAltName").innerText =
+          layer.feature.properties["Also Known as"];
+        }else{
+          document.getElementById("selectionAltName").innerText = "";
+        }
+
         if (layer.feature.properties["Construction"]) {
           document.getElementById(
           "selection_subtitle"
@@ -305,32 +313,36 @@ let landmarksLayer = L.geoJSON(null, {
             "selection_subtitle"
           ).innerText += ` ${layer.feature.properties["Destruction"]}`;
         }
-        if(layer.feature.properties["Test Photo File Name"]){
-          document.getElementById(
-            "selection_img"
-          ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-          document.getElementById(
-            "selection_img"
-          ).style.display = 'inherit';
+        if(layer.feature.properties["Use Image?"] == 'yes'){
+          if(layer.feature.properties["Image File Name"]){
+            document.getElementById(
+              "selection_img"
+            ).src = `images\\pictures\\${layer.feature.properties["Image File Name"]}`;
+            document.getElementById(
+              "selection_img"
+            ).style.display = 'inherit';
+          }
         }else{
-          document.getElementById("selection_img").src = "";
-          document.getElementById("selection_img").style.display = 'inherit';
-        }
-        if (layer.feature.properties["img_attribution"]) {
-        document.getElementById("img_attribution").innerText = "";
-        }else{
-          document.getElementById("img_attribution").innerText = ""
-        }
-        if (layer.feature.properties["Maps Photo Should Appear on"]) {
-          document.getElementById("img_attribution").innerText +=
-            layer.feature.properties["Maps Photo Should Appear on"];
-          if (layer.feature.properties["Year of Image"]) {
-            document.getElementById("img_attribution").innerHTML += ", ";
+          if(layer.feature.properties["Test Photo File Name"]){
+            document.getElementById(
+              "selection_img"
+            ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+            document.getElementById(
+              "selection_img"
+            ).style.display = 'inherit';
+          }else{
+            document.getElementById("selection_img").src = "";
+            document.getElementById("selection_img").style.display = 'inherit';
           }
         }
         if (layer.feature.properties["Year of Image"]) {
-          document.getElementById("img_attribution").innerText +=
+          document.getElementById("img_attribution").innerText =
             layer.feature.properties["Year of Image"];
+        }else{
+          document.getElementById("img_attribution").innerText = "";
+        }
+        if(layer.feature.properties["Image Download Location"]){
+          document.getElementById("img_attribution").innerText += `. Courtesy ${layer.feature.properties["Image Download Location"]}`;
         }
         if (layer.feature.properties["Description"]) {
           document.getElementById("selection_description").innerText =
@@ -815,4 +827,5 @@ function updateZoomText() {
   console.log("zoom change to" + map.getZoom());
 }
 updateZoomText();
-selectMode({innerText:'Just Maps'});
+// selectMode({innerText:'Just Maps'});
+selectMode({innerText:'Landmarks'});

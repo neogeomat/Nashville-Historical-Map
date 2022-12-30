@@ -198,7 +198,7 @@ body {
   text-align: center;
   margin: 1px;
 }
-#selection_subtitle {
+#selection_subtitle, #selectionAltName {
   text-align: center;
   font-size: small;
   margin-top: 1px;
