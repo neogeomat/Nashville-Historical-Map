@@ -646,7 +646,7 @@ function selectMode(elem) {
           node.innerText = "";
         }
       );
-      $('#selection_description').html('Select a landmark marker on the map and information for that landmark will appear here');
+      $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
 
       if(map.hasLayer(nashville2016OverlayTile1444_578)){
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -688,6 +688,8 @@ function selectMode(elem) {
           }
         }
       );
+
+      $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -702,12 +704,14 @@ function selectMode(elem) {
       }
       selectYear('1864');
 
-      if(!$("#overlayRadio").hasClass("disabled")){
-        $("#overlayRadio").addClass("disabled");
+      if($("#overlayRadio").hasClass("disabled")){
+        $("#overlayRadio").removeClass("disabled");
       }
+      $("#overlayRadio > input")[0].checked = false;
+      $("#overlayRadio > input")[1].checked = true;
 
-      if($("#informationPanal").is(":visible")){
-        $("#informationPanal").hide();
+      if(!$("#informationPanal").is(":visible")){
+        $("#informationPanal").show();
       }
 
       if(map.hasLayer(nashville2016OverlayTile1444_578)){

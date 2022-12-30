@@ -32,7 +32,7 @@
   z-index: 1000;
   pointer-events: none;
   /* top: 50%; possible because the placeholder's parent is the map */
-  left: calc(var(--CPwidth));
+  /* left: calc(var(--CPwidth)); */
   /* transform: translateY(-50%); using the CSS3 Transform technique */
   padding-top: 10px;
 }
@@ -44,7 +44,7 @@
 .leaflet-control-zoom {
   border-radius: 25px;
   width: 30px;
-  left: calc(var(--CPwidth) + 20px);
+  left: calc(var(--CPwidth) + 40px);
   background-color: #221d1f;
   /* border: 1px solid rgba(0, 0, 0, 0.8); */
   border: 1px solid #221d1f;
