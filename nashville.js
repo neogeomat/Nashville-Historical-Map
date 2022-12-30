@@ -289,7 +289,7 @@ let landmarksLayer = L.geoJSON(null, {
         if (layer.feature.properties["Construction"]) {
           document.getElementById(
           "selection_subtitle"
-        ).innerText = `${layer.feature.properties["Construction"]}`;
+        ).innerText = `Built ${layer.feature.properties["Construction"]}`;
         }else{
           document.getElementById(
             "selection_subtitle"
@@ -300,7 +300,7 @@ let landmarksLayer = L.geoJSON(null, {
             "selection_subtitle"
           ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
         }
-        if (layer.feature.properties["Destruction"]) {
+        if (layer.feature.properties["Destruction"] && layer.feature.properties["Destruction"] != 'extant') {
           document.getElementById(
             "selection_subtitle"
           ).innerText += ` ${layer.feature.properties["Destruction"]}`;
@@ -429,8 +429,8 @@ let streetsLayer = L.geoJSON(streets_data, {
         document.getElementById("SelectionName").innerText = "";
       }
       if(layer.feature.properties["Construction"]){
-        document.getElementById("selection_subtitle").innerText =
-        layer.feature.properties["Construction"];
+        document.getElementById("selection_subtitle").innerText = `Built 
+        ${layer.feature.properties["Construction"]}`;
       }else{
         document.getElementById("selection_subtitle").innerText = "";
       }
