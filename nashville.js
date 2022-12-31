@@ -19,30 +19,32 @@ let map = L.map("map", {
 
 let zoomControl = L.control
   .zoom({
-    zoomInText: '<img src="images/leftPanalImages/magnifybutton.png" alt="" srcset="">',
-    zoomOutText: '<img src="images/leftPanalImages/reducebutton.png" alt="" srcset="">',
+    zoomInText:
+      '<img src="images/leftPanalImages/magnifybutton.png" alt="" srcset="">',
+    zoomOutText:
+      '<img src="images/leftPanalImages/reducebutton.png" alt="" srcset="">',
   })
   .addTo(map);
 
 // Create additional Control placeholders
 function addControlPlaceholders(map) {
   var corners = map._controlCorners,
-      l = 'leaflet-',
-      container = map._controlContainer;
+    l = "leaflet-",
+    container = map._controlContainer;
 
   function createCorner(vSide, hSide) {
-      var className = l + vSide + ' ' + l + hSide;
+    var className = l + vSide + " " + l + hSide;
 
-      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+    corners[vSide + hSide] = L.DomUtil.create("div", className, container);
   }
 
-  createCorner('verticalcenter', 'left');
-  createCorner('verticalcenter', 'right');
+  createCorner("verticalcenter", "left");
+  createCorner("verticalcenter", "right");
 }
 addControlPlaceholders(map);
 
 // Change the position of the Zoom Control to a newly created placeholder.
-zoomControl.setPosition('verticalcenterleft');
+zoomControl.setPosition("verticalcenterleft");
 
 // You can also put other controls in the same placeholder.
 // L.control.scale({position: 'verticalcenterright'}).addTo(map);
@@ -260,7 +262,7 @@ let landmarksLayer = L.geoJSON(null, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
             iconSize: [18, 22],
-            offset:[9,0]
+            offset: [9, 0],
           })
         );
       }
@@ -269,7 +271,7 @@ let landmarksLayer = L.geoJSON(null, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
           iconSize: [18, 22],
-          offset:[9,0]
+          offset: [9, 0],
         })
       );
       previousselectedlandmark = layer;
@@ -277,91 +279,96 @@ let landmarksLayer = L.geoJSON(null, {
       // Update Side Panel
       // debugger;
       console.log(layer.feature.properties);
-      let yearslandmark = layer.feature.properties['Maps Photo Should Appear on'].split(',');
-      yearslandmark = yearslandmark.map(y => {return y.trim();});
-      
-      if(yearslandmark.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){ // landmark selected year khe lai laki malai check yaau
-        if(layer.feature.properties["Landmark"]){
-          document.getElementById("SelectionName").innerText =
-          `Also known as ${layer.feature.properties["Landmark"]}.`;
-        }else{
+      let yearslandmark =
+        layer.feature.properties["Maps Photo Should Appear on"].split(",");
+      yearslandmark = yearslandmark.map((y) => {
+        return y.trim();
+      });
+
+      if (
+        yearslandmark.indexOf($("#year.select-selected")[0].innerText.trim()) >=
+        0
+      ) {
+        // landmark selected year khe lai laki malai check yaau
+        if (layer.feature.properties["Landmark"]) {
+          document.getElementById(
+            "SelectionName"
+          ).innerText = `Also known as ${layer.feature.properties["Landmark"]}.`;
+        } else {
           document.getElementById("SelectionName").innerText = "";
         }
-        if(layer.feature.properties["Also Known as"]){
+        if (layer.feature.properties["Also Known as"]) {
           document.getElementById("selectionAltName").innerText =
-          layer.feature.properties["Also Known as"];
-        }else{
+            layer.feature.properties["Also Known as"];
+        } else {
           document.getElementById("selectionAltName").innerText = "";
         }
 
         if (layer.feature.properties["Construction"]) {
           document.getElementById(
-          "selection_subtitle"
-        ).innerText = `Built ${layer.feature.properties["Construction"]}`;
-        }else{
-          document.getElementById(
             "selection_subtitle"
-          ).innerText = "";
+          ).innerText = `Built ${layer.feature.properties["Construction"]}`;
+        } else {
+          document.getElementById("selection_subtitle").innerText = "";
         }
         if (layer.feature.properties["Manner of Destruction"]) {
           document.getElementById(
             "selection_subtitle"
           ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
         }
-        if (layer.feature.properties["Destruction"] && layer.feature.properties["Destruction"] != 'extant') {
+        if (
+          layer.feature.properties["Destruction"] &&
+          layer.feature.properties["Destruction"] != "extant"
+        ) {
           document.getElementById(
             "selection_subtitle"
           ).innerText += ` ${layer.feature.properties["Destruction"]}`;
         }
-        if(layer.feature.properties["Use Image?"] == 'yes'){
-          if(layer.feature.properties["Image File Name"]){
+        if (layer.feature.properties["Use Image?"] == "yes") {
+          if (layer.feature.properties["Image File Name"]) {
             document.getElementById(
               "selection_img"
             ).src = `images\\pictures\\${layer.feature.properties["Image File Name"]}`;
-            document.getElementById(
-              "selection_img"
-            ).style.display = 'inherit';
+            document.getElementById("selection_img").style.display = "inherit";
           }
-        }else{
-          if(layer.feature.properties["Test Photo File Name"]){
+        } else {
+          if (layer.feature.properties["Test Photo File Name"]) {
             document.getElementById(
               "selection_img"
             ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-            document.getElementById(
-              "selection_img"
-            ).style.display = 'inherit';
-          }else{
+            document.getElementById("selection_img").style.display = "inherit";
+          } else {
             document.getElementById("selection_img").src = "";
-            document.getElementById("selection_img").style.display = 'inherit';
+            document.getElementById("selection_img").style.display = "inherit";
           }
         }
         if (layer.feature.properties["Year of Image"]) {
           document.getElementById("img_attribution").innerText =
             layer.feature.properties["Year of Image"];
-        }else{
+        } else {
           document.getElementById("img_attribution").innerText = "";
         }
-        if(layer.feature.properties["Image Download Location"]){
-          document.getElementById("img_attribution").innerText += `. Courtesy ${layer.feature.properties["Image Download Location"]}`;
+        if (layer.feature.properties["Image Download Location"]) {
+          document.getElementById(
+            "img_attribution"
+          ).innerText += `. Courtesy ${layer.feature.properties["Image Download Location"]}`;
         }
         if (layer.feature.properties["Description"]) {
           document.getElementById("selection_description").innerText =
             layer.feature.properties["Description"];
         }
-      }else{
-        let listStreet = document.querySelectorAll('#Selection [id]');
-      listStreet.forEach(
-        node => {
-          if(node.innerText){
-          node.innerText = "";
-          }else{
+      } else {
+        let listStreet = document.querySelectorAll("#Selection [id]");
+        listStreet.forEach((node) => {
+          if (!node.src) {
+            node.innerText = "";
+          } else {
             node.src = "";
-            node.style.display = 'none';
+            node.style.display = "none";
           }
-        }
-      );
+        });
       }
-      openCity({currentTarget:$('#selection_btn')[0]}, "Selection");
+      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // $('#selection_btn').addClass('active');
     });
   },
@@ -383,11 +390,10 @@ let csvAdjust = omnivore
     csvAdjustData = csvAdjust.getLayers();
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
-    searchControl.options.layer = landmarksLayer_clone;
-    searchControl._layer = landmarksLayer_clone;
+    // searchControl.options.layer = landmarksLayer_clone;
+    // searchControl._layer = landmarksLayer_clone;
   });
 // csvAdjust.addTo(map);
-
 
 let previousselectedstreet = null;
 let streetsLayer = L.geoJSON(streets_data, {
@@ -397,7 +403,7 @@ let streetsLayer = L.geoJSON(streets_data, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet.png",
         iconSize: [20, 20],
-        offset: [10,10]
+        offset: [10, 10],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -417,7 +423,7 @@ let streetsLayer = L.geoJSON(streets_data, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
             iconSize: [20, 20],
-            offset: [10,10]
+            offset: [10, 10],
           })
         );
       }
@@ -426,7 +432,7 @@ let streetsLayer = L.geoJSON(streets_data, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet.png",
           iconSize: [20, 20],
-          offset: [10,10]
+          offset: [10, 10],
         })
       );
       previousselectedstreet = layer;
@@ -434,93 +440,116 @@ let streetsLayer = L.geoJSON(streets_data, {
       // Update Side Panel
       // debugger;
       console.log(layer.feature.properties);
-      if(layer.feature.properties["Street"]){
+      if (layer.feature.properties["Street"]) {
         document.getElementById("SelectionName").innerText =
-        layer.feature.properties["Street"];
-      }else{
+          layer.feature.properties["Street"];
+      } else {
         document.getElementById("SelectionName").innerText = "";
       }
-      if(layer.feature.properties["Type"]){
-        document.getElementById("SelectionName").innerText += ` ${layer.feature.properties["Type"]}`;
+      if (layer.feature.properties["Type"]) {
+        document.getElementById(
+          "SelectionName"
+        ).innerText += ` ${layer.feature.properties["Type"]}`;
       }
-      if(layer.feature.properties["Construction"]){
+      if (layer.feature.properties["Construction"]) {
         document.getElementById("selection_subtitle").innerText = `Built 
         ${layer.feature.properties["Construction"]}`;
-      }else{
+      } else {
         document.getElementById("selection_subtitle").innerText = "";
       }
-      if(layer.feature.properties["Test Photo File Name"]){
+      if (layer.feature.properties["Test Photo File Name"]) {
         document.getElementById(
           "selection_img"
         ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-      }else{
-        document.getElementById(
-          "selection_img"
-        ).src = "";
+      } else {
+        document.getElementById("selection_img").src = "";
       }
 
       if (layer.feature.properties["img_attribution"]) {
         document.getElementById("img_attribution").innerText =
           layer.feature.properties["img_attribution"];
-      }else{
+      } else {
         document.getElementById("img_attribution").innerText = "";
       }
 
       if (layer.feature.properties["History"]) {
         document.getElementById("selection_description").innerText =
           layer.feature.properties["History"];
-      }else{
+      } else {
         document.getElementById("selection_description").innerText = "";
       }
     });
   },
 });
-let streetsLayer_clone = Object.assign({},streetsLayer);
+let streetsLayer_clone = Object.assign({}, streetsLayer);
 
 let searchControl = new L.Control.Search({
   // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
   // layer:L.layerGroup(csvAdjustData),
   // layer: landmarksLayer,
-  layer: landmarksLayer_clone,
-  position:'topright',
-  propertyName:'Name',
-  container:"Search",
-  collapsed:false,
+  // layer: landmarksLayer_clone,
+  layer: streetsLayer,
+  position: "topright",
+  propertyName: "Name",
+  container: "Search",
+  collapsed: false,
   // textPlaceholder: 'Search for Landmark or Streets..........',
-  buildTip: function(text, val) {
+  buildTip: function (text, val) {
     // debugger;
     let type;
-    if(val.layer.feature.properties.Landmark){
-      type = 'Landmark';
-    } else if(val.layer.feature.properties.Street){
-      type = 'Street';
+    if (val.layer.feature.properties.Landmark) {
+      type = "Landmark";
+    } else if (val.layer.feature.properties.Street) {
+      type = "Street";
     }
-    return '<a href="#" class="'+type+'">'+text+'  <!-- <b>'+type+'</b> --> <span class="result-arrow">></span></a>';
-  }
+    return (
+      '<a href="#" class="' +
+      type +
+      '">' +
+      text +
+      "  <!-- <b>" +
+      type +
+      '</b> --> <span class="result-arrow">></span></a>'
+    );
+  },
 });
 searchControl.addTo(map);
-searchControl.on('search:locationfound',e=>{
+searchControl.on("search:locationfound", (e) => {
   console.log(e);
   // debugger;
-  let years = e.layer.feature.properties['Maps Photo Should Appear on'].split(',');
-  years = years.map(y => {return y.trim();}); 
-  if(years.indexOf($('#year.select-selected')[0].innerText.trim()) >= 0){
+  let years =
+    e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
+  years = years.map((y) => {
+    return y.trim();
+  });
+  if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
     // pass;
-  } else{
-    let content = '<p>The search Feature is not available in current selected year. <\p> It is available in years ';
+  } else {
+    let content =
+      "<p>The search Feature is not available in current selected year. <p> It is available in years ";
     for (var i = 0; i < years.length; i++) {
-      content += ('<button class="popup-mapchange-button" value=' + years[i] + ' onClick= selectYear("' + years[i] + '")>' + years[i] + '</button>');
+      content +=
+        '<button class="popup-mapchange-button" value=' +
+        years[i] +
+        ' onClick= selectYear("' +
+        years[i] +
+        '")>' +
+        years[i] +
+        "</button>";
     }
-    content += 'Click the year to change map';
+    content += "Click the year to change map";
     var tooltip = L.popup({
       direction: "bottom",
       // className: 'instructions'
     })
-    .setLatLng(e.latlng)
-    .setContent(content)
-    .openOn(map);
+      .setLatLng(e.latlng)
+      .setContent(content)
+      .openOn(map);
   }
-  const year = e.layer.feature.properties['Maps Photo Should Appear on'].split(',').pop().trim();
+  const year = e.layer.feature.properties["Maps Photo Should Appear on"]
+    .split(",")
+    .pop()
+    .trim();
 
   //cahnge to ;ast found year
   // $('#year.select-selected')[0].innerText = year;
@@ -540,10 +569,10 @@ let baselayers = {
 
 let overlays = {
   // "Landmarks":L.layerGroup(),
-  'Just Maps': L.layerGroup(),
+  "Just Maps": L.layerGroup(),
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
-  'Battle of Nashville': L.layerGroup(),
+  "Battle of Nashville": L.layerGroup(),
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
@@ -604,21 +633,21 @@ function selectMode(elem) {
         console.log(map.previousYear);
       }
 
-      // 
+      //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
-      if($("#overlayRadio").hasClass("disabled")){
+      if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
-      if($("#informationPanal").is(":visible")){
+      if ($("#informationPanal").is(":visible")) {
         $("#informationPanal").hide();
         // $('.instructions')[0].style.height = 'auto';
       }
 
-      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+      if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
-        $('#overlayRadio > input')[1].checked = true; // check the off button
+        $("#overlayRadio > input")[1].checked = true; // check the off button
       }
       break;
     case "Landmarks":
@@ -636,34 +665,46 @@ function selectMode(elem) {
       // if($("#year.select-selected")[0].innerText in ['1984','2016']){
       //   selectYear('1952');
       // }
-      if(['Streets','Battle of Nashville'].includes($('#mode.select-selected')[0].getAttribute('previousMode'))){
-        selectYear('1952');
+      if (
+        ["Streets", "Battle of Nashville"].includes(
+          $("#mode.select-selected")[0].getAttribute("previousMode")
+        )
+      ) {
+        selectYear("1952");
       }
       //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
-      if(!$("#overlayRadio").hasClass("disabled")){
+      if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
-      if(!$("#informationPanal").is(":visible")){
+      if (!$("#informationPanal").is(":visible")) {
         if ($("#informationPanal").hasClass("hidden")) {
           $("#informationPanal").removeClass("hidden");
         }
         $("#informationPanal").show();
       }
-      
-      let list = document.querySelectorAll('#Selection [id]');
-      list.forEach(
-        node => {
-          node.innerText = "";
-        }
-      );
-      $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
 
-      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+      let list = document.querySelectorAll("#Selection [id]");
+      list.forEach((node) => {
+        if (!node.src) {
+          node.innerText = "";
+        } else {
+          node.src = "";
+          // node.style.display = "inherit";
+        }
+      });
+      if(!map.previousselectedlandmark){
+        $('#selection_img').hide();
+      }
+      $("#selection_description").html(
+        "Select a landmark/street marker on the map and information for that landmark will appear here"
+      );
+
+      if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
-        $('#overlayRadio > input')[1].checked = true; // check the off button
+        $("#overlayRadio > input")[1].checked = true; // check the off button
       }
       break;
     case "Streets":
@@ -677,57 +718,58 @@ function selectMode(elem) {
         map.removeLayer(baselayers[i]);
       }
       map.addLayer(nashville2016Tile1444_578);
-      $('#year.select-selected')[0].innerText = '2016';
+      $("#year.select-selected")[0].innerText = "2016";
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
       }
-      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+      if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
-      if(!$("#overlayRadio").hasClass("disabled")){
+      if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
-      if(!$("#informationPanal").is(":visible")){
+      if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
       }
-// debugger;
-      let listStreet = document.querySelectorAll('#Selection [id]');
-      listStreet.forEach(
-        node => {
-          if(node.innerText){
+      // debugger;
+      let listStreet = document.querySelectorAll("#Selection [id]");
+      listStreet.forEach((node) => {
+        if (!node.src) {
           node.innerText = "";
-          }else{
-            node.src = "";
-          }
+        } else {
+          node.src = "";
+          node.style.display = "none";
         }
-      );
+      });
 
-      $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
+      $("#selection_description").html(
+        "Select a landmark/street marker on the map and information for that landmark will appear here"
+      );
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
         console.log(map.previousYear);
       }
-      if(!map.hasLayer(nashville2016Tile1444_578)){
+      if (!map.hasLayer(nashville2016Tile1444_578)) {
         map.addLayer(nashville2016Tile1444_578);
       }
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
       }
-      selectYear('1864');
+      selectYear("1864");
 
-      if($("#overlayRadio").hasClass("disabled")){
+      if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
       $("#overlayRadio > input")[0].checked = false;
       $("#overlayRadio > input")[1].checked = true;
 
-      if(!$("#informationPanal").is(":visible")){
+      if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
       }
 
-      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+      if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
       break;
@@ -735,40 +777,38 @@ function selectMode(elem) {
 }
 
 function selectYear(elem) {
-  const year = elem.innerText||elem;
+  const year = elem.innerText || elem;
   for (let i in baselayers) {
     map.removeLayer(baselayers[i]);
   }
   map.addLayer(baselayers[year]);
   // debugger;
-  let l = csvAdjustData.filter(k =>{
+  let l = csvAdjustData.filter((k) => {
     return k.feature.properties["Maps Photo Should Appear on"].includes(year);
   });
   landmarksLayer.clearLayers();
-  l.forEach(m => {
+  l.forEach((m) => {
     m.addTo(landmarksLayer);
-   });
-   $('#year.select-selected')[0].innerText = year;
-   if($('#selection_btn').hasClass('active')){
-   if(previousselectedlandmark)
-   previousselectedlandmark.fireEvent('click');
-   if(previousselectedstreet)
-   previousselectedstreet.fireEvent('click');
-   }
+  });
+  $("#year.select-selected")[0].innerText = year;
+  if ($("#selection_btn").hasClass("active")) {
+    if (previousselectedlandmark) previousselectedlandmark.fireEvent("click");
+    if (previousselectedstreet) previousselectedstreet.fireEvent("click");
+  }
 }
 
-function select2016Overlay ($elem){
+function select2016Overlay($elem) {
   // alert();
   // debugger;
-  switch($elem.value){
-    case 'on':
-      if(!map.hasLayer(nashville2016OverlayTile1444_578)){
+  switch ($elem.value) {
+    case "on":
+      if (!map.hasLayer(nashville2016OverlayTile1444_578)) {
         layerSwitcher.addOverlay(nashville2016OverlayTile1444_578);
         map.addLayer(nashville2016OverlayTile1444_578);
       }
       break;
-    case 'off':
-      if(map.hasLayer(nashville2016OverlayTile1444_578)){
+    case "off":
+      if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         layerSwitcher.removeLayer(nashville2016OverlayTile1444_578);
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
@@ -829,4 +869,4 @@ function updateZoomText() {
 }
 updateZoomText();
 // selectMode({innerText:'Just Maps'});
-selectMode({innerText:'Landmarks'});
+selectMode({ innerText: "Landmarks" });
