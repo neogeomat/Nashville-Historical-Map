@@ -400,13 +400,13 @@ let streetsLayer = L.geoJSON(streets_data, {
         offset: [10,10]
       }),
     });
-    m.bindTooltip(feature.properties.Street, {
+    m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
       // permanent: true,
       direction: "top",
       offset: [0, -20],
     }).openTooltip();
     m.layerName = "Street";
-    feature.properties.Name = feature.properties.Street;
+    feature.properties.Name = `${feature.properties.Street} ${feature.properties.Type}`;
     return m;
   },
   onEachFeature: function (feature, layer) {
@@ -440,6 +440,9 @@ let streetsLayer = L.geoJSON(streets_data, {
       }else{
         document.getElementById("SelectionName").innerText = "";
       }
+      if(layer.feature.properties["Type"]){
+        document.getElementById("SelectionName").innerText += ` ${layer.feature.properties["Type"]}`;
+      }
       if(layer.feature.properties["Construction"]){
         document.getElementById("selection_subtitle").innerText = `Built 
         ${layer.feature.properties["Construction"]}`;
@@ -472,10 +475,8 @@ let streetsLayer = L.geoJSON(streets_data, {
     });
   },
 });
-// let streetsLayer_clone = Object.assign({},streetsLayer);
+let streetsLayer_clone = Object.assign({},streetsLayer);
 
-// streetsLayer.addTo(map);
-// debugger;
 let searchControl = new L.Control.Search({
   // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
   // layer:L.layerGroup(csvAdjustData),
