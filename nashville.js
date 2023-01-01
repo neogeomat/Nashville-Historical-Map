@@ -243,7 +243,7 @@ let landmarksLayer = L.geoJSON(null, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedlandmark.png",
         iconSize: [18, 22],
-        iconAnchor: [9, 32],
+        iconAnchor: [9, 22],
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
@@ -263,7 +263,7 @@ let landmarksLayer = L.geoJSON(null, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
             iconSize: [18, 22],
-            offset: [9, 0],
+            iconAnchor: [9, 22],
           })
         );
       }
@@ -272,7 +272,7 @@ let landmarksLayer = L.geoJSON(null, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
           iconSize: [18, 22],
-          iconAnchor: [9, 32],
+          iconAnchor: [9, 22],
         })
       );
       previousselectedlandmark = layer;
@@ -391,8 +391,8 @@ let csvAdjust = omnivore
     csvAdjustData = csvAdjust.getLayers();
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
-    // searchControl.options.layer = landmarksLayer_clone;
-    // searchControl._layer = landmarksLayer_clone;
+    searchControl.options.layer = landmarksLayer_clone;
+    searchControl._layer = landmarksLayer_clone;
   });
 // csvAdjust.addTo(map);
 
@@ -488,8 +488,8 @@ let searchControl = new L.Control.Search({
   // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
   // layer:L.layerGroup(csvAdjustData),
   // layer: landmarksLayer,
-  // layer: landmarksLayer_clone,
-  layer: streetsLayer,
+  layer: landmarksLayer_clone,
+  // layer: streetsLayer,
   position: "topright",
   propertyName: "Name",
   container: "Search",
@@ -539,7 +539,7 @@ searchControl.on("search:locationfound", (e) => {
         "</button>";
     }
     content += "Click the year to change map";
-    var tooltip = L.popup({
+    var popup = L.popup({
       direction: "bottom",
       // className: 'instructions'
     })
@@ -547,15 +547,7 @@ searchControl.on("search:locationfound", (e) => {
       .setContent(content)
       .openOn(map);
   }
-  const year = e.layer.feature.properties["Maps Photo Should Appear on"]
-    .split(",")
-    .pop()
-    .trim();
 
-  //cahnge to ;ast found year
-  // $('#year.select-selected')[0].innerText = year;
-  // selectYear(year);
-  //
 });
 
 let baselayers = {
