@@ -242,7 +242,8 @@ let landmarksLayer = L.geoJSON(null, {
     var m = L.marker(latlng, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-        iconSize: [22, 32],
+        iconSize: [18, 22],
+        iconAnchor: [9, 32],
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
@@ -271,7 +272,7 @@ let landmarksLayer = L.geoJSON(null, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
           iconSize: [18, 22],
-          offset: [9, 0],
+          iconAnchor: [9, 32],
         })
       );
       previousselectedlandmark = layer;
@@ -868,5 +869,5 @@ function updateZoomText() {
   console.log("zoom change to" + map.getZoom());
 }
 updateZoomText();
-// selectMode({innerText:'Just Maps'});
-selectMode({ innerText: "Landmarks" });
+selectMode({innerText:'Just Maps'});
+// selectMode({ innerText: "Landmarks" });
