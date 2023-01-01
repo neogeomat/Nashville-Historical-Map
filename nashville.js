@@ -337,17 +337,17 @@ let landmarksLayer = L.geoJSON(null, {
             layer.feature.properties["Description"];
         }
       }else{
-        let listStreet = document.querySelectorAll('#Selection [id]');
-      listStreet.forEach(
-        node => {
-          if(node.innerText){
-          node.innerText = "";
-          }else{
-            node.src = "";
-            node.style.display = 'none';
-          }
-        }
-      );
+      //   let listStreet = document.querySelectorAll('#Selection [id]');
+      // listStreet.forEach(
+      //   node => {
+      //     if(node.innerText){
+      //     node.innerText = "";
+      //     }else{
+      //       node.src = "";
+      //       node.style.display = 'none';
+      //     }
+      //   }
+      // );
       }
       openCity({currentTarget:$('#selection_btn')[0]}, "Selection");
       // $('#selection_btn').addClass('active');
@@ -640,12 +640,12 @@ function selectMode(elem) {
         $("#informationPanal").show();
       }
       
-      let list = document.querySelectorAll('#Selection [id]');
-      list.forEach(
-        node => {
-          node.innerText = "";
-        }
-      );
+      // let list = document.querySelectorAll('#Selection [id]');
+      // list.forEach(
+      //   node => {
+      //     node.innerText = "";
+      //   }
+      // );
       $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
 
       if(map.hasLayer(nashville2016OverlayTile1444_578)){
@@ -678,16 +678,16 @@ function selectMode(elem) {
         $("#informationPanal").show();
       }
 // debugger;
-      let listStreet = document.querySelectorAll('#Selection [id]');
-      listStreet.forEach(
-        node => {
-          if(node.innerText){
-          node.innerText = "";
-          }else{
-            node.src = "";
-          }
-        }
-      );
+      // let listStreet = document.querySelectorAll('#Selection [id]');
+      // listStreet.forEach(
+      //   node => {
+      //     if(node.innerText){
+      //     node.innerText = "";
+      //     }else{
+      //       node.src = "";
+      //     }
+      //   }
+      // );
 
       $('#selection_description').html('Select a landmark/street marker on the map and information for that landmark will appear here');
       break;
