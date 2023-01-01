@@ -8,3 +8,6 @@ data/correctStreetLocations/correctStreetLocations/Coopertown.png
 data/correctStreetLocations/correctStreetLocations/Old Charlotte.png
 data/correctStreetLocations/correctStreetLocations/Saundersville.png
 *.pdf
+data/Streets 3 (for dev) geojson.geojson
+data/Streets 3 (for dev).csv
+data/Streets 3 (for dev).xlsx
