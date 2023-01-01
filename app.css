@@ -62,7 +62,8 @@
   position: inherit;
   height: 1em;
   width: 1em;
-  top: 7.5em;
+  /* top: 10.5em; */
+  bottom: 0.5em;
   left: 0.5em;
 }
 
@@ -70,7 +71,8 @@
   position: inherit;
   height: 1em;
   width: 1em;
-  top: 7.5em;
+  /* top: 10.5em; */
+  bottom: 0.5em;
   right: 0.5em;
 }
 
@@ -223,4 +225,8 @@ body {
 .Street.search-tip b,
 .Street.leaflet-marker-icon {
   background: #66f;
+}
+
+#overlayRadio{
+  margin-top: 10px;
 }
