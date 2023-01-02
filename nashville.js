@@ -243,7 +243,7 @@ let landmarksLayer = L.geoJSON(null, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedlandmark.png",
         iconSize: [18, 22],
-        iconAnchor: [9, 32],
+        iconAnchor: [9, 22],
       }),
     });
     m.bindTooltip(feature.properties.Landmark, {
@@ -263,7 +263,7 @@ let landmarksLayer = L.geoJSON(null, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
             iconSize: [18, 22],
-            iconAnchor: [9, 32],
+            iconAnchor: [9, 22],
           })
         );
       }
@@ -272,7 +272,7 @@ let landmarksLayer = L.geoJSON(null, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
           iconSize: [18, 22],
-          iconAnchor: [9, 32],
+          iconAnchor: [9, 22],
         })
       );
       previousselectedlandmark = layer;
@@ -393,8 +393,11 @@ let csvAdjust = omnivore
     csvAdjustData = csvAdjust.getLayers();
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
-    searchControl.options.layer = landmarksLayer_clone;
-    searchControl._layer = landmarksLayer_clone;
+    // if(searchControl){
+    // searchControl.options.layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
+    // searchControl._layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
+    // }
+    // searchControl.setLayer(L.layerGroup([landmarksLayer_clone,streetsLayer_clone]));
   });
 // csvAdjust.addTo(map);
 
@@ -481,7 +484,8 @@ let streetsLayer = L.geoJSON(streets_data, {
     });
   },
 });
-let streetsLayer_clone = Object.assign({}, streetsLayer);
+// let streetsLayer_clone = Object.assign({}, streetsLayer);
+let streetsLayer_clone = cloneLayer(streetsLayer);
 
 let searchControl = new L.Control.Search({
   // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
@@ -489,29 +493,60 @@ let searchControl = new L.Control.Search({
   // layer: landmarksLayer,
   layer: landmarksLayer_clone,
   // layer: streetsLayer,
+  // layer: L.layerGroup([landmarksLayer_clone,streetsLayer]),
   position: "topright",
   propertyName: "Name",
   container: "Search",
   collapsed: false,
   // textPlaceholder: 'Search for Landmark or Streets..........',
-  buildTip: function (text, val) {
-    // debugger;
-    let type;
-    if (val.layer.feature.properties.Landmark) {
-      type = "Landmark";
-    } else if (val.layer.feature.properties.Street) {
-      type = "Street";
-    }
-    return (
-      '<a href="#" class="' +
-      type +
-      '">' +
-      text +
-      "  <!-- <b>" +
-      type +
-      '</b> --> <span class="result-arrow">></span></a>'
-    );
-  },
+  // buildTip: function (text, val) {
+  //   // debugger;
+  //   let type;
+  //   if (val.layer.feature.properties.Landmark) {
+  //     type = "Landmark";
+  //   } else if (val.layer.feature.properties.Street) {
+  //     type = "Street";
+  //   }
+  //   return (
+  //     '<a href="#" class="' +
+  //     type +
+  //     '">' +
+  //     text +
+  //     "  <!-- <b>" +
+  //     type +
+  //     '</b> --> <span class="result-arrow">></span></a>'
+  //   );
+  // },
+  sourceData: function(text, callResponse){
+    let data = [];
+    landmarksLayer_clone.getLayers().forEach(function(l){
+      if(l.feature.properties.Landmark) {
+        data.push({
+          'loc':[l.getLatLng().lat,l.getLatLng().lng],
+          'Name':l.feature.properties.Name,
+          'type':"Landmark"
+        });
+      }
+    });
+
+    streetsLayer_clone.getLayers().forEach(function(l){
+      if(l.feature.properties.Street) {
+        data.push({
+          'loc':[l.getLatLng().lat,l.getLatLng().lng],
+          'Name':l.feature.properties.Name,
+          'type':"Street"
+        });
+      }
+    });
+
+    callResponse(data);
+
+    return {	//called to stop previous requests on map move
+			abort: function() {
+				console.log('aborted request:'+ text);
+			}
+		};
+  }
 });
 searchControl.addTo(map);
 searchControl.on("search:locationfound", (e) => {
@@ -538,7 +573,7 @@ searchControl.on("search:locationfound", (e) => {
         "</button>";
     }
     content += "Click the year to change map";
-    var tooltip = L.popup({
+    var popup = L.popup({
       direction: "bottom",
       // className: 'instructions'
     })
@@ -546,15 +581,7 @@ searchControl.on("search:locationfound", (e) => {
       .setContent(content)
       .openOn(map);
   }
-  const year = e.layer.feature.properties["Maps Photo Should Appear on"]
-    .split(",")
-    .pop()
-    .trim();
 
-  //cahnge to ;ast found year
-  // $('#year.select-selected')[0].innerText = year;
-  // selectYear(year);
-  //
 });
 
 let baselayers = {
