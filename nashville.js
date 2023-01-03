@@ -294,13 +294,12 @@ let landmarksLayer = L.geoJSON(null, {
         if (layer.feature.properties["Landmark"]) {
           document.getElementById(
             "SelectionName"
-          ).innerText = `Also known as ${layer.feature.properties["Landmark"]}.`;
+          ).innerText = `${layer.feature.properties["Landmark"]}`;
         } else {
           document.getElementById("SelectionName").innerText = "";
         }
         if (layer.feature.properties["Also Known as"]) {
-          document.getElementById("selectionAltName").innerText =
-            layer.feature.properties["Also Known as"];
+          document.getElementById("selectionAltName").innerText = `Also known as ${layer.feature.properties["Also Known as"]}.`;
         } else {
           document.getElementById("selectionAltName").innerText = "";
         }
@@ -325,6 +324,9 @@ let landmarksLayer = L.geoJSON(null, {
             "selection_subtitle"
           ).innerText += ` ${layer.feature.properties["Destruction"]}`;
         }
+        document.getElementById(
+          "selection_subtitle"
+        ).innerText += `.`;
         if (layer.feature.properties["Use Image?"] == "yes") {
           if (layer.feature.properties["Image File Name"]) {
             document.getElementById(
@@ -345,14 +347,14 @@ let landmarksLayer = L.geoJSON(null, {
         }
         if (layer.feature.properties["Year of Image"]) {
           document.getElementById("img_attribution").innerText =
-            layer.feature.properties["Year of Image"];
+            `${layer.feature.properties["Year of Image"]}.`;
         } else {
           document.getElementById("img_attribution").innerText = "";
         }
         if (layer.feature.properties["Image Download Location"]) {
           document.getElementById(
             "img_attribution"
-          ).innerText += `. Courtesy ${layer.feature.properties["Image Download Location"]}`;
+          ).innerText += `Courtesy ${layer.feature.properties["Image Download Location"]}`;
         }
         if (layer.feature.properties["Description"]) {
           document.getElementById("selection_description").innerText =
@@ -409,6 +411,7 @@ let streetsLayer = L.geoJSON(streets_data, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet.png",
         iconSize: [20, 20],
+        iconAnchor: [10, 10],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -428,6 +431,7 @@ let streetsLayer = L.geoJSON(streets_data, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
             iconSize: [20, 20],
+            iconAnchor: [10, 10],
           })
         );
       }
@@ -436,6 +440,7 @@ let streetsLayer = L.geoJSON(streets_data, {
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet.png",
           iconSize: [20, 20],
+          iconAnchor: [10, 10],
         })
       );
       previousselectedstreet = layer;
@@ -498,6 +503,7 @@ let searchControl = new L.Control.Search({
   propertyName: "Name",
   container: "Search",
   collapsed: false,
+  textPlaceholder: "",
   // textPlaceholder: 'Search for Landmark or Streets..........',
   // buildTip: function (text, val) {
   //   // debugger;
