@@ -530,7 +530,8 @@ let searchControl = new L.Control.Search({
         data.push({
           'loc':[l.getLatLng().lat,l.getLatLng().lng],
           'Name':l.feature.properties.Name,
-          'type':"Landmark"
+          'type':"Landmark",
+          'layer':landmarksLayer
         });
       }
     });
@@ -540,7 +541,8 @@ let searchControl = new L.Control.Search({
         data.push({
           'loc':[l.getLatLng().lat,l.getLatLng().lng],
           'Name':l.feature.properties.Name,
-          'type':"Street"
+          'type':"Street",
+          'layer':streetsLayer
         });
       }
     });
