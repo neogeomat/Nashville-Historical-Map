@@ -395,11 +395,13 @@ let csvAdjust = omnivore
     csvAdjustData = csvAdjust.getLayers();
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
-    // if(searchControl){
-    // searchControl.options.layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
-    // searchControl._layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
-    // }
-    // searchControl.setLayer(L.layerGroup([landmarksLayer_clone,streetsLayer_clone]));
+    if(searchControl){
+      // setLayer use ya mate. source code thik maju.
+      searchControl.options.layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
+      searchControl._layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
+    }else{
+      $('#Search').html('Search Control not working');
+    }
   });
 // csvAdjust.addTo(map);
 
@@ -489,16 +491,10 @@ let streetsLayer = L.geoJSON(streets_data, {
     });
   },
 });
-// let streetsLayer_clone = Object.assign({}, streetsLayer);
+
 let streetsLayer_clone = cloneLayer(streetsLayer);
 
 let searchControl = new L.Control.Search({
-  // layer: L.layerGroup([cloneLayer(landmarksLayer)]),
-  // layer:L.layerGroup(csvAdjustData),
-  // layer: landmarksLayer,
-  layer: landmarksLayer_clone,
-  // layer: streetsLayer,
-  // layer: L.layerGroup([landmarksLayer_clone,streetsLayer]),
   position: "topright",
   propertyName: "Name",
   container: "Search",
@@ -523,38 +519,38 @@ let searchControl = new L.Control.Search({
   //     '</b> --> <span class="result-arrow">></span></a>'
   //   );
   // },
-  sourceData: function(text, callResponse){
-    let data = [];
-    landmarksLayer_clone.getLayers().forEach(function(l){
-      if(l.feature.properties.Landmark) {
-        data.push({
-          'loc':[l.getLatLng().lat,l.getLatLng().lng],
-          'Name':l.feature.properties.Name,
-          'type':"Landmark",
-          'layer':landmarksLayer
-        });
-      }
-    });
+  // sourceData: function(text, callResponse){
+  //   let data = [];
+  //   landmarksLayer_clone.getLayers().forEach(function(l){
+  //     if(l.feature.properties.Landmark) {
+  //       data.push({
+  //         'loc':[l.getLatLng().lat,l.getLatLng().lng],
+  //         'Name':l.feature.properties.Name,
+  //         'type':"Landmark",
+  //         'layer':landmarksLayer
+  //       });
+  //     }
+  //   });
 
-    streetsLayer_clone.getLayers().forEach(function(l){
-      if(l.feature.properties.Street) {
-        data.push({
-          'loc':[l.getLatLng().lat,l.getLatLng().lng],
-          'Name':l.feature.properties.Name,
-          'type':"Street",
-          'layer':streetsLayer
-        });
-      }
-    });
+  //   streetsLayer_clone.getLayers().forEach(function(l){
+  //     if(l.feature.properties.Street) {
+  //       data.push({
+  //         'loc':[l.getLatLng().lat,l.getLatLng().lng],
+  //         'Name':l.feature.properties.Name,
+  //         'type':"Street",
+  //         'layer':streetsLayer
+  //       });
+  //     }
+  //   });
 
-    callResponse(data);
+  //   callResponse(data);
 
-    return {	//called to stop previous requests on map move
-			abort: function() {
-				console.log('aborted request:'+ text);
-			}
-		};
-  }
+  //   return {	//called to stop previous requests on map move
+	// 		abort: function() {
+	// 			console.log('aborted request:'+ text);
+	// 		}
+	// 	};
+  // }
 });
 searchControl.addTo(map);
 searchControl.on("search:locationfound", (e) => {
