@@ -347,7 +347,7 @@ let landmarksLayer = L.geoJSON(null, {
         }
         if (layer.feature.properties["Year of Image"]) {
           document.getElementById("img_attribution").innerText =
-            `${layer.feature.properties["Year of Image"]}.`;
+            `${layer.feature.properties["Year of Image"]}. `;
         } else {
           document.getElementById("img_attribution").innerText = "";
         }
