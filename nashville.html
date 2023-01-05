@@ -27,7 +27,8 @@
             grid-template-columns: auto auto;
         }
 		.slide img {
-			width: 100%;
+            margin: 0 36px;
+			width: 80%;
 		}
 		.height {
 			height: 10px;
@@ -175,7 +176,7 @@
                             <p id="selection_subtitle"></p>
                             <div class="image-container">
                                 <div class="slide">                                
-                                    <img id="selection_img" width ='280' height = '280' hidden>
+                                    <img id="selection_img" hidden>
                                     <div id="img_attribution" class="captionText"></div>
                                 </div>
                                 <!-- <div class="slide">                                
@@ -188,12 +189,14 @@
                                 </div> -->
                         
                                 <!-- Next and Previous icon to change images -->
-                                <!-- <a class="previous" onclick="moveSlides(-1)">
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <a class="previous" onclick="moveSlides(-1)">
+                                    <!-- <i class="fa fa-chevron-left" aria-hidden="true"></i> -->
+                                    <img src="images/leftPanalImages/previous-enabled.png" />
                                 </a>
                                 <a class="next" onclick="moveSlides(1)">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a> -->
+                                    <!-- <i class="fa fa-chevron-right"></i> -->
+                                    <img src="images/leftPanalImages/next-enabled.png" />
+                                </a>
                             </div>
                             <p id="selection_description"></p>
                         </div>
