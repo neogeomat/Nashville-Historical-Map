@@ -291,76 +291,112 @@ let landmarksLayer = L.geoJSON(null, {
         0
       ) {
         // landmark selected year khe lai laki malai check yaau
-        if (layer.feature.properties["Landmark"]) {
-          document.getElementById(
-            "SelectionName"
-          ).innerText = `${layer.feature.properties["Landmark"]}`;
-        } else {
-          document.getElementById("SelectionName").innerText = "";
+        var prop = layer.feature.properties;
+        console.log(prop);
+        console.log($('#select_div'));
+        $('#select_div').html('');
+        var contentSelection = '<h4 id="SelectionName">'+prop["Landmark"]+'</h4>';
+        contentSelection += (prop["Also Known as"])?'<p id="selectionAltName">Also Known as '+prop["Also Known as"]+'</p>':'';
+        var mannerofdestruction = (prop["Manner of Destruction"])?', '+prop["Manner of Destruction"]:'';
+        var destruction = '';
+        if (prop["Destruction"] && prop["Destruction"] != "extant") {
+          destruction = ' '+prop["Destruction"];
         }
-        if (layer.feature.properties["Also Known as"]) {
-          document.getElementById("selectionAltName").innerText = `Also known as ${layer.feature.properties["Also Known as"]}.`;
-        } else {
-          document.getElementById("selectionAltName").innerText = "";
+        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+mannerofdestruction+destruction+'.</p>':'';
+        contentSelection += '<div class="image-container">';
+        var slideImage = '<div class="slide">';
+        if(prop["Use Image?"] == "yes"){
+          if(prop["Image File Name"])
+          slideImage += '<img src="images/pictures/'+prop["Image File Name"]+'">';
+        }else{
+          if(prop["Test Photo File Name"])
+          slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
         }
+        if(prop["Year of Image"]){
+          slideImage += '<div id="img_attribution" class="captionText">'+prop["Year of Image"];
+          if(prop["Image Download Location"]){
+            slideImage += ' Courtesy '+prop["Image Download Location"]+'</div>';
+          }
+        }
+        slideImage += '</div>';
 
-        if (layer.feature.properties["Construction"]) {
-          document.getElementById(
-            "selection_subtitle"
-          ).innerText = `Built ${layer.feature.properties["Construction"]}`;
-        } else {
-          document.getElementById("selection_subtitle").innerText = "";
+        contentSelection += slideImage+'</div>';
+        if (prop["Description"]) {
+        contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
         }
-        if (layer.feature.properties["Manner of Destruction"]) {
-          document.getElementById(
-            "selection_subtitle"
-          ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
-        }
-        if (
-          layer.feature.properties["Destruction"] &&
-          layer.feature.properties["Destruction"] != "extant"
-        ) {
-          document.getElementById(
-            "selection_subtitle"
-          ).innerText += ` ${layer.feature.properties["Destruction"]}`;
-        }
-        document.getElementById(
-          "selection_subtitle"
-        ).innerText += `.`;
-        if (layer.feature.properties["Use Image?"] == "yes") {
-          if (layer.feature.properties["Image File Name"]) {
-            document.getElementById(
-              "selection_img"
-            ).src = `images\\pictures\\${layer.feature.properties["Image File Name"]}`;
-            document.getElementById("selection_img").style.display = "inherit";
-          }
-        } else {
-          if (layer.feature.properties["Test Photo File Name"]) {
-            document.getElementById(
-              "selection_img"
-            ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-            document.getElementById("selection_img").style.display = "inherit";
-          } else {
-            document.getElementById("selection_img").src = "";
-            document.getElementById("selection_img").style.display = "inherit";
-          }
-        }
-        if (layer.feature.properties["Year of Image"]) {
-          document.getElementById("img_attribution").innerText =
-            `${layer.feature.properties["Year of Image"]}. `;
-        } else {
-          document.getElementById("img_attribution").innerText = "";
-        }
-        if (layer.feature.properties["Image Download Location"]) {
-          document.getElementById(
-            "img_attribution"
-          ).innerText += `Courtesy ${layer.feature.properties["Image Download Location"]}`;
-        }
-        if (layer.feature.properties["Description"]) {
-          document.getElementById("selection_description").innerText =
-            layer.feature.properties["Description"];
-        }
+        $('#select_div').append(contentSelection);
+        
+        // if (layer.feature.properties["Landmark"]) {
+        //   document.getElementById(
+        //     "SelectionName"
+        //   ).innerText = `${layer.feature.properties["Landmark"]}`;
+        // } else {
+        //   document.getElementById("SelectionName").innerText = "";
+        // }
+        // if (layer.feature.properties["Also Known as"]) {
+        //   document.getElementById("selectionAltName").innerText = `Also known as ${layer.feature.properties["Also Known as"]}.`;
+        // } else {
+        //   document.getElementById("selectionAltName").innerText = "";
+        // }
+
+        // if (layer.feature.properties["Construction"]) {
+        //   document.getElementById(
+        //     "selection_subtitle"
+        //   ).innerText = `Built ${layer.feature.properties["Construction"]}`;
+        // } else {
+        //   document.getElementById("selection_subtitle").innerText = "";
+        // }
+        // if (layer.feature.properties["Manner of Destruction"]) {
+        //   document.getElementById(
+        //     "selection_subtitle"
+        //   ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
+        // }
+        // if (
+        //   layer.feature.properties["Destruction"] &&
+        //   layer.feature.properties["Destruction"] != "extant"
+        // ) {
+        //   document.getElementById(
+        //     "selection_subtitle"
+        //   ).innerText += ` ${layer.feature.properties["Destruction"]}`;
+        // }
+        // document.getElementById(
+        //   "selection_subtitle"
+        // ).innerText += `.`;
+        // if (layer.feature.properties["Use Image?"] == "yes") {
+        //   if (layer.feature.properties["Image File Name"]) {
+        //     document.getElementById(
+        //       "selection_img"
+        //     ).src = `images\\pictures\\${layer.feature.properties["Image File Name"]}`;
+        //     document.getElementById("selection_img").style.display = "inherit";
+        //   }
+        // } else {
+        //   if (layer.feature.properties["Test Photo File Name"]) {
+        //     document.getElementById(
+        //       "selection_img"
+        //     ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+        //     document.getElementById("selection_img").style.display = "inherit";
+        //   } else {
+        //     document.getElementById("selection_img").src = "";
+        //     document.getElementById("selection_img").style.display = "inherit";
+        //   }
+        // }
+        // if (layer.feature.properties["Year of Image"]) {
+        //   document.getElementById("img_attribution").innerText =
+        //     `${layer.feature.properties["Year of Image"]}. `;
+        // } else {
+        //   document.getElementById("img_attribution").innerText = "";
+        // }
+        // if (layer.feature.properties["Image Download Location"]) {
+        //   document.getElementById(
+        //     "img_attribution"
+        //   ).innerText += `Courtesy ${layer.feature.properties["Image Download Location"]}`;
+        // }
+        // if (layer.feature.properties["Description"]) {
+        //   document.getElementById("selection_description").innerText =
+        //     layer.feature.properties["Description"];
+        // }
       }else{
+        $('#select_div').html('Content is Empty!!');
       //   let listStreet = document.querySelectorAll('#Selection [id]');
       // listStreet.forEach(
       //   node => {
