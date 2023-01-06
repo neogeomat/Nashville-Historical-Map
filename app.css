@@ -247,7 +247,7 @@ body {
 #select_div{
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 54vh;
+  max-height: calc(100vh - 350px);
   padding: 5px;
 }
 #select_div::-webkit-scrollbar {
