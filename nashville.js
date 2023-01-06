@@ -485,45 +485,70 @@ let streetsLayer = L.geoJSON(streets_data, {
 
       // Update Side Panel
       // debugger;
-      console.log(layer.feature.properties);
-      if (layer.feature.properties["Street"]) {
-        document.getElementById("SelectionName").innerText =
-          layer.feature.properties["Street"];
-      } else {
-        document.getElementById("SelectionName").innerText = "";
-      }
-      if (layer.feature.properties["Type"]) {
-        document.getElementById(
-          "SelectionName"
-        ).innerText += ` ${layer.feature.properties["Type"]}`;
-      }
-      if (layer.feature.properties["Construction"]) {
-        document.getElementById("selection_subtitle").innerText = `Built 
-        ${layer.feature.properties["Construction"]}`;
-      } else {
-        document.getElementById("selection_subtitle").innerText = "";
-      }
-      if (layer.feature.properties["Test Photo File Name"]) {
-        document.getElementById(
-          "selection_img"
-        ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-      } else {
-        document.getElementById("selection_img").src = "";
-      }
 
-      if (layer.feature.properties["img_attribution"]) {
-        document.getElementById("img_attribution").innerText =
-          layer.feature.properties["img_attribution"];
-      } else {
-        document.getElementById("img_attribution").innerText = "";
-      }
+      var prop = layer.feature.properties;
+        console.log(prop);
+        console.log($('#select_div'));
+        $('#select_div').html('');
+        var contentSelection = '<h4 id="SelectionName">'+prop["Street"]+prop["Type"]+'</h4>';
+        
+        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+'.</p>':'';
+        contentSelection += '<div class="image-container">';
+        var slideImage = '<div class="slide">';
+        
+          if(prop["Test Photo File Name"])
+          slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
+        
+        if(prop["img_attribution"]){
+          slideImage += '<div id="img_attribution" class="captionText">'+prop["img_attribution"];
+          
+        }
+        slideImage += '</div>';
 
-      if (layer.feature.properties["History"]) {
-        document.getElementById("selection_description").innerText =
-          layer.feature.properties["History"];
-      } else {
-        document.getElementById("selection_description").innerText = "";
-      }
+        contentSelection += slideImage+'</div>';
+        if (prop["History"]) {
+        contentSelection +='<p id="selection_description">'+prop["History"]+'</p>';
+        }
+        $('#select_div').append(contentSelection);
+      // console.log(layer.feature.properties);
+      // if (layer.feature.properties["Street"]) {
+      //   document.getElementById("SelectionName").innerText =
+      //     layer.feature.properties["Street"];
+      // } else {
+      //   document.getElementById("SelectionName").innerText = "";
+      // }
+      // if (layer.feature.properties["Type"]) {
+      //   document.getElementById(
+      //     "SelectionName"
+      //   ).innerText += ` ${layer.feature.properties["Type"]}`;
+      // }
+      // if (layer.feature.properties["Construction"]) {
+      //   document.getElementById("selection_subtitle").innerText = `Built 
+      //   ${layer.feature.properties["Construction"]}`;
+      // } else {
+      //   document.getElementById("selection_subtitle").innerText = "";
+      // }
+      // if (layer.feature.properties["Test Photo File Name"]) {
+      //   document.getElementById(
+      //     "selection_img"
+      //   ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
+      // } else {
+      //   document.getElementById("selection_img").src = "";
+      // }
+
+      // if (layer.feature.properties["img_attribution"]) {
+      //   document.getElementById("img_attribution").innerText =
+      //     layer.feature.properties["img_attribution"];
+      // } else {
+      //   document.getElementById("img_attribution").innerText = "";
+      // }
+
+      // if (layer.feature.properties["History"]) {
+      //   document.getElementById("selection_description").innerText =
+      //     layer.feature.properties["History"];
+      // } else {
+      //   document.getElementById("selection_description").innerText = "";
+      // }
     });
   },
 });
@@ -759,6 +784,7 @@ function selectMode(elem) {
       //     node.innerText = "";
       //   }
       // );
+      $('#select_div').html('Content is Empty!!');
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -800,6 +826,7 @@ function selectMode(elem) {
       //     }
       //   }
       // );
+      $('#select_div').html('Content is Empty!!');
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
