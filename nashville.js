@@ -308,6 +308,7 @@ let landmarksLayer = L.geoJSON(null, {
         if(prop["Use Image?"] == "yes"){
           if(prop["Image File Name"])
           slideImage += '<img src="images/pictures/'+prop["Image File Name"]+'">';
+          
         }else{
           if(prop["Test Photo File Name"])
           slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
@@ -319,13 +320,18 @@ let landmarksLayer = L.geoJSON(null, {
           }
         }
         slideImage += '</div>';
-
+        if(prop["Alternate Image 2"]){
+          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 2"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 2 Download Location"]+'</div>';
+          slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
+          slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
+        }
+        
         contentSelection += slideImage+'</div>';
         if (prop["Description"]) {
         contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
         }
         $('#select_div').append(contentSelection);
-        
+        displaySlide(1);
         // if (layer.feature.properties["Landmark"]) {
         //   document.getElementById(
         //     "SelectionName"
@@ -854,6 +860,7 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
+      $('#select_div').html('Content is Empty!!');
       break;
   }
 }
