@@ -402,7 +402,7 @@ let landmarksLayer = L.geoJSON(null, {
         //     layer.feature.properties["Description"];
         // }
       }else{
-        $('#select_div').html('Content is Empty!!');
+        $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
       //   let listStreet = document.querySelectorAll('#Selection [id]');
       // listStreet.forEach(
       //   node => {
@@ -790,7 +790,7 @@ function selectMode(elem) {
       //     node.innerText = "";
       //   }
       // );
-      $('#select_div').html('Content is Empty!!');
+      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -832,7 +832,7 @@ function selectMode(elem) {
       //     }
       //   }
       // );
-      $('#select_div').html('Content is Empty!!');
+      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -860,7 +860,7 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
-      $('#select_div').html('Content is Empty!!');
+      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
       break;
   }
 }
