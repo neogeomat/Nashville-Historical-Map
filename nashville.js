@@ -769,6 +769,8 @@ function selectMode(elem) {
         )
       ) {
         selectYear("1952");
+      }else{
+        selectYear($("#year.select-selected")[0].innerText);
       }
       //
       if ($("#yearDiv").hasClass("disabled")) {
