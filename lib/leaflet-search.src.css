@@ -79,17 +79,17 @@
 	color:#aaa;
 }
 .leaflet-control-search .search-button {
-	background-color: #e8c483;
-    margin: 3px;
+	/* background-color: #e8c483;
+    margin: 3px; */
     /* position: absolute; */
     /* top: 87.5px; */
     /* left: 350px; */
-    color: black;
+    /* color: black;
 	text-align: center;
     text-decoration: none;
     padding: 6px;
     border-radius: 4px;
-    margin: 6px;
+    margin: 6px; */
 }
 .leaflet-control-search .search-button:hover {
 	/* background: url('../images/search-icon.png') no-repeat 4px -20px #fafafa; */
