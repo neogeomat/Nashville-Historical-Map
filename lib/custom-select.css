@@ -20,7 +20,7 @@
     position: absolute;
     content: "";
     top: 16px;
-    left: 120px;
+    left: 150px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
@@ -41,7 +41,7 @@
     padding: 4px 20px 4px 4px;
     border: 1px solid;
     text-align: left;
-    width: 110px;
+    width: 150px;
     border-color: #666056;
     cursor: pointer;
     background-color: #221d1f;
