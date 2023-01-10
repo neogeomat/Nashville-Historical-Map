@@ -325,8 +325,6 @@ let landmarksLayer = L.geoJSON(null, {
           slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
-        
-        contentSelection += slideImage+'</div>';
         if (prop["Description"]) {
         contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
         }
@@ -769,6 +767,8 @@ function selectMode(elem) {
         )
       ) {
         selectYear("1952");
+      }else{
+        selectYear($("#year.select-selected")[0].innerText);
       }
       //
       if ($("#yearDiv").hasClass("disabled")) {
