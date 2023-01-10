@@ -320,7 +320,7 @@ let landmarksLayer = L.geoJSON(null, {
           }
         }
         slideImage += '</div>';
-        if(prop["Alternate Image 2"]){
+        if(prop["Use Image?"] == "yes" && prop["Alternate Image 2"]){
           slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 2"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 2 Download Location"]+'</div>';
           slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
