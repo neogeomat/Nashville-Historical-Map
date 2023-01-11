@@ -296,7 +296,7 @@ let landmarksLayer = L.geoJSON(null, {
         console.log($('#select_div'));
         $('#select_div').html('');
         var contentSelection = '<h4 id="SelectionName">'+prop["Landmark"]+'</h4>';
-        contentSelection += (prop["Also Known as"])?'<p id="selectionAltName">Also Known as '+prop["Also Known as"]+'</p>':'';
+        contentSelection += (prop["Also Known as"])?'<p id="selectionAltName">Also known as '+prop["Also Known as"]+'</p>':'';
         var mannerofdestruction = (prop["Manner of Destruction"])?', '+prop["Manner of Destruction"]:'';
         var destruction = '';
         if (prop["Destruction"] && prop["Destruction"] != "extant") {
