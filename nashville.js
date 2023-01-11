@@ -1,6 +1,7 @@
 const centZoom = 6,
   zoomStep = 1,
   tileSize_578 = 700;
+// const debugMode = true;
 const debugMode = false;
 let imageBounds = [
   [0, 0],
@@ -422,18 +423,22 @@ let landmarksLayer = L.geoJSON(null, {
 // landmarksLayer.addTo(map);
 let csvAdjustData = [];
 let landmarksLayer_clone;
+// let csvAdjust = omnivore
+//   .csv(
+//     "data/Landmarks 6 transformed xyfill.csv",
 let csvAdjust = omnivore
-  .csv(
-    "data/Landmarks 4 (for dev).csv",
+  .geojson(
+    'data/Landmarks 6 transformed xyfill.geojson',
     {
-      latfield: "y",
-      lonfield: "X",
-      delimiter: ",",
+      // latfield: "y",
+      // lonfield: "x",
+      // delimiter: ",",
     },
     landmarksLayer
   )
   .on("ready", function (layer) {
     csvAdjustData = csvAdjust.getLayers();
+    console.log(csvAdjustData);
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
     if(searchControl){
@@ -758,19 +763,18 @@ function selectMode(elem) {
         map.addLayer(baselayers[map.previousYear]);
         console.log("map.previousYear = " + map.previousYear);
       }
-
-      // if($("#year.select-selected")[0].innerText in ['1984','2016']){
-      //   selectYear('1952');
-      // }
-      if (
-        ["Streets", "Battle of Nashville"].includes(
-          $("#mode.select-selected")[0].getAttribute("previousMode")
-        )
-      ) {
-        selectYear("1952");
-      }else{
-        selectYear($("#year.select-selected")[0].innerText);
+      if($("#mode.select-selected")[0]){
+        if (
+          ["Streets", "Battle of Nashville"].includes(
+            $("#mode.select-selected")[0].getAttribute("previousMode")
+          )
+        ) {
+          selectYear("1952");
+        }else{
+          selectYear($("#year.select-selected")[0].innerText);
+        }
       }
+    
       //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
@@ -958,5 +962,9 @@ function updateZoomText() {
   console.log("zoom change to" + map.getZoom());
 }
 updateZoomText();
-selectMode({innerText:'Just Maps'});
-// selectMode({ innerText: "Landmarks" });
+
+if(!debugMode){
+// selectMode({innerText:'Just Maps'});
+}else{
+  selectMode({ innerText: "Landmarks" });
+}
