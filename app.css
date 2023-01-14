@@ -201,6 +201,7 @@ body {
 #select_div{
   text-align: center;
   color: #f2c885;
+  font-style: italic;
 }
 
 #Selection img {
