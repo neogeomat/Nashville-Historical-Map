@@ -288,7 +288,7 @@ let landmarksLayer = L.geoJSON(null, {
         console.log($('#select_div'));
         $('#select_div').html('');
         var contentSelection = '<h4 id="SelectionName">'+prop["Landmark"]+'</h4>';
-        contentSelection += (prop["Also Known as"])?'<p id="selectionAltName">Also known as '+prop["Also Known as"]+'</p>':'';
+        contentSelection += (prop["Alternate Names"])?'<p id="selectionAltName">Also known as '+prop["Alternate Names"]+'</p>':'';
         var mannerofdestruction = (prop["Manner of Destruction"])?', '+prop["Manner of Destruction"]:'';
         var destruction = '';
         if (prop["Destruction"] && prop["Destruction"] != "extant") {
@@ -300,17 +300,24 @@ let landmarksLayer = L.geoJSON(null, {
         if(prop["Use Image?"] == "yes"){
           if(prop["Image File Name"])
           slideImage += '<img src="images/pictures/'+prop["Image File Name"]+'">';
+
+          if(prop["Year of Image"]){
+            slideImage += '<div id="img_attribution" class="captionText">'+prop["Year of Image"];
+            if(prop["Image Type"]){
+              slideImage += ' '+prop["Image Type"]+".";
+            }
+            if(prop["Image Download Location"]){
+              slideImage += ' Courtesy '+prop["Image Download Location"]+'</div>';
+            }
+          }
+
+
           
         }else{
           if(prop["Test Photo File Name"])
           slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
         }
-        if(prop["Year of Image"]){
-          slideImage += '<div id="img_attribution" class="captionText">'+prop["Year of Image"];
-          if(prop["Image Download Location"]){
-            slideImage += ' Courtesy '+prop["Image Download Location"]+'</div>';
-          }
-        }
+        
         slideImage += '</div>';
         if(prop["Use Image?"] == "yes" && prop["Alternate Image 2"]){
           slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 2"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 2 Download Location"]+'</div>';
@@ -324,7 +331,7 @@ let landmarksLayer = L.geoJSON(null, {
         $('#select_div').append(contentSelection);
         displaySlide(1);
       }else{
-        $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
+        $('#select_div').html('<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
       }
       openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // $('#selection_btn').addClass('active');
@@ -607,7 +614,7 @@ function selectMode(elem) {
         map.addLayer(baselayers[map.previousYear]);
         console.log(map.previousYear);
       }
-
+      // debugger;
       //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
@@ -668,7 +675,7 @@ function selectMode(elem) {
       //     node.innerText = "";
       //   }
       // );
-      $('#select_div').html('<p id="selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
+      $('#select_div').html('<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -702,7 +709,7 @@ function selectMode(elem) {
         $("#informationPanal").show();
       }
 // debugger;
-      $('#select_div').html('<p id="selection_description">Select a street marker on the map and information for that street will appear here</p>');
+      $('#select_div').html('<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>');
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -730,7 +737,7 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
-      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
+      $('#select_div').html('<p id="no_selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
       break;
   }
 }
@@ -831,7 +838,7 @@ function updateZoomText() {
 updateZoomText();
 
 if(!debugMode){
-// selectMode({innerText:'Just Maps'});
+  selectMode({innerText:'Just Maps'});
 }else{
   selectMode({ innerText: "Landmarks" });
 }
