@@ -799,7 +799,7 @@ function selectMode(elem) {
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
-        $("#overlayRadio > input")[1].checked = true; // check the off button
+        $("#overlayRadio input")[1].checked = true; // check the off button
       }
       break;
     case "Streets":
@@ -820,9 +820,11 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
+      $("#overlayRadio input")[1].checked = true; // check the off button
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
+      
       if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
       }
