@@ -60,15 +60,6 @@ map.attributionControl.setPrefix(
 );
 map.setView([45, 53], centZoom);
 
-// map.setView([0, 0], centZoom-zoomStep);
-// .setView([36.1665, -86.79199], centZoom-1);
-
-// add svg layers
-// let imageBounds = [
-//         [35.96967, -87.05589],
-//         [36.41016, -86.51555]
-//     ];
-
 let nashville1864Tile1444_578 = L.tileLayer("data/1864Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -332,88 +323,8 @@ let landmarksLayer = L.geoJSON(null, {
         }
         $('#select_div').append(contentSelection);
         displaySlide(1);
-        // if (layer.feature.properties["Landmark"]) {
-        //   document.getElementById(
-        //     "SelectionName"
-        //   ).innerText = `${layer.feature.properties["Landmark"]}`;
-        // } else {
-        //   document.getElementById("SelectionName").innerText = "";
-        // }
-        // if (layer.feature.properties["Also Known as"]) {
-        //   document.getElementById("selectionAltName").innerText = `Also known as ${layer.feature.properties["Also Known as"]}.`;
-        // } else {
-        //   document.getElementById("selectionAltName").innerText = "";
-        // }
-
-        // if (layer.feature.properties["Construction"]) {
-        //   document.getElementById(
-        //     "selection_subtitle"
-        //   ).innerText = `Built ${layer.feature.properties["Construction"]}`;
-        // } else {
-        //   document.getElementById("selection_subtitle").innerText = "";
-        // }
-        // if (layer.feature.properties["Manner of Destruction"]) {
-        //   document.getElementById(
-        //     "selection_subtitle"
-        //   ).innerText += `, ${layer.feature.properties["Manner of Destruction"]}`;
-        // }
-        // if (
-        //   layer.feature.properties["Destruction"] &&
-        //   layer.feature.properties["Destruction"] != "extant"
-        // ) {
-        //   document.getElementById(
-        //     "selection_subtitle"
-        //   ).innerText += ` ${layer.feature.properties["Destruction"]}`;
-        // }
-        // document.getElementById(
-        //   "selection_subtitle"
-        // ).innerText += `.`;
-        // if (layer.feature.properties["Use Image?"] == "yes") {
-        //   if (layer.feature.properties["Image File Name"]) {
-        //     document.getElementById(
-        //       "selection_img"
-        //     ).src = `images\\pictures\\${layer.feature.properties["Image File Name"]}`;
-        //     document.getElementById("selection_img").style.display = "inherit";
-        //   }
-        // } else {
-        //   if (layer.feature.properties["Test Photo File Name"]) {
-        //     document.getElementById(
-        //       "selection_img"
-        //     ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-        //     document.getElementById("selection_img").style.display = "inherit";
-        //   } else {
-        //     document.getElementById("selection_img").src = "";
-        //     document.getElementById("selection_img").style.display = "inherit";
-        //   }
-        // }
-        // if (layer.feature.properties["Year of Image"]) {
-        //   document.getElementById("img_attribution").innerText =
-        //     `${layer.feature.properties["Year of Image"]}. `;
-        // } else {
-        //   document.getElementById("img_attribution").innerText = "";
-        // }
-        // if (layer.feature.properties["Image Download Location"]) {
-        //   document.getElementById(
-        //     "img_attribution"
-        //   ).innerText += `Courtesy ${layer.feature.properties["Image Download Location"]}`;
-        // }
-        // if (layer.feature.properties["Description"]) {
-        //   document.getElementById("selection_description").innerText =
-        //     layer.feature.properties["Description"];
-        // }
       }else{
         $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
-      //   let listStreet = document.querySelectorAll('#Selection [id]');
-      // listStreet.forEach(
-      //   node => {
-      //     if(node.innerText){
-      //     node.innerText = "";
-      //     }else{
-      //       node.src = "";
-      //       node.style.display = 'none';
-      //     }
-      //   }
-      // );
       }
       openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // $('#selection_btn').addClass('active');
@@ -521,45 +432,6 @@ let streetsLayer = L.geoJSON(streets_data, {
         }
         $('#select_div').append(contentSelection);
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
-      // console.log(layer.feature.properties);
-      // if (layer.feature.properties["Street"]) {
-      //   document.getElementById("SelectionName").innerText =
-      //     layer.feature.properties["Street"];
-      // } else {
-      //   document.getElementById("SelectionName").innerText = "";
-      // }
-      // if (layer.feature.properties["Type"]) {
-      //   document.getElementById(
-      //     "SelectionName"
-      //   ).innerText += ` ${layer.feature.properties["Type"]}`;
-      // }
-      // if (layer.feature.properties["Construction"]) {
-      //   document.getElementById("selection_subtitle").innerText = `Built 
-      //   ${layer.feature.properties["Construction"]}`;
-      // } else {
-      //   document.getElementById("selection_subtitle").innerText = "";
-      // }
-      // if (layer.feature.properties["Test Photo File Name"]) {
-      //   document.getElementById(
-      //     "selection_img"
-      //   ).src = `images\\testimages\\${layer.feature.properties["Test Photo File Name"]}`;
-      // } else {
-      //   document.getElementById("selection_img").src = "";
-      // }
-
-      // if (layer.feature.properties["img_attribution"]) {
-      //   document.getElementById("img_attribution").innerText =
-      //     layer.feature.properties["img_attribution"];
-      // } else {
-      //   document.getElementById("img_attribution").innerText = "";
-      // }
-
-      // if (layer.feature.properties["History"]) {
-      //   document.getElementById("selection_description").innerText =
-      //     layer.feature.properties["History"];
-      // } else {
-      //   document.getElementById("selection_description").innerText = "";
-      // }
     });
   },
 });
@@ -830,16 +702,6 @@ function selectMode(elem) {
         $("#informationPanal").show();
       }
 // debugger;
-      // let listStreet = document.querySelectorAll('#Selection [id]');
-      // listStreet.forEach(
-      //   node => {
-      //     if(node.innerText){
-      //     node.innerText = "";
-      //     }else{
-      //       node.src = "";
-      //     }
-      //   }
-      // );
       $('#select_div').html('<p id="selection_description">Select a street marker on the map and information for that street will appear here</p>');
       break;
     case "Battle of Nashville":
