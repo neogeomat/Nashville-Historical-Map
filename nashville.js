@@ -795,7 +795,7 @@ function selectMode(elem) {
       //     node.innerText = "";
       //   }
       // );
-      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
+      $('#select_div').html('<p id="selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -839,7 +839,7 @@ function selectMode(elem) {
       //     }
       //   }
       // );
-      $('#select_div').html('<p id="selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
+      $('#select_div').html('<p id="selection_description">Select a street marker on the map and information for that street will appear here</p>');
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -880,7 +880,9 @@ function selectYear(elem) {
   map.addLayer(baselayers[year]);
   // debugger;
   let l = csvAdjustData.filter((k) => {
-    return k.feature.properties["Maps Photo Should Appear on"].includes(year);
+    if(k.feature.properties["Maps Photo Should Appear on"]){
+      return k.feature.properties["Maps Photo Should Appear on"].includes(year);
+    }
   });
   landmarksLayer.clearLayers();
   l.forEach((m) => {

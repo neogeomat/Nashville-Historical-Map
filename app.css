@@ -30,7 +30,7 @@
   position: absolute;
   z-index: 1000;
   height: calc(100vh - 30px);
-  font-size: 20px;
+  font-size: 16px;
   font-family: "BloggerSans", Georgia;
   margin: 8px;
 }
@@ -105,6 +105,7 @@ body {
   /* font-size: 30px; */
   text-align: center;
   /* height: 2em; */
+  margin-top: 5px;
 }
 
 .grid-item.zoombtn {
@@ -126,6 +127,7 @@ body {
 .labeltxt {
   text-align: left;
   color: #f2c885;
+  margin-bottom: -20px;
 }
 #zoomText {
   display: inline-block;
@@ -151,7 +153,7 @@ body {
 .tab button {
   width: 33%;
   font-family: 'BloggerSans';
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .tabcontent {
@@ -188,7 +190,7 @@ body {
 
 #legend_img::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 6px red;
+  -webkit-box-shadow: inset 0 0 6px lightgrey;
 }
 
 .disabled {
@@ -208,7 +210,7 @@ body {
 }
 #selection_subtitle, #selectionAltName {
   text-align: center;
-  font-size: small;
+  font-size: 16px;
   margin: 5px;
   color: #f2c885;
 }
@@ -263,7 +265,7 @@ body {
 
 .search-tooltip::-webkit-scrollbar-thumb,#select_div::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 6px red;
+  -webkit-box-shadow: inset 0 0 6px lightgrey;
 }
 
 
