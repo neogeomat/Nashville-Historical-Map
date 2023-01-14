@@ -500,7 +500,7 @@ let streetsLayer = L.geoJSON(streets_data, {
         console.log(prop);
         console.log($('#select_div'));
         $('#select_div').html('');
-        var contentSelection = '<h4 id="SelectionName">'+prop["Street"]+prop["Type"]+'</h4>';
+        var contentSelection = '<h4 id="SelectionName">'+prop["Street"]+' '+prop["Type"]+'</h4>';
         
         contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+'.</p>':'';
         contentSelection += '<div class="image-container">';
@@ -520,6 +520,7 @@ let streetsLayer = L.geoJSON(streets_data, {
         contentSelection +='<p id="selection_description">'+prop["History"]+'</p>';
         }
         $('#select_div').append(contentSelection);
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // console.log(layer.feature.properties);
       // if (layer.feature.properties["Street"]) {
       //   document.getElementById("SelectionName").innerText =

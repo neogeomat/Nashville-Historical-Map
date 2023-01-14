@@ -198,6 +198,11 @@ body {
   opacity: 0.4;
 }
 
+#select_div{
+  text-align: center;
+  color: #f2c885;
+}
+
 #Selection img {
   overflow: hidden;
   /* max-width:300px; */
