@@ -141,7 +141,7 @@ nashville1952Tile1444_578.getTileUrl = function (coords) {
   // console.log(coords);
   // debugger;
   return (
-    this._url + "/1952-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
+    this._url + "1952-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
   );
 };
 
@@ -309,10 +309,7 @@ let landmarksLayer = L.geoJSON(null, {
             if(prop["Image Download Location"]){
               slideImage += ' Courtesy '+prop["Image Download Location"]+'</div>';
             }
-          }
-
-
-          
+          }          
         }else{
           if(prop["Test Photo File Name"])
           slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
@@ -506,35 +503,42 @@ let searchControl = new L.Control.Search({
 searchControl.addTo(map);
 searchControl.on("search:locationfound", (e) => {
   console.log(e);
-  // debugger;
-  let years =
-    e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
-  years = years.map((y) => {
-    return y.trim();
-  });
-  if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
-    // pass;
-  } else {
-    let content =
-      "<p>The search Feature is not available in current selected year. <p> It is available in years ";
-    for (var i = 0; i < years.length; i++) {
-      content +=
-        '<button class="popup-mapchange-button" value=' +
-        years[i] +
-        ' onClick= selectYear("' +
-        years[i] +
-        '")>' +
-        years[i] +
-        "</button>";
+  // check street or landmark
+  if(e.layer.feature.properties.hasOwnProperty('Street')){
+    
+  }
+  if(e.layer.feature.properties.hasOwnProperty('Landmark')){
+    // debugger;
+    let years =
+      e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
+    years = years.map((y) => {
+      return y.trim();
+    });
+    let feature = e.layer.feature;
+
+    if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
+      // pass;
+    } else {
+      let content =
+        `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
+
+      content += 	`Year <select id="popupYear" >`;
+
+      for (var i = 0; i < years.length; i++) {
+        content +=
+          `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
+      }
+      content += "</select>";
+      content += "<button> Cancel </button><button onClick ='popupSelectYear()'>OK</button>";
+
+      var popup = L.popup({
+        direction: "bottom",
+        // className: 'instructions'
+      })
+        .setLatLng(e.latlng)
+        .setContent(content)
+        .openOn(map);
     }
-    content += "Click the year to change map";
-    var popup = L.popup({
-      direction: "bottom",
-      // className: 'instructions'
-    })
-      .setLatLng(e.latlng)
-      .setContent(content)
-      .openOn(map);
   }
 
 });
@@ -763,6 +767,11 @@ function selectYear(elem) {
     if (previousselectedlandmark) previousselectedlandmark.fireEvent("click");
     if (previousselectedstreet) previousselectedstreet.fireEvent("click");
   }
+}
+
+function popupSelectYear(){
+  let popupYear = $('#popupYear').val();
+  selectYear(popupYear);
 }
 
 function select2016Overlay($elem) {
