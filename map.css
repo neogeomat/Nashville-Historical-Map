@@ -60,9 +60,10 @@
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: #221d1f;
+  /* background-color: #221d1f; */
+  background-color: #e4e4e4;
   /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  border: 1px solid #221d1f;
+  border: 0px solid #221d1f;
   /* padding: 6px; */
   /* font-size: 30px; */
   text-align: center;
@@ -70,13 +71,13 @@
 }
 
 .leaflet-popup-content {
-  font-size: 20px;
+  font-size: 16px;
   font-family: "BloggerSans", Georgia;
-  color: white;
+  color: black;
 }
 
 .popup-mapchange-button {
-  background-color: #e8c483;
+  /* background-color: #e8c483; */
   margin: 3px;
   /* position: absolute; */
   /* top: 87.5px; */
