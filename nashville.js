@@ -529,7 +529,7 @@ searchControl.on("search:locationfound", (e) => {
           `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
       }
       content += "</select>";
-      content += "<button> Cancel </button><button onClick ='popupSelectYear()'>OK</button>";
+      content += "<div><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
