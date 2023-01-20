@@ -201,8 +201,8 @@ body {
 #Selection img {
   overflow: hidden;
   /* max-width:300px; */
-  height:280px;
-  width: 280px;
+  /* height:280px; */
+  /* width: 280px; */
 }
 #SelectionName {
   text-align: center;
