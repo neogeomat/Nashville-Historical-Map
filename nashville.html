@@ -122,12 +122,10 @@
     <div id="route">
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
-        
-            <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
-            <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
-            
-            <img src="images/leftPanalImages/ll-corner.png" id="ll-corner">
-            <img src="images/leftPanalImages/lr-corner.png" id="lr-corner" alt="">
+            <div>
+                <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
+                <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
+            </div>
 
             <div id="interact" class="grid-container">
                 <div class="grid-item logo">
@@ -167,67 +165,68 @@
                 </div>    
                              
             </div>
-                <div id="informationPanal" class="informationPanal">
-                    <!-- Tab links -->
-                    <div class="tab">
-                        <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
-                        <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
-                        <button id="search_btn" class="tablinks" onclick="openCity(event, 'Search')">Search</button>
-                    </div>
-                    <!-- Tab content -->
-                    <div id="Selection" class="tabcontent">
-                        <div id="select_div">
-                            <!-- <h4 id="SelectionName"></h4>
-                            <p id="selectionAltName"></p>
-                            <p id="selection_subtitle"></p>
-                            <div class="image-container">
-                                <div class="slide">                                
-                                    <img id="selection_img" hidden>
-                                    <div id="img_attribution" class="captionText"></div>
-                                </div> -->
-                                <!-- <div class="slide">                                
-                                    <img src="images/testimages/testimage2.png">
-                                    <div class="captionText">asdfate aetaedfd</div>
-                                </div>
-                                <div class="slide">                                
-                                    <img src="images/testimages/testimage3.png">
-                                    <div class="captionText">tesadf asdfaadfadsf asdf</div>
-                                </div> -->
-                        
-                                <!-- Next and Previous icon to change images -->
-                                <!-- <a class="previous" onclick="moveSlides(-1)"> -->
-                                    <!-- <i class="fa fa-chevron-left" aria-hidden="true"></i> -->
-                                    <!-- <img src="images/leftPanalImages/previous-enabled.png" /> -->
-                                <!-- </a> -->
-                                <!-- <a class="next" onclick="moveSlides(1)"> -->
-                                    <!-- <i class="fa fa-chevron-right"></i> -->
-                                    <!-- <img src="images/leftPanalImages/next-enabled.png" /> -->
-                                <!-- </a> -->
-                            <!-- </div> -->
-                            <!-- <p id="selection_description"></p> -->
-                        </div>
-                    </div>
+            <div>
+                <img src="images/leftPanalImages/ll-corner.png" id="ll-corner">
+                <img src="images/leftPanalImages/lr-corner.png" id="lr-corner" alt="">
+            </div>
+            <div id="informationPanal" class="informationPanal">
+                <!-- Tab links -->
+                <div class="tab">
+                    <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
+                    <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
+                    <button id="search_btn" class="tablinks" onclick="openCity(event, 'Search')">Search</button>
+                </div>
+                <!-- Tab content -->
+                <div id="Selection" class="tabcontent">
+                    <div id="select_div">
+                        <!-- <h4 id="SelectionName"></h4>
+                        <p id="selectionAltName"></p>
+                        <p id="selection_subtitle"></p>
+                        <div class="image-container">
+                            <div class="slide">                                
+                                <img id="selection_img" hidden>
+                                <div id="img_attribution" class="captionText"></div>
+                            </div> -->
+                            <!-- <div class="slide">                                
+                                <img src="images/testimages/testimage2.png">
+                                <div class="captionText">asdfate aetaedfd</div>
+                            </div>
+                            <div class="slide">                                
+                                <img src="images/testimages/testimage3.png">
+                                <div class="captionText">tesadf asdfaadfadsf asdf</div>
+                            </div> -->
                     
-                    <div id="Legend" class="legend tabcontent">
-                        <span></span>
-                        <div id="legend_img">
-                            <img id="legend_content" src="images/legend/legendcontent_2jan2023.png" />
-                        </div>
-                        <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
-                        <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
-                    </div>
-                    <div id="Search" class="tabcontent">
-                        <p>Enter a search term.</p>
-                        <!-- <input type="radio" name="landmark" />
-                        <label for="landmark">A landmark</label>
-                        <input type="radio" name="street" />
-                        <label for="street">A Street</label> -->
-
+                            <!-- Next and Previous icon to change images -->
+                            <!-- <a class="previous" onclick="moveSlides(-1)"> -->
+                                <!-- <i class="fa fa-chevron-left" aria-hidden="true"></i> -->
+                                <!-- <img src="images/leftPanalImages/previous-enabled.png" /> -->
+                            <!-- </a> -->
+                            <!-- <a class="next" onclick="moveSlides(1)"> -->
+                                <!-- <i class="fa fa-chevron-right"></i> -->
+                                <!-- <img src="images/leftPanalImages/next-enabled.png" /> -->
+                            <!-- </a> -->
+                        <!-- </div> -->
+                        <!-- <p id="selection_description"></p> -->
                     </div>
                 </div>
+                
+                <div id="Legend" class="legend tabcontent">
+                    <span></span>
+                    <div id="legend_img">
+                        <img id="legend_content" src="images/legend/legendcontent_2jan2023.png" />
+                    </div>
+                    <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
+                    <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
+                </div>
+                <div id="Search" class="tabcontent">
+                    <p>Enter a search term.</p>
+                    <!-- <input type="radio" name="landmark" />
+                    <label for="landmark">A landmark</label>
+                    <input type="radio" name="street" />
+                    <label for="street">A Street</label> -->
 
-            </div>
-            
+                </div>
+            </div>            
         </div>
         <div id="gridCollapse" class="collapsible hidden">
             <img src="images/leftPanalImages/collapsebutton.png">

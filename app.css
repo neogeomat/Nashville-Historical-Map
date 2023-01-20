@@ -23,13 +23,12 @@
   flex-direction: column;
   width: var(--CPwidth);
   vertical-align: top;
-  /* background: black; */
   background-color: #221d1f;
   color: white;
   padding: 15px;
   position: absolute;
   z-index: 1000;
-  height: calc(100vh - 30px);
+  height: calc(100vh - 5vh);
   font-size: 16px;
   font-family: "BloggerSans", Georgia;
   margin: 8px;
@@ -43,7 +42,7 @@
 }
 
 #ur-corner {
-  position: inherit;
+  position: absolute;
   height: 1em;
   width: 1em;
   top: 0.5em;
@@ -69,11 +68,11 @@
 }
 
 #lr-corner {
-  position: inherit;
+  position: absolute;
   height: 1em;
   width: 1em;
   /* top: 10.5em; */
-  bottom: 0.5em;
+  /* bottom: 0.5em; */
   right: 0.5em;
 }
 
@@ -258,7 +257,8 @@ body {
 .search-tooltip, #select_div{
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: calc(100vh - 350px);
+  /* max-height: calc(100vh - 350px); */
+  /* height: calc(100vh - 37vh); */
   padding: 5px;
 }
 .search-tooltip::-webkit-scrollbar,#select_div::-webkit-scrollbar {
