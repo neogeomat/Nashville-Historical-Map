@@ -173,12 +173,6 @@ body {
   margin-top: 15px;
 }
 
-#legend_img {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: calc(100vh - 350px);
-  padding: 5px;
-}
 
 #legend_img::-webkit-scrollbar {
   width: 5px;
@@ -255,10 +249,10 @@ body {
     margin-top: 10px;
 }
 
-.search-tooltip, #select_div{
+.search-tooltip, #select_div, #legend_img{
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 340px);
   padding: 5px;
 }
 .search-tooltip::-webkit-scrollbar,#select_div::-webkit-scrollbar {
