@@ -28,7 +28,7 @@
   padding: 15px;
   position: absolute;
   z-index: 1000;
-  height: calc(100vh - 5vh);
+  height: calc(100vh - 8vh);
   font-size: 16px;
   font-family: "BloggerSans", Georgia;
   margin: 8px;
@@ -252,12 +252,8 @@ body {
 .search-tooltip, #select_div, #legend_img{
   overflow-y: scroll;
   overflow-x: hidden;
-<<<<<<< HEAD
-  max-height: calc(100vh - 340px);
-=======
   /* max-height: calc(100vh - 350px); */
-  /* height: calc(100vh - 37vh); */
->>>>>>> 3e7ee607b972ba2a370aa4b016df3814194aaf5e
+  height: calc(100vh - 53vh);
   padding: 5px;
 }
 .search-tooltip::-webkit-scrollbar,#select_div::-webkit-scrollbar {
