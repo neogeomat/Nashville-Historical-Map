@@ -288,13 +288,14 @@ let landmarksLayer = L.geoJSON(null, {
         console.log($('#select_div'));
         $('#select_div').html('');
         var contentSelection = '<h4 id="SelectionName">'+prop["Landmark"]+'</h4>';
-        contentSelection += (prop["Alternate Names"])?'<p id="selectionAltName">Also known as '+prop["Alternate Names"]+'</p>':'';
+        contentSelection += (prop["Alternate Names"])?'<p id="selectionAltName">Also known as '+prop["Alternate Names"]+'.</p>':'';
         var mannerofdestruction = (prop["Manner of Destruction"])?', '+prop["Manner of Destruction"]:'';
         var destruction = '';
         if (prop["Destruction"] && prop["Destruction"] != "extant") {
           destruction = ' '+prop["Destruction"];
         }
         contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+mannerofdestruction+destruction+'.</p>':'';
+        // code for first image
         contentSelection += '<div class="image-container">';
         var slideImage = '<div class="slide">';
         if(prop["Use Image?"] == "yes"){
@@ -316,12 +317,15 @@ let landmarksLayer = L.geoJSON(null, {
         }
         
         slideImage += '</div>';
-        if(prop["Use Image?"] == "yes" && prop["Alternate Image 2"]){
-          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 2"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 2 Download Location"]+'</div>';
+        // debugger;
+        // code for 2nd image
+        if(prop["Use Alternate Image 1?"] == "yes" && prop["Alternate Image 1 Download Location"]){
+          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'</div>';
           slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
         contentSelection += slideImage+'</div>';
+        //
         if (prop["Description"]) {
         contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
         }
