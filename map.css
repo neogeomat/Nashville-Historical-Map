@@ -21,7 +21,7 @@
 .leaflet-tooltip-top:before {
   /* css for tip of tooltip */
   top: 45%;
-  margin-top: 20px;
+  margin-top: 19px;
   border-top: 20px solid #221d1f; /* increase the border width */
 }
 
