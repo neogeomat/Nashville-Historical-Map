@@ -174,7 +174,8 @@ body {
 
 #legend_img {
   overflow-y: scroll;
-  height: 400px;
+  overflow-x: hidden;
+  max-height: calc(100vh - 350px);
   padding: 5px;
 }
 
