@@ -628,6 +628,11 @@ function selectMode(elem) {
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
+      if(!$('#yearDiv').is(':visible')){
+        let y = $('#yearDiv');
+        y.show();
+        y.next().hide();
+      }
       if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
@@ -668,6 +673,11 @@ function selectMode(elem) {
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
+      if(!$('#yearDiv').is(':visible')){
+        let y = $('#yearDiv');
+        y.show();
+        y.next().hide();
+      }
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
@@ -706,6 +716,11 @@ function selectMode(elem) {
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
       }
+      if($('#yearDiv').is(":visible")){
+        let y = $('#yearDiv');
+        y.hide();
+        y.next().html('2016').show();
+      }
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
@@ -730,6 +745,11 @@ function selectMode(elem) {
       }
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
+      }
+      if($('#yearDiv').is(":visible")){
+        let y = $('#yearDiv');
+        y.hide();
+        y.next().html('1864').show();
       }
       selectYear("1864");
 
