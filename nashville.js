@@ -209,7 +209,7 @@ L.gridLayer.debugCoords = function (opts) {
 };
 let grid = L.gridLayer.debugCoords({ tileSize: 1024 });
 if (debugMode) {
-  map.addLayer(grid);
+  // map.addLayer(grid);
 }
 // add the OpenStreetMap tiles
 let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -320,7 +320,7 @@ let landmarksLayer = L.geoJSON(null, {
         // debugger;
         // code for 2nd image
         if(prop["Use Alternate Image 1?"] == "yes" && prop["Alternate Image 1 Download Location"]){
-          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"></div><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'</div>';
+          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'</div></div>';
           slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
@@ -330,6 +330,7 @@ let landmarksLayer = L.geoJSON(null, {
         contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
         }
         $('#select_div').append(contentSelection);
+
         displaySlide(1);
       }else{
         $('#select_div').html('<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
