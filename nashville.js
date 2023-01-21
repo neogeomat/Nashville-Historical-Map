@@ -538,11 +538,25 @@ searchControl.on("search:locationfound", (e) => {
 
       var popup = L.popup({
         direction: "bottom",
-        // className: 'instructions'
+        keepInView: true,
+        autoClose: false,
+        closeOnEscapeKey: false,
+        closeOnClick: false
       })
-        .setLatLng(e.latlng)
-        .setContent(content)
-        .openOn(map);
+        .setLatLng(e.latlng);
+      map.on('popupopen',()=>{
+        // alert('popup opened');
+        $('.instructions').addClass('noClick');
+        $('#map').addClass('noClick');
+        $('.leaflet-popup').addClass('yesClick');
+      });
+      map.on('popupclose',()=>{
+        // alert('popup closed');
+        $('.instructions').removeClass('noClick');
+        $('#map').removeClass('noClick');
+        // $('.leaflet-popup').addClass('yesClick');
+      });
+      popup.setContent(content).openOn(map);
     }
   }
 
@@ -797,6 +811,7 @@ function selectYear(elem) {
 function popupSelectYear(){
   let popupYear = $('#popupYear').val();
   selectYear(popupYear);
+  map.closePopup();
 }
 
 function select2016Overlay($elem) {
