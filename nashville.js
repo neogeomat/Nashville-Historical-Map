@@ -294,7 +294,7 @@ let landmarksLayer = L.geoJSON(null, {
         if (prop["Destruction"] && prop["Destruction"] != "extant") {
           destruction = ' '+prop["Destruction"];
         }
-        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+mannerofdestruction+destruction+'.</p>':'';
+        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"] +'. '+ mannerofdestruction + destruction +'.</p>':'';
         // code for first image
         contentSelection += '<div class="image-container">';
         var slideImage = '<div class="slide">';
@@ -308,7 +308,7 @@ let landmarksLayer = L.geoJSON(null, {
               slideImage += ' '+prop["Image Type"]+".";
             }
             if(prop["Image Download Location"]){
-              slideImage += ' Courtesy '+prop["Image Download Location"]+'</div>';
+              slideImage += ' Courtesy '+prop["Image Download Location"]+'.</div>';
             }
           }          
         }else{
@@ -320,7 +320,7 @@ let landmarksLayer = L.geoJSON(null, {
         // debugger;
         // code for 2nd image
         if(prop["Use Alternate Image 1?"] == "yes" && prop["Alternate Image 1 Download Location"]){
-          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'</div></div>';
+          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'.</div></div>';
           slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
