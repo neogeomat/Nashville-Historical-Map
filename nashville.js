@@ -453,6 +453,7 @@ let searchControl = new L.Control.Search({
   container: "Search",
   collapsed: false,
   textPlaceholder: "",
+  initial: false,
   // textPlaceholder: 'Search for Landmark or Streets..........',
   // buildTip: function (text, val) {
   //   // debugger;
