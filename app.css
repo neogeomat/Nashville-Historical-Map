@@ -102,7 +102,7 @@ body {
   border: 1px solid #221d1f;
   padding: 1px;
   /* font-size: 30px; */
-  text-align: center;
+  /* text-align: center; */
   /* height: 2em; */
   margin-top: 5px;
 }
@@ -273,6 +273,13 @@ body {
   border-radius: 5px;
   -webkit-box-shadow: inset 0 0 6px lightgrey;
 }
+
+.search-alert{
+  text-align: center;
+  color: #f2c885;
+  font-style: italic;
+}
+
 
 .noClick{
   pointer-events: none;
