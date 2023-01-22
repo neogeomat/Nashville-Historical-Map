@@ -734,8 +734,8 @@ function selectMode(elem) {
       if($('#yearDiv').is(":visible")){
         let y = $('#yearDiv');
         y.hide();
-        y.next().html('2016').show();
       }
+      $('#yearDiv').next().html('2016').show();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
@@ -764,8 +764,9 @@ function selectMode(elem) {
       if($('#yearDiv').is(":visible")){
         let y = $('#yearDiv');
         y.hide();
-        y.next().html('1864').show();
+        // y.next().html('1864').show();
       }
+      $('#yearDiv').next().html('1864').show();
       selectYear("1864");
 
       if ($("#overlayRadio").hasClass("disabled")) {
