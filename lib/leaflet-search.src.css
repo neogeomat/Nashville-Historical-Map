@@ -136,7 +136,8 @@
 	font-size:.75em;
 	margin-bottom:5px;
 	padding:0 .25em;
-	color:#e00;
+	/* color:#e00; */
+	color: #f2c885;
 	font-weight:bold;
 	border-radius:.25em;
 }
