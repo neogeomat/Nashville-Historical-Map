@@ -230,6 +230,7 @@ body {
 
 #selection_description{
   margin-top: 30px;
+  white-space: pre-line;
 }
 .hidden {
   display: none;
