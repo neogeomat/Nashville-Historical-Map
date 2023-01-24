@@ -30,7 +30,7 @@
         .search-tooltip{
             overflow-y: scroll;
             overflow-x: hidden;
-            max-height: calc(100vh - 500px);
+            /* max-height: calc(100vh - 500px); */
             padding: 5px;
         }
 		.slide img {
@@ -123,6 +123,7 @@
     <div id="route">
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
+            <div id="control-head">
             <div>
                 <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
                 <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
@@ -171,6 +172,7 @@
                 <img src="images/leftPanalImages/ll-corner.png" id="ll-corner">
                 <img src="images/leftPanalImages/lr-corner.png" id="lr-corner" alt="">
             </div>
+        </div>
             <div id="informationPanal" class="informationPanal">
                 <!-- Tab links -->
                 <div class="tab">
@@ -304,7 +306,7 @@
         // });
 </script>
 <script>
-    $('.instructions')[0].style.height = 'auto'
+    // $('.instructions')[0].style.height = 'auto'
 </script>
 <script>
     var slideIndex = 1;

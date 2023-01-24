@@ -285,55 +285,89 @@ let landmarksLayer = L.geoJSON(null, {
         // landmark selected year khe lai laki malai check yaau
         var prop = layer.feature.properties;
         console.log(prop);
-        console.log($('#select_div'));
-        $('#select_div').html('');
-        var contentSelection = '<h4 id="SelectionName">'+prop["Landmark"]+'</h4>';
-        contentSelection += (prop["Alternate Names"])?'<p id="selectionAltName">Also known as '+prop["Alternate Names"]+'.</p>':'';
-        var mannerofdestruction = (prop["Manner of Destruction"])?', '+prop["Manner of Destruction"]:'';
-        var destruction = '';
+        console.log($("#select_div"));
+        $("#select_div").html("");
+        var contentSelection =
+          '<h4 id="SelectionName">' + prop["Landmark"] + "</h4>";
+        contentSelection += prop["Alternate Names"]
+          ? '<p id="selectionAltName">Also known as ' +
+            prop["Alternate Names"] +
+            ".</p>"
+          : "";
+        var mannerofdestruction = prop["Manner of Destruction"]
+          ? ", " + prop["Manner of Destruction"]
+          : "";
+        var destruction = "";
         if (prop["Destruction"] && prop["Destruction"] != "extant") {
-          destruction = ' '+prop["Destruction"];
+          destruction = " " + prop["Destruction"];
         }
-        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"] +'. '+ mannerofdestruction + destruction +'.</p>':'';
+        contentSelection += prop["Construction"]
+          ? '<p id="selection_subtitle">Built ' +
+            prop["Construction"] +
+            ". " +
+            mannerofdestruction +
+            destruction +
+            ".</p>"
+          : "";
         // code for first image
         contentSelection += '<div class="image-container">';
         var slideImage = '<div class="slide">';
-        if(prop["Use Image?"] == "yes"){
-          if(prop["Image File Name"])
-          slideImage += '<img src="images/pictures/'+prop["Image File Name"]+'">';
+        if (prop["Use Image?"] == "yes") {
+          if (prop["Image File Name"])
+            slideImage +=
+              '<img src="images/pictures/' + prop["Image File Name"] + '">';
 
-          if(prop["Year of Image"]){
-            slideImage += '<div id="img_attribution" class="captionText">'+prop["Year of Image"];
-            if(prop["Image Type"]){
-              slideImage += ' '+prop["Image Type"]+".";
+          if (prop["Year of Image"]) {
+            slideImage +=
+              '<div id="img_attribution" class="captionText">' +
+              prop["Year of Image"];
+            if (prop["Image Type"]) {
+              slideImage += " " + prop["Image Type"] + ".";
             }
-            if(prop["Image Download Location"]){
-              slideImage += ' Courtesy '+prop["Image Download Location"]+'.</div>';
+            if (prop["Image Download Location"]) {
+              slideImage +=
+                " Courtesy " + prop["Image Download Location"] + ".</div>";
             }
-          }          
-        }else{
-          if(prop["Test Photo File Name"])
-          slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
+          }
+        } else {
+          if (prop["Test Photo File Name"])
+            slideImage +=
+              '<img src="images/testimages/' +
+              prop["Test Photo File Name"] +
+              '">';
         }
-        
-        slideImage += '</div>';
+
+        slideImage += "</div>";
         // debugger;
         // code for 2nd image
-        if(prop["Use Alternate Image 1?"] == "yes" && prop["Alternate Image 1 Download Location"]){
-          slideImage += '<div class="slide"><img src="images/pictures/'+prop["Alternate Image 1 File Name"]+'"><div id="img_attribution" class="captionText">'+prop["Alternate Image 1 Download Location"]+'.</div></div>';
-          slideImage += '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
-          slideImage += '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
+        if (
+          prop["Use Alternate Image 1?"] == "yes" &&
+          prop["Alternate Image 1 Download Location"]
+        ) {
+          slideImage +=
+            '<div class="slide"><img src="images/pictures/' +
+            prop["Alternate Image 1 File Name"] +
+            '"><div id="img_attribution" class="captionText">' +
+            prop["Alternate Image 1 Download Location"] +
+            ".</div></div>";
+          slideImage +=
+            '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
+          slideImage +=
+            '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
-        contentSelection += slideImage+'</div>';
+        contentSelection += slideImage + "</div>";
         //
         if (prop["Description"]) {
-        contentSelection +='<p id="selection_description">'+prop["Description"]+'</p>';
+          contentSelection +=
+            '<p id="selection_description">' + prop["Description"] + "</p>";
         }
-        $('#select_div').append(contentSelection);
+        $("#select_div").append(contentSelection);
 
         displaySlide(1);
-      }else{
-        $('#select_div').html('<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
+      } else {
+        $("#select_div").html(
+          '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
+        );
       }
       openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // $('#selection_btn').addClass('active');
@@ -348,7 +382,7 @@ let landmarksLayer_clone;
 //     "data/Landmarks 6 transformed xyfill.csv",
 let csvAdjust = omnivore
   .geojson(
-    'data/Landmarks 6 transformed xyfill.geojson',
+    "data/Landmarks 6 transformed xyfill.geojson",
     {
       // latfield: "y",
       // lonfield: "x",
@@ -361,12 +395,18 @@ let csvAdjust = omnivore
     console.log(csvAdjustData);
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
-    if(searchControl){
+    if (searchControl) {
       // setLayer use ya mate. source code thik maju.
-      searchControl.options.layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
-      searchControl._layer = L.layerGroup([landmarksLayer_clone,streetsLayer_clone]);
-    }else{
-      $('#Search').html('Search Control not working');
+      searchControl.options.layer = L.layerGroup([
+        landmarksLayer_clone,
+        streetsLayer_clone,
+      ]);
+      searchControl._layer = L.layerGroup([
+        landmarksLayer_clone,
+        streetsLayer_clone,
+      ]);
+    } else {
+      $("#Search").html("Search Control not working");
     }
   });
 // csvAdjust.addTo(map);
@@ -417,30 +457,40 @@ let streetsLayer = L.geoJSON(streets_data, {
       // debugger;
 
       var prop = layer.feature.properties;
-        console.log(prop);
-        console.log($('#select_div'));
-        $('#select_div').html('');
-        var contentSelection = '<h4 id="SelectionName">'+prop["Street"]+' '+prop["Type"]+'</h4>';
-        
-        contentSelection += (prop["Construction"])?'<p id="selection_subtitle">Built '+prop["Construction"]+'.</p>':'';
-        contentSelection += '<div class="image-container">';
-        var slideImage = '<div class="slide">';
-        
-          if(prop["Test Photo File Name"])
-          slideImage += '<img src="images/testimages/'+prop["Test Photo File Name"]+'">';
-        
-        if(prop["img_attribution"]){
-          slideImage += '<div id="img_attribution" class="captionText">'+prop["img_attribution"];
-          
-        }
-        slideImage += '</div>';
+      console.log(prop);
+      console.log($("#select_div"));
+      $("#select_div").html("");
+      var contentSelection =
+        '<h4 id="SelectionName">' +
+        prop["Street"] +
+        " " +
+        prop["Type"] +
+        "</h4>";
 
-        contentSelection += slideImage+'</div>';
-        if (prop["History"]) {
-        contentSelection +='<p id="selection_description">'+prop["History"]+'</p>';
-        }
-        $('#select_div').append(contentSelection);
-        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      contentSelection += prop["Construction"]
+        ? '<p id="selection_subtitle">Built ' + prop["Construction"] + ".</p>"
+        : "";
+      contentSelection += '<div class="image-container">';
+      var slideImage = '<div class="slide">';
+
+      if (prop["Test Photo File Name"])
+        slideImage +=
+          '<img src="images/testimages/' + prop["Test Photo File Name"] + '">';
+
+      if (prop["img_attribution"]) {
+        slideImage +=
+          '<div id="img_attribution" class="captionText">' +
+          prop["img_attribution"];
+      }
+      slideImage += "</div>";
+
+      contentSelection += slideImage + "</div>";
+      if (prop["History"]) {
+        contentSelection +=
+          '<p id="selection_description">' + prop["History"] + "</p>";
+      }
+      $("#select_div").append(contentSelection);
+      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
     });
   },
 });
@@ -501,20 +551,19 @@ let searchControl = new L.Control.Search({
   //   callResponse(data);
 
   //   return {	//called to stop previous requests on map move
-	// 		abort: function() {
-	// 			console.log('aborted request:'+ text);
-	// 		}
-	// 	};
+  // 		abort: function() {
+  // 			console.log('aborted request:'+ text);
+  // 		}
+  // 	};
   // }
 });
 searchControl.addTo(map);
 searchControl.on("search:locationfound", (e) => {
   console.log(e);
   // check street or landmark
-  if(e.layer.feature.properties.hasOwnProperty('Street')){
-    
+  if (e.layer.feature.properties.hasOwnProperty("Street")) {
   }
-  if(e.layer.feature.properties.hasOwnProperty('Landmark')){
+  if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
     // debugger;
     let years =
       e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
@@ -526,42 +575,39 @@ searchControl.on("search:locationfound", (e) => {
     if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
       // pass;
     } else {
-      let content =
-        `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
+      let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
 
-      content += 	`Year <select id="popupYear" >`;
+      content += `Year <select id="popupYear" >`;
 
       for (var i = 0; i < years.length; i++) {
-        content +=
-          `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
+        content += `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
       }
       content += "</select>";
-      content += "<div><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
+      content +=
+        "<div><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
         keepInView: true,
         autoClose: false,
         closeOnEscapeKey: false,
-        closeOnClick: false
-      })
-        .setLatLng(e.latlng);
-      map.on('popupopen',()=>{
+        closeOnClick: false,
+      }).setLatLng(e.latlng);
+      map.on("popupopen", () => {
         // alert('popup opened');
-        $('.instructions').addClass('noClick');
-        $('#map').addClass('noClick');
-        $('.leaflet-popup').addClass('yesClick');
+        $(".instructions").addClass("noClick");
+        $("#map").addClass("noClick");
+        $(".leaflet-popup").addClass("yesClick");
       });
-      map.on('popupclose',()=>{
+      map.on("popupclose", () => {
         // alert('popup closed');
-        $('.instructions').removeClass('noClick');
-        $('#map').removeClass('noClick');
+        $(".instructions").removeClass("noClick");
+        $("#map").removeClass("noClick");
         // $('.leaflet-popup').addClass('yesClick');
       });
       popup.setContent(content).openOn(map);
     }
   }
-
 });
 
 let baselayers = {
@@ -644,8 +690,8 @@ function selectMode(elem) {
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
-      if(!$('#yearDiv').is(':visible')){
-        let y = $('#yearDiv');
+      if (!$("#yearDiv").is(":visible")) {
+        let y = $("#yearDiv");
         y.show();
         y.next().hide();
       }
@@ -668,29 +714,29 @@ function selectMode(elem) {
       } catch (e) {
         map.previousYear = map.previousYear;
       }
-      console.log(map.previousYear);
+      // console.log(map.previousYear);
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
-        console.log("map.previousYear = " + map.previousYear);
+        // console.log("map.previousYear = " + map.previousYear);
       }
-      if($("#mode.select-selected")[0]){
+      if ($("#mode.select-selected")[0]) {
         if (
           ["Streets", "Battle of Nashville"].includes(
             $("#mode.select-selected")[0].getAttribute("previousMode")
           )
         ) {
           selectYear("1952");
-        }else{
+        } else {
           selectYear($("#year.select-selected")[0].innerText);
         }
       }
-    
+
       //
       if ($("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").removeClass("disabled");
       }
-      if(!$('#yearDiv').is(':visible')){
-        let y = $('#yearDiv');
+      if (!$("#yearDiv").is(":visible")) {
+        let y = $("#yearDiv");
         y.show();
         y.next().hide();
       }
@@ -703,14 +749,23 @@ function selectMode(elem) {
         }
         $("#informationPanal").show();
       }
-      
+
       // let list = document.querySelectorAll('#Selection [id]');
       // list.forEach(
       //   node => {
       //     node.innerText = "";
       //   }
       // );
-      $('#select_div').html('<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>');
+      $("#select_div").html(
+        '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
+      );
+      // console.log($("#control-head").height());
+      let adjheight = $("#map").height() - $("#control-head").height() - 130;
+      $("#select_div").height(adjheight);
+      $("#legend_img").height(adjheight);
+      $(".search-tooltip").height(
+        adjheight - $(".search-input").height() - 100
+      );
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -732,11 +787,11 @@ function selectMode(elem) {
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
       }
-      if($('#yearDiv').is(":visible")){
-        let y = $('#yearDiv');
+      if ($("#yearDiv").is(":visible")) {
+        let y = $("#yearDiv");
         y.hide();
       }
-      $('#yearDiv').next().html('2016').show();
+      $("#yearDiv").next().html("2016").show();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
@@ -744,12 +799,14 @@ function selectMode(elem) {
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
-      
+
       if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
       }
-// debugger;
-      $('#select_div').html('<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>');
+      // debugger;
+      $("#select_div").html(
+        '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>'
+      );
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -762,12 +819,12 @@ function selectMode(elem) {
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
       }
-      if($('#yearDiv').is(":visible")){
-        let y = $('#yearDiv');
+      if ($("#yearDiv").is(":visible")) {
+        let y = $("#yearDiv");
         y.hide();
         // y.next().html('1864').show();
       }
-      $('#yearDiv').next().html('1864').show();
+      $("#yearDiv").next().html("1864").show();
       selectYear("1864");
 
       if ($("#overlayRadio").hasClass("disabled")) {
@@ -783,7 +840,9 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
-      $('#select_div').html('<p id="no_selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>');
+      $("#select_div").html(
+        '<p id="no_selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>'
+      );
       break;
   }
 }
@@ -796,7 +855,7 @@ function selectYear(elem) {
   map.addLayer(baselayers[year]);
   // debugger;
   let l = csvAdjustData.filter((k) => {
-    if(k.feature.properties["Maps Photo Should Appear on"]){
+    if (k.feature.properties["Maps Photo Should Appear on"]) {
       return k.feature.properties["Maps Photo Should Appear on"].includes(year);
     }
   });
@@ -811,8 +870,8 @@ function selectYear(elem) {
   }
 }
 
-function popupSelectYear(){
-  let popupYear = $('#popupYear').val();
+function popupSelectYear() {
+  let popupYear = $("#popupYear").val();
   selectYear(popupYear);
   map.closePopup();
 }
@@ -889,8 +948,8 @@ function updateZoomText() {
 }
 updateZoomText();
 
-if(!debugMode){
-  selectMode({innerText:'Just Maps'});
-}else{
+if (!debugMode) {
+  selectMode({ innerText: "Just Maps" });
+} else {
   selectMode({ innerText: "Landmarks" });
 }

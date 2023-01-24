@@ -28,7 +28,7 @@
   padding: 15px;
   position: absolute;
   z-index: 1000;
-  height: calc(100vh - 8vh);
+  /* height: calc(100vh - 5vh); */
   font-size: 16px;
   font-family: "BloggerSans", Georgia;
   margin: 8px;
@@ -254,7 +254,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   /* max-height: calc(100vh - 350px); */
-  height: calc(100vh - 53vh);
+  /* height: calc(100vh - 53vh); */
   padding: 5px;
 }
 .search-tooltip::-webkit-scrollbar,
