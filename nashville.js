@@ -760,7 +760,7 @@ function selectMode(elem) {
         '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
       );
       // console.log($("#control-head").height());
-      let adjheight = $("#map").height() - $("#control-head").height() - 130;
+      let adjheight = $("#map").height() - $("#control-head").height() - 120;
       $("#select_div").height(adjheight);
       $("#legend_img").height(adjheight);
       $(".search-tooltip").height(

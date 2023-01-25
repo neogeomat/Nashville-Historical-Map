@@ -121,7 +121,7 @@ body {
 .informationPanal {
   grid-column: 1 / span 2;
   margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 .labeltxt {
   text-align: left;
@@ -256,6 +256,8 @@ body {
   /* max-height: calc(100vh - 350px); */
   /* height: calc(100vh - 53vh); */
   padding: 5px;
+  scrollbar-color: lightgrey #221d1f;
+  scrollbar-width: thin;
 }
 .search-tooltip::-webkit-scrollbar,
 #select_div::-webkit-scrollbar {
