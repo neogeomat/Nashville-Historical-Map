@@ -399,11 +399,11 @@ let csvAdjust = omnivore
       // setLayer use ya mate. source code thik maju.
       searchControl.options.layer = L.layerGroup([
         landmarksLayer_clone,
-        streetsLayer_clone,
+        // streetsLayer_clone,
       ]);
       searchControl._layer = L.layerGroup([
         landmarksLayer_clone,
-        streetsLayer_clone,
+        // streetsLayer_clone,
       ]);
     } else {
       $("#Search").html("Search Control not working");
