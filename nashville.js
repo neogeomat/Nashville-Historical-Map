@@ -500,7 +500,7 @@ let streetsLayer_clone = cloneLayer(streetsLayer);
 let searchControl = new L.Control.Search({
   position: "topright",
   propertyName: "Name",
-  container: "Search",
+  container: "search_div",
   collapsed: false,
   textPlaceholder: "",
   initial: false,
@@ -763,6 +763,9 @@ function selectMode(elem) {
       let adjheight = $("#map").height() - $("#control-head").height() - 120;
       $("#select_div").height(adjheight);
       $("#legend_img").height(adjheight);
+      $("#search_div").height(
+        adjheight+10
+      );
       $(".search-tooltip").height(
         adjheight - $(".search-input").height() - 100
       );
