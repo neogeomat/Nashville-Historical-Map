@@ -231,21 +231,23 @@ let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(null, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
-    var m = L.marker(latlng, {
-      icon: L.icon({
-        iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-        iconSize: [18, 22],
-        iconAnchor: [9, 22],
-      }),
-    });
-    m.bindTooltip(feature.properties.Landmark, {
-      // permanent: true,
-      direction: "top",
-      offset: [0, -42],
-    }).openTooltip();
-    m.layerName = "Landmark";
-    feature.properties.Name = feature.properties.Landmark;
-    return m;
+    if(feature.properties.x){
+      var m = L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: "images/landmarks_streets/unselectedlandmark.png",
+          iconSize: [18, 22],
+          iconAnchor: [9, 22],
+        }),
+      });
+      m.bindTooltip(feature.properties.Landmark, {
+        // permanent: true,
+        direction: "top",
+        offset: [0, -42],
+      }).openTooltip();
+      m.layerName = "Landmark";
+      feature.properties.Name = feature.properties.Landmark;
+      return m;
+    }
   },
   onEachFeature: function (feature, layer) {
     // previousselectedlandmark = null;
