@@ -56,7 +56,7 @@ zoomText.style.color = "white";
 zoomControl.getContainer().firstChild.after(zoomText);
 
 map.attributionControl.setPrefix(
-  "Historical Atlas of Nashville by William Gregg (wrgregg@gmail.com). &copy; 2022"
+  "Nashville Historical Atlas by William Gregg (wrgregg@gmail.com). &copy; 2023"
 );
 map.setView([45, 53], centZoom);
 
@@ -231,7 +231,7 @@ let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(null, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
-    if(feature.properties.x){
+    if(feature.properties){
       var m = L.marker(latlng, {
         icon: L.icon({
           iconUrl: "images/landmarks_streets/unselectedlandmark.png",
@@ -384,7 +384,7 @@ let landmarksLayer_clone;
 //     "data/Landmarks 6 transformed xyfill.csv",
 let csvAdjust = omnivore
   .geojson(
-    "data/Landmarks 6 transformed xyfill.geojson",
+    "data/Landmarks 6 (for dev 2).geojson",
     {
       // latfield: "y",
       // lonfield: "x",
