@@ -668,7 +668,17 @@ if (debugMode) {
     })
     .addTo(map);
 }
-
+function adjustHeight(){
+  let adjheight = $("#map").height() - $("#control-head").height() - 120;
+      $("#select_div").height(adjheight);
+      $("#legend_img").height(adjheight);
+      $("#search_div").height(
+        adjheight+10
+      );
+      $(".search-tooltip").height(
+        adjheight - $(".search-input").height() - 100
+      );
+}
 function selectMode(elem) {
   const mode = elem.innerText;
   for (let i in overlays) {
@@ -775,16 +785,8 @@ function selectMode(elem) {
         '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
       );
       // console.log($("#control-head").height());
-      let adjheight = $("#map").height() - $("#control-head").height() - 120;
-      $("#select_div").height(adjheight);
-      $("#legend_img").height(adjheight);
-      $("#search_div").height(
-        adjheight+10
-      );
-      $(".search-tooltip").height(
-        adjheight - $(".search-input").height() - 100
-      );
-
+      
+      adjustHeight();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
         $("#overlayRadio input")[1].checked = true; // check the off button
@@ -827,6 +829,8 @@ function selectMode(elem) {
       if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
       }
+
+      adjustHeight();
       // debugger;
       $("#select_div").html(
         '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>'
