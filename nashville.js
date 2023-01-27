@@ -564,6 +564,8 @@ searchControl.on("search:locationfound", (e) => {
   console.log(e);
   // check street or landmark
   if (e.layer.feature.properties.hasOwnProperty("Street")) {
+    selectMode({ innerText: "Streets" });
+    $("#mode.select-selected")[0].innerText = "Streets";
   }
   if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
     // debugger;
