@@ -332,7 +332,7 @@
         // var totaldots =
             // document.getElementsByClassName("footerdot");
         
-        if (n > totalslides.length) {
+        if (n > totalslides.length || n==1) {
             // last slide khe next yasa first slide khe waniu
             slideIndex = 1;
         }
@@ -346,6 +346,7 @@
         //     totaldots[i].className =
         //     totaldots[i].className.replace(" active", "");
         // }
+        console.log(totalslides, slideIndex);
         if(totalslides.length > 0)
         totalslides[slideIndex - 1].style.display = "block";
         // totaldots[slideIndex - 1].className += " active";
