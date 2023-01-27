@@ -697,9 +697,16 @@ function selectMode(elem) {
         y.show();
         y.next().hide();
       }
+
       if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
+      if(!$("#overlayRadio").is(":visible")) {
+        let r = $("#overlayRadio");
+        r.show();
+        r.next().hide();
+      }
+
       if ($("#informationPanal").is(":visible")) {
         $("#informationPanal").hide();
         // $('.instructions')[0].style.height = 'auto';
@@ -742,9 +749,15 @@ function selectMode(elem) {
         y.show();
         y.next().hide();
       }
+
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
+      if($("#overlayRadio").is(":visible")) {
+        $("#overlayRadio").hide();
+      }
+      $("#overlayRadio").next().html("Off").show();
+
       if (!$("#informationPanal").is(":visible")) {
         if ($("#informationPanal").hasClass("hidden")) {
           $("#informationPanal").removeClass("hidden");
@@ -788,6 +801,7 @@ function selectMode(elem) {
         map.removeLayer(baselayers[i]);
       }
       map.addLayer(nashville2016Tile1444_578);
+
       $("#year.select-selected")[0].innerText = "2016";
       if (!$("#yearDiv").hasClass("disabled")) {
         $("#yearDiv").addClass("disabled");
@@ -800,10 +814,15 @@ function selectMode(elem) {
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
+
       $("#overlayRadio input")[1].checked = true; // check the off button
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
+      if($("#overlayRadio").is(":visible")){
+        $("#overlayRadio").hide();
+      }
+      $("#overlayRadio").next().html("Off").show();
 
       if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
@@ -837,6 +856,12 @@ function selectMode(elem) {
       }
       $("#overlayRadio > input")[0].checked = false;
       $("#overlayRadio > input")[1].checked = true;
+
+      if(!$("#overlayRadio").is(":visible")){
+        $("#overlayRadio").show();
+        $("#overlayRadio").next().hide();
+      }
+      // $("#overlayRadio").next().html("Off").show();
 
       if (!$("#informationPanal").is(":visible")) {
         $("#informationPanal").show();
