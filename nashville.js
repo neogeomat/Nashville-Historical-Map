@@ -862,13 +862,14 @@ function selectMode(elem) {
       if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
-      $("#overlayRadio > input")[0].checked = false;
-      $("#overlayRadio > input")[1].checked = true;
-
+      
       if(!$("#overlayRadio").is(":visible")){
         $("#overlayRadio").show();
         $("#overlayRadio").next().hide();
       }
+      // $("#overlayRadio > input")[0].checked = false;
+      // $("#overlayRadio > input")[1].checked = true;
+
       // $("#overlayRadio").next().html("Off").show();
 
       if (!$("#informationPanal").is(":visible")) {
