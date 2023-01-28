@@ -507,6 +507,8 @@ let searchControl = new L.Control.Search({
   textPlaceholder: "",
   initial: false,
   autoType: false,
+  autoCollapseTime: 60000,
+  textErr: "No results found",
   // textPlaceholder: 'Search for Landmark or Streets..........',
   // buildTip: function (text, val) {
   //   // debugger;
