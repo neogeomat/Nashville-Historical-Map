@@ -357,6 +357,23 @@ let landmarksLayer = L.geoJSON(null, {
           slideImage +=
             '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
         }
+
+        // code for 3rd image
+        if (
+          prop["Use Alternate Image 2?"] == "yes" &&
+          prop["Alternate Image 2 Download Location"]
+        ) {
+          slideImage +=
+            '<div class="slide"><img src="images/pictures/' +
+            prop["Alternate Image 2 File Name"] +
+            '"><div id="img_attribution" class="captionText">' +
+            prop["Alternate Image 2 Download Location"] +
+            ".</div></div>";
+          slideImage +=
+            '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
+          slideImage +=
+            '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
+        }
         contentSelection += slideImage + "</div>";
         //
         if (prop["Description"]) {
