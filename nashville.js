@@ -527,7 +527,7 @@ let searchControl = new L.Control.Search({
   container: "search_div",
   collapsed: false,
   textPlaceholder: "",
-  initial: false,
+  // initial: false,
   autoType: false,
   autoCollapseTime: 60000,
   textErr: "No results found",
