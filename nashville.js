@@ -705,6 +705,11 @@ function adjustHeight(){
         adjheight - $(".search-input").height() - 100
       );
 }
+$(document).ready(function(){
+  $( window ).resize(function() {
+    adjustHeight();
+  });
+});
 function selectMode(elem) {
   const mode = elem.innerText;
   for (let i in overlays) {
