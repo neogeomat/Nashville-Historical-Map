@@ -348,10 +348,26 @@
         //     totaldots[i].className =
         //     totaldots[i].className.replace(" active", "");
         // }
-        console.log(totalslides, slideIndex);
+        
         if(totalslides.length > 0)
         totalslides[slideIndex - 1].style.display = "block";
         // totaldots[slideIndex - 1].className += " active";
+        setTimeout(function(){
+            for (i = 0; i < totalslides.length; i++) {
+                if(totalslides[i].style.display == "block" && totalslides[i].children.length>0)
+                {
+                    let imagChildr = totalslides[i].children;
+                    for(j = 0; j < imagChildr.length; j++){
+                        $('.captionText').width(imagChildr[j].clientWidth)
+                        .css('left', (370-imagChildr[j].clientWidth)/2)
+                        .css('text-align','left');
+                    }
+
+                }
+                
+            }
+        }, 60)
+        
     }
 </script>
 </html>

@@ -352,10 +352,15 @@ let landmarksLayer = L.geoJSON(null, {
             '"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 1 Download Location"] +
             ".</div></div>";
+            if (
+              prop["Use Alternate Image 2?"] != "yes" &&
+              !prop["Alternate Image 2 Download Location"]
+            ){
           slideImage +=
             '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
           slideImage +=
             '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
+            }
         }
 
         // code for 3rd image
