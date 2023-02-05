@@ -231,7 +231,7 @@ let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(null, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
-    if(feature.properties){
+    if (feature.properties) {
       var m = L.marker(latlng, {
         icon: L.icon({
           iconUrl: "images/landmarks_streets/unselectedlandmark.png",
@@ -352,15 +352,15 @@ let landmarksLayer = L.geoJSON(null, {
             '"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 1 Download Location"] +
             ".</div></div>";
-            if (
-              prop["Use Alternate Image 2?"] != "yes" &&
-              !prop["Alternate Image 2 Download Location"]
-            ){
-          slideImage +=
-            '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
-          slideImage +=
-            '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
-            }
+          if (
+            prop["Use Alternate Image 2?"] != "yes" &&
+            !prop["Alternate Image 2 Download Location"]
+          ) {
+            slideImage +=
+              '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
+            slideImage +=
+              '<a class="next" onclick="moveSlides(1)"><img src="images/leftPanalImages/next-enabled.png" /></a>';
+          }
         }
 
         // code for 3rd image
@@ -612,7 +612,7 @@ searchControl.on("search:locationfound", (e) => {
       }
       content += "</select>";
       content +=
-        "<div><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
+        "<div style=\"text-align:right\"><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -694,19 +694,15 @@ if (debugMode) {
     })
     .addTo(map);
 }
-function adjustHeight(){
+function adjustHeight() {
   let adjheight = $("#map").height() - $("#control-head").height() - 120;
-      $("#select_div").height(adjheight);
-      $("#legend_img").height(adjheight);
-      $("#search_div").height(
-        adjheight+10
-      );
-      $(".search-tooltip").height(
-        adjheight - $(".search-input").height() - 100
-      );
+  $("#select_div").height(adjheight);
+  $("#legend_img").height(adjheight);
+  $("#search_div").height(adjheight + 10);
+  $(".search-tooltip").height(adjheight - $(".search-input").height() - 100);
 }
-$(document).ready(function(){
-  $( window ).resize(function() {
+$(document).ready(function () {
+  $(window).resize(function () {
     adjustHeight();
   });
 });
@@ -742,7 +738,7 @@ function selectMode(elem) {
       if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
-      if(!$("#overlayRadio").is(":visible")) {
+      if (!$("#overlayRadio").is(":visible")) {
         let r = $("#overlayRadio");
         r.show();
         r.next().hide();
@@ -794,7 +790,7 @@ function selectMode(elem) {
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
-      if($("#overlayRadio").is(":visible")) {
+      if ($("#overlayRadio").is(":visible")) {
         $("#overlayRadio").hide();
       }
       $("#overlayRadio").next().html("Off").show();
@@ -816,7 +812,7 @@ function selectMode(elem) {
         '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
       );
       // console.log($("#control-head").height());
-      
+
       adjustHeight();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
@@ -852,7 +848,7 @@ function selectMode(elem) {
       if (!$("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").addClass("disabled");
       }
-      if($("#overlayRadio").is(":visible")){
+      if ($("#overlayRadio").is(":visible")) {
         $("#overlayRadio").hide();
       }
       $("#overlayRadio").next().html("Off").show();
@@ -889,8 +885,8 @@ function selectMode(elem) {
       if ($("#overlayRadio").hasClass("disabled")) {
         $("#overlayRadio").removeClass("disabled");
       }
-      
-      if(!$("#overlayRadio").is(":visible")){
+
+      if (!$("#overlayRadio").is(":visible")) {
         $("#overlayRadio").show();
         $("#overlayRadio").next().hide();
       }
