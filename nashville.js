@@ -390,7 +390,7 @@ let landmarksLayer = L.geoJSON(null, {
         displaySlide(1);
       } else {
         $("#select_div").html(
-          '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
+          '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here.</p>'
         );
       }
       openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
@@ -532,24 +532,25 @@ let searchControl = new L.Control.Search({
   autoCollapseTime: 60000,
   textErr: "No results found",
   // textPlaceholder: 'Search for Landmark or Streets..........',
-  // buildTip: function (text, val) {
-  //   // debugger;
-  //   let type;
-  //   if (val.layer.feature.properties.Landmark) {
-  //     type = "Landmark";
-  //   } else if (val.layer.feature.properties.Street) {
-  //     type = "Street";
-  //   }
-  //   return (
-  //     '<a href="#" class="' +
-  //     type +
-  //     '">' +
-  //     text +
-  //     "  <!-- <b>" +
-  //     type +
-  //     '</b> --> <span class="result-arrow">></span></a>'
-  //   );
-  // },
+  buildTip: function (text, val) {
+    // debugger;
+    console.log(val);
+    let type;
+    if (val.layer.feature.properties.Landmark) {
+      type = "Landmark";
+    } else if (val.layer.feature.properties.Street) {
+      type = "Street";
+    }
+    return (
+      '<a href="#" class="' +
+      type +
+      '">' +
+      text +
+      ".<!-- <b>" +
+      type +
+      '</b> --> <span class="result-arrow">></span></a>'
+    );
+  },
   // sourceData: function(text, callResponse){
   //   let data = [];
   //   landmarksLayer_clone.getLayers().forEach(function(l){
@@ -650,7 +651,7 @@ let baselayers = {
   1871: nashville1871Tile1444_578,
   1903: nashville1903Tile1444_578,
   1929: nashville1929Tile1444_578,
-  // 2016: nashville2016Tile1444_578,
+  2016: nashville2016Tile1444_578,
   // "none":L.layerGroup()
 };
 
@@ -663,14 +664,20 @@ let overlays = {
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
-  $("#year").append(`<option value=${i}>${i}`);
+  // console.log(i);
+  // debugger;
+  if(['1864','2016'].indexOf(i)<0){
+    $("#year").append(`<option value=${i}>${i}`);
+  }else{
+  
+  }
 }
 for (let i in overlays) {
   $("#mode").append(`<option value=${i}>${i}`);
 }
 
 nashville1952Tile1444_578.addTo(map);
-$("#year").children()[4].selected = true;
+$("#year").children()[3].selected = true;
 let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display = "none";
 
@@ -819,7 +826,7 @@ function selectMode(elem) {
       //   }
       // );
       $("#select_div").html(
-        '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here</p>'
+        '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here.</p>'
       );
       // console.log($("#control-head").height());
 
@@ -873,7 +880,7 @@ function selectMode(elem) {
       adjustHeight();
       // debugger;
       $("#select_div").html(
-        '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>'
+        '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here.</p>'
       );
       if(!$("#selection_btn.active")[0]){
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
