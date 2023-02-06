@@ -257,7 +257,7 @@ body {
   /* height: calc(100vh - 53vh); */
   padding: 5px;
   scrollbar-color: lightgrey #221d1f;
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
 .search-tooltip::-webkit-scrollbar,
 #select_div::-webkit-scrollbar {

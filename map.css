@@ -90,6 +90,11 @@
   margin: 6px;
 }
 
+.leaflet-popup button, .leaflet-popup select{
+  font-family: 'BloggerSans';
+  background-color: white;
+}
+
 .leaflet-touch .leaflet-bar a {
   width: 26px;
   height: 26px;

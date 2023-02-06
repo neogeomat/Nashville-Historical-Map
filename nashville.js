@@ -306,7 +306,7 @@ let landmarksLayer = L.geoJSON(null, {
         contentSelection += prop["Construction"]
           ? '<p id="selection_subtitle">Built ' +
             prop["Construction"] +
-            ". " +
+            "" +
             mannerofdestruction +
             destruction +
             ".</p>"
@@ -605,14 +605,15 @@ searchControl.on("search:locationfound", (e) => {
     } else {
       let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
 
-      content += `Year <select id="popupYear" >`;
+      content += `Year <select id="popupYear" >
+      <option class="popup-mapchange-button">Select</option>`;
 
       for (var i = 0; i < years.length; i++) {
         content += `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
       }
       content += "</select>";
       content +=
-        "<div><button> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
+        "<div><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -620,6 +621,7 @@ searchControl.on("search:locationfound", (e) => {
         autoClose: false,
         closeOnEscapeKey: false,
         closeOnClick: false,
+        closeButton:false,
       }).setLatLng(e.latlng);
       map.on("popupopen", () => {
         // alert('popup opened');
@@ -644,7 +646,7 @@ let baselayers = {
   1871: nashville1871Tile1444_578,
   1903: nashville1903Tile1444_578,
   1929: nashville1929Tile1444_578,
-  2016: nashville2016Tile1444_578,
+  // 2016: nashville2016Tile1444_578,
   // "none":L.layerGroup()
 };
 
@@ -757,6 +759,10 @@ function selectMode(elem) {
         map.removeLayer(nashville2016OverlayTile1444_578);
         $("#overlayRadio > input")[1].checked = true; // check the off button
       }
+
+      if(!$("#selection_btn.active")[0]){
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      }
       break;
     case "Landmarks":
       try {
@@ -822,6 +828,9 @@ function selectMode(elem) {
         map.removeLayer(nashville2016OverlayTile1444_578);
         $("#overlayRadio input")[1].checked = true; // check the off button
       }
+      if(!$("#selection_btn.active")[0]){
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      }
       break;
     case "Streets":
       try {
@@ -866,6 +875,9 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here</p>'
       );
+      if(!$("#selection_btn.active")[0]){
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      }
       break;
     case "Battle of Nashville":
       if (map.previousYear) {
@@ -907,8 +919,11 @@ function selectMode(elem) {
         map.removeLayer(nashville2016OverlayTile1444_578);
       }
       $("#select_div").html(
-        '<p id="no_selection_description">Select a landmark/street marker on the map and information for that landmark will appear here</p>'
+        '<p id="no_selection_description">For now the map of the Battle of Nashville is not interactive and shows only the positions of the armies on the first day of fighting, December 15th, 1864. Check back later for an enhanced map of the battle.</p>'
       );
+      // if(!$("#selection_btn.active")[0]){
+      //   openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      // }
       break;
   }
 }
