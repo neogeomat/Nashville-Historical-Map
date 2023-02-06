@@ -602,7 +602,9 @@ searchControl.on("search:locationfound", (e) => {
     let feature = e.layer.feature;
 
     if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
+      // debugger;
       // pass;
+      e.layer.fire('click');
     } else {
       let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
 
