@@ -527,7 +527,7 @@ let searchControl = new L.Control.Search({
   container: "search_div",
   collapsed: false,
   textPlaceholder: "",
-  // initial: false,
+  initial: false,
   autoType: false,
   autoCollapseTime: 60000,
   textErr: "No results found",
@@ -622,7 +622,7 @@ searchControl.on("search:locationfound", (e) => {
         closeOnEscapeKey: false,
         closeOnClick: false,
         closeButton:false,
-      }).setLatLng(e.latlng);
+      }).setLatLng(map.getBounds().getCenter());
       map.on("popupopen", () => {
         // alert('popup opened');
         $(".instructions").addClass("noClick");
@@ -636,6 +636,10 @@ searchControl.on("search:locationfound", (e) => {
         // $('.leaflet-popup').addClass('yesClick');
       });
       popup.setContent(content).openOn(map);
+      
+      if(searchControl._markerSearch){
+        searchControl._markerSearch.removeFrom(map);
+      }
     }
   }
 });
