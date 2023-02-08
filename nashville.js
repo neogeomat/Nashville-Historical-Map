@@ -725,6 +725,7 @@ function selectMode(elem) {
   for (let i in overlays) {
     map.removeLayer(overlays[i]);
   }
+  $("#offRedioOverlay").prop("checked", true).trigger("click");
   map.addLayer(overlays[mode]);
   switch (mode) {
     case "Just Maps":
@@ -768,7 +769,6 @@ function selectMode(elem) {
         // $("#overlayRadio > input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      // console.log($("#overlayRadio > input"));
       if (!$("#selection_btn.active")[0]) {
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
@@ -929,6 +929,7 @@ function selectMode(elem) {
         map.removeLayer(nashville2016OverlayTile1444_578);
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
+      adjustHeight();
       $("#select_div").html(
         '<p id="no_selection_description">For now the map of the Battle of Nashville is not interactive and shows only the positions of the armies on the first day of fighting, December 15th, 1864. Check back later for an enhanced map of the battle.</p>'
       );
