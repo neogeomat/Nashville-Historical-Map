@@ -481,8 +481,6 @@ let streetsLayer = L.geoJSON(streets_data, {
       // debugger;
 
       var prop = layer.feature.properties;
-      console.log(prop);
-      console.log($("#select_div"));
       $("#select_div").html("");
       var contentSelection =
         '<h4 id="SelectionName">' +
@@ -534,7 +532,6 @@ let searchControl = new L.Control.Search({
   // textPlaceholder: 'Search for Landmark or Streets..........',
   buildTip: function (text, val) {
     // debugger;
-    console.log(val);
     let type;
     if (val.layer.feature.properties.Landmark) {
       type = "Landmark";
@@ -616,7 +613,7 @@ searchControl.on("search:locationfound", (e) => {
       }
       content += "</select>";
       content +=
-        "<div style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
+        "<div style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -963,9 +960,11 @@ function selectYear(elem) {
   }
 }
 
-function popupSelectYear() {
+function popupSelectYear(leaflet_id) {
   let popupYear = $("#popupYear").val();
   selectYear(popupYear);
+  let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
+  feature.fire('click');
   map.closePopup();
 }
 
