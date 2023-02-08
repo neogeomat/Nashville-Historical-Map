@@ -604,7 +604,7 @@ searchControl.on("search:locationfound", (e) => {
     if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
       // debugger;
       // pass;
-      e.layer.fire('click');
+      e.layer.fire("click");
     } else {
       let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
 
@@ -624,7 +624,7 @@ searchControl.on("search:locationfound", (e) => {
         autoClose: false,
         closeOnEscapeKey: false,
         closeOnClick: false,
-        closeButton:false,
+        closeButton: false,
       }).setLatLng(map.getBounds().getCenter());
       map.on("popupopen", () => {
         // alert('popup opened');
@@ -639,8 +639,8 @@ searchControl.on("search:locationfound", (e) => {
         // $('.leaflet-popup').addClass('yesClick');
       });
       popup.setContent(content).openOn(map);
-      
-      if(searchControl._markerSearch){
+
+      if (searchControl._markerSearch) {
         searchControl._markerSearch.removeFrom(map);
       }
     }
@@ -668,10 +668,9 @@ let overlays = {
 for (let i in baselayers) {
   // console.log(i);
   // debugger;
-  if(['1864','2016'].indexOf(i)<0){
+  if (["1864", "2016"].indexOf(i) < 0) {
     $("#year").append(`<option value=${i}>${i}`);
-  }else{
-  
+  } else {
   }
 }
 for (let i in overlays) {
@@ -766,10 +765,11 @@ function selectMode(elem) {
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
-        $("#overlayRadio > input")[1].checked = true; // check the off button
+        // $("#overlayRadio > input")[1].checked = true; // check the off button
+        $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-
-      if(!$("#selection_btn.active")[0]){
+      // console.log($("#overlayRadio > input"));
+      if (!$("#selection_btn.active")[0]) {
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
@@ -835,9 +835,10 @@ function selectMode(elem) {
       adjustHeight();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
-        $("#overlayRadio input")[1].checked = true; // check the off button
+        // $("#overlayRadio input")[1].checked = true; // check the off button
+        $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if(!$("#selection_btn.active")[0]){
+      if (!$("#selection_btn.active")[0]) {
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
@@ -884,7 +885,7 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here.</p>'
       );
-      if(!$("#selection_btn.active")[0]){
+      if (!$("#selection_btn.active")[0]) {
         openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
@@ -926,6 +927,7 @@ function selectMode(elem) {
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
+        $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
       $("#select_div").html(
         '<p id="no_selection_description">For now the map of the Battle of Nashville is not interactive and shows only the positions of the armies on the first day of fighting, December 15th, 1864. Check back later for an enhanced map of the battle.</p>'
