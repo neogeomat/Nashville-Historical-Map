@@ -352,7 +352,8 @@
         if(totalslides.length > 0)
         totalslides[slideIndex - 1].style.display = "block";
         // totaldots[slideIndex - 1].className += " active";
-        setTimeout(function(){
+        $(".slide img").on('load', function(){ 
+            // alert('image loaded!');        
             for (i = 0; i < totalslides.length; i++) {
                 if(totalslides[i].style.display == "block" && totalslides[i].children.length>0)
                 {
@@ -366,7 +367,8 @@
                 }
                 
             }
-        }, 150)
+        });
+        
         
     }
 </script>
