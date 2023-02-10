@@ -616,7 +616,7 @@ searchControl.on("search:locationfound", (e) => {
       }
       content += "</select>";
       content +=
-        "<div style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
+        "<div id=\"popup_btn\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear()'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",

@@ -354,3 +354,11 @@ body {
 	border-radius: 50%;
 	background: white;
 }
+
+#popupYear{
+  padding: 4px 20px 4px 10px;
+}
+
+#popup_btn>button{
+  padding: 5px;
+}
