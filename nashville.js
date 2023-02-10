@@ -965,8 +965,12 @@ function selectYear(elem) {
 
 function popupSelectYear() {
   let popupYear = $("#popupYear").val();
-  selectYear(popupYear);
-  map.closePopup();
+  if (popupYear != "Select") {
+    selectYear(popupYear);
+    map.closePopup();
+  } else {
+    alert("Please select year...");
+  }
 }
 
 function select2016Overlay($elem) {
