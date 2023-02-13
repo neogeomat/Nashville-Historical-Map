@@ -613,7 +613,7 @@ searchControl.on("search:locationfound", (e) => {
       }
       content += "</select>";
       content +=
-        "<div style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
+        "<div id=\"popup_btn\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -962,10 +962,14 @@ function selectYear(elem) {
 
 function popupSelectYear(leaflet_id) {
   let popupYear = $("#popupYear").val();
-  selectYear(popupYear);
-  let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
+  if (popupYear != "Select") {
+    selectYear(popupYear);
+let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
   feature.fire('click');
-  map.closePopup();
+    map.closePopup();
+  } else {
+    alert("Please select year...");
+  }
 }
 
 function select2016Overlay($elem) {
