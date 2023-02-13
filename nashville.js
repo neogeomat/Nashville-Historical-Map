@@ -528,7 +528,7 @@ let searchControl = new L.Control.Search({
   initial: false,
   autoType: false,
   autoCollapseTime: 60000,
-  textErr: "No results found",
+  textErr: "No results found.",
   // textPlaceholder: 'Search for Landmark or Streets..........',
   buildTip: function (text, val) {
     // debugger;
@@ -548,6 +548,8 @@ let searchControl = new L.Control.Search({
       '</b> --> <span class="result-arrow">></span></a>'
     );
   },
+  moveToLocation: function (latlng, title, val) {
+  }
   // sourceData: function(text, callResponse){
   //   let data = [];
   //   landmarksLayer_clone.getLayers().forEach(function(l){
@@ -601,11 +603,13 @@ searchControl.on("search:locationfound", (e) => {
     if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
       // debugger;
       // pass;
-      e.layer.fire("click");
+      searchControl.showLocation(e.latlng,e.text);
+      let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
+      feature.fire('click');
     } else {
       let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
 
-      content += `Year <select id="popupYear" >
+      content += `Year <select id="popupYear" class="custom-select">
       <option class="popup-mapchange-button">Select</option>`;
 
       for (var i = 0; i < years.length; i++) {
@@ -617,12 +621,19 @@ searchControl.on("search:locationfound", (e) => {
 
       var popup = L.popup({
         direction: "bottom",
-        keepInView: true,
+        // keepInView: true,
+        autoPan: false,
         autoClose: false,
         closeOnEscapeKey: false,
         closeOnClick: false,
         closeButton: false,
-      }).setLatLng(map.getBounds().getCenter());
+      });
+      popup.setContent(content);
+      // popup.setLatLng(L.latLng(40.5, 55.5));
+      popup.setLatLng(map.getBounds().getCenter());
+      // popup.setLatLng(e.latlng);
+      popup.openOn(map);
+
       map.on("popupopen", () => {
         // alert('popup opened');
         $(".instructions").addClass("noClick");
@@ -635,7 +646,7 @@ searchControl.on("search:locationfound", (e) => {
         $("#map").removeClass("noClick");
         // $('.leaflet-popup').addClass('yesClick');
       });
-      popup.setContent(content).openOn(map);
+      
 
       if (searchControl._markerSearch) {
         searchControl._markerSearch.removeFrom(map);
@@ -663,8 +674,6 @@ let overlays = {
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
-  // console.log(i);
-  // debugger;
   if (["1864", "2016"].indexOf(i) < 0) {
     $("#year").append(`<option value=${i}>${i}`);
   } else {
