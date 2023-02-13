@@ -543,7 +543,7 @@ let searchControl = new L.Control.Search({
       type +
       '">' +
       text +
-      ".<!-- <b>" +
+      "<!-- <b>" +
       type +
       '</b> --> <span class="result-arrow">></span></a>'
     );
@@ -975,6 +975,7 @@ function popupSelectYear(leaflet_id) {
     selectYear(popupYear);
 let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
   feature.fire('click');
+  map.panTo(feature.getLatLng());
     map.closePopup();
   } else {
     alert("Please select year...");
