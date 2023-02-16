@@ -529,6 +529,7 @@ let searchControl = new L.Control.Search({
   autoType: false,
   autoCollapseTime: 60000,
   textErr: "No results found.",
+  marker: false,
   // textPlaceholder: 'Search for Landmark or Streets..........',
   buildTip: function (text, val) {
     // debugger;
@@ -590,7 +591,7 @@ searchControl.on("search:locationfound", (e) => {
   if (e.layer.feature.properties.hasOwnProperty("Street")) {
     selectMode({ innerText: "Streets" });
     $("#mode.select-selected")[0].innerText = "Streets";
-  }
+  }else
   if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
     // debugger;
     let years =
