@@ -618,7 +618,7 @@ searchControl.on("search:locationfound", (e) => {
       }
       content += "</select>";
       content +=
-        "<div id=\"popup_btn\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
+        "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -648,13 +648,22 @@ map.on("popupopen", e => {
   // alert('popup opened');
   $(".instructions").addClass("noClick");
   $("#map").addClass("noClick");
+  $(".leaflet-marker-pane img").removeClass('leaflet-interactive');
   $(".leaflet-popup").addClass("yesClick");
+  $('.leaflet-popup').on('keypress',e=>{
+    console.log(e);
+    if(e.keyCode == 13) { // pressing enter
+      // alert();
+      $('#popup_btn_div').children(1).click();
+    }
+  });
 });
 map.on("popupclose", e => {
   console.log('popupclose: ',e);
   // alert('popup closed');
   $(".instructions").removeClass("noClick");
   $("#map").removeClass("noClick");
+  $(".leaflet-marker-pane img").addClass('leaflet-interactive');
   // $('.leaflet-popup').addClass('yesClick');
 });
 
