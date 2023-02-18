@@ -608,17 +608,31 @@ searchControl.on("search:locationfound", (e) => {
       let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
       feature.fire('click');
     } else {
-      let content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? <p>`;
+      let content;
+      if(years.length == 1){
+        content = `<p> ${feature.properties.Name} appears only on the ${years[0]} map, which will now be displayed. </p>`;
+        content += `<select id="popupYear" class="custom-select hidden">
+        <option class="popup-mapchange-button">Select</option>`;
+  
+        for (var i = 0; i < years.length; i++) {
+          content += `<option class="popup-mapchange-button" value='${years[i]}' selected>${years[i]}</option>`;
+        }
+        content += "</select>";
+        content +=
+          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
+      }else{
+        content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? </p>`;
 
-      content += `Year <select id="popupYear" class="custom-select">
-      <option class="popup-mapchange-button">Select</option>`;
-
-      for (var i = 0; i < years.length; i++) {
-        content += `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
+        content += `Year <select id="popupYear" class="custom-select">
+        <option class="popup-mapchange-button">Select</option>`;
+  
+        for (var i = 0; i < years.length; i++) {
+          content += `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
+        }
+        content += "</select>";
+        content +=
+          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
       }
-      content += "</select>";
-      content +=
-        "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
 
       var popup = L.popup({
         direction: "bottom",
@@ -633,8 +647,7 @@ searchControl.on("search:locationfound", (e) => {
       // popup.setLatLng(L.latLng(40.5, 55.5));
       popup.setLatLng(map.getBounds().getCenter());
       // popup.setLatLng(e.latlng);
-      popup.openOn(map);    
-
+      popup.openOn(map); 
       if (searchControl._markerSearch) {
         searchControl._markerSearch.removeFrom(map);
       }
@@ -984,10 +997,11 @@ function selectYear(elem) {
 function popupSelectYear(leaflet_id) {
   let popupYear = $("#popupYear").val();
   if (popupYear != "Select") {
+    selectMode({ innerText: "Landmarks" });
     selectYear(popupYear);
-let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
-  feature.fire('click');
-  map.panTo(feature.getLatLng());
+    let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
+    feature.fire('click');
+    map.panTo(feature.getLatLng());
     map.closePopup();
   } else {
     alert("Please select year...");
