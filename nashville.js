@@ -633,27 +633,29 @@ searchControl.on("search:locationfound", (e) => {
       // popup.setLatLng(L.latLng(40.5, 55.5));
       popup.setLatLng(map.getBounds().getCenter());
       // popup.setLatLng(e.latlng);
-      popup.openOn(map);
-
-      map.on("popupopen", () => {
-        // alert('popup opened');
-        $(".instructions").addClass("noClick");
-        $("#map").addClass("noClick");
-        $(".leaflet-popup").addClass("yesClick");
-      });
-      map.on("popupclose", () => {
-        // alert('popup closed');
-        $(".instructions").removeClass("noClick");
-        $("#map").removeClass("noClick");
-        // $('.leaflet-popup').addClass('yesClick');
-      });
-      
+      popup.openOn(map);    
 
       if (searchControl._markerSearch) {
         searchControl._markerSearch.removeFrom(map);
       }
     }
   }
+});
+
+map.on("popupopen", e => {
+  // debugger;
+  console.log('popupopen: ',e);
+  // alert('popup opened');
+  $(".instructions").addClass("noClick");
+  $("#map").addClass("noClick");
+  $(".leaflet-popup").addClass("yesClick");
+});
+map.on("popupclose", e => {
+  console.log('popupclose: ',e);
+  // alert('popup closed');
+  $(".instructions").removeClass("noClick");
+  $("#map").removeClass("noClick");
+  // $('.leaflet-popup').addClass('yesClick');
 });
 
 let baselayers = {
