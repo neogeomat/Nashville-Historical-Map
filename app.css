@@ -15,6 +15,7 @@
 :root {
   /* --CPwidth: 33%; */
   --CPwidth: 400px;
+  --fontsize: 16px;
 }
 
 .instructions {
@@ -29,7 +30,8 @@
   position: absolute;
   z-index: 1000;
   /* height: calc(100vh - 5vh); */
-  font-size: 16px;
+  /* font-size: 16px; */
+  font-size: var(--fontsize);
   font-family: "BloggerSans", Georgia;
   margin: 8px;
 }
@@ -150,7 +152,8 @@ body {
 /* } */
 
 .tab button {
-  width: 33.33%;
+  /* width: 33.33%; */
+  width: 25%;
   font-family: 'BloggerSans';
   font-size: 16px;
 }
@@ -208,10 +211,11 @@ body {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  /* font-size: calc(var(--fontsize) + 2px); */
 }
 #selection_subtitle, #selectionAltName {
   text-align: center;
-  font-size: 16px;
+  font-size: small;
   margin: 5px;
   color: #f2c885;
 }

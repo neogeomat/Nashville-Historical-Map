@@ -235,8 +235,8 @@ let landmarksLayer = L.geoJSON(null, {
       var m = L.marker(latlng, {
         icon: L.icon({
           iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-          iconSize: [18, 22],
-          iconAnchor: [9, 22],
+          iconSize: [24, 28],
+          iconAnchor: [12, 28],
         }),
       });
       m.bindTooltip(feature.properties.Landmark, {
@@ -256,8 +256,8 @@ let landmarksLayer = L.geoJSON(null, {
         previousselectedlandmark.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-            iconSize: [18, 22],
-            iconAnchor: [9, 22],
+            iconSize: [24, 28],
+            iconAnchor: [12, 28],
           })
         );
       }
@@ -265,8 +265,8 @@ let landmarksLayer = L.geoJSON(null, {
       layer.setIcon(
         L.icon({
           iconUrl: "images/landmarks_streets/selectedlandmark.png",
-          iconSize: [18, 22],
-          iconAnchor: [9, 22],
+          iconSize: [24, 28],
+          iconAnchor: [12, 28],
         })
       );
       previousselectedlandmark = layer;
@@ -403,7 +403,7 @@ let csvAdjustData = [];
 let landmarksLayer_clone;
 // let csvAdjust = omnivore
 //   .csv(
-//     "data/Landmarks 6 transformed xyfill.csv",
+//     "data/Landmarks 6 (for dev 2) real coord downloaded.csv",
 let csvAdjust = omnivore
   .geojson(
     "data/Landmarks 6 (for dev 2).geojson",
@@ -442,8 +442,8 @@ let streetsLayer = L.geoJSON(streets_data, {
     let m = L.marker(latlng, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet.png",
-        iconSize: [20, 20],
-        iconAnchor: [10, 10],
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -462,8 +462,8 @@ let streetsLayer = L.geoJSON(streets_data, {
         previousselectedstreet.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
-            iconSize: [20, 20],
-            iconAnchor: [10, 10],
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
           })
         );
       }
@@ -471,8 +471,8 @@ let streetsLayer = L.geoJSON(streets_data, {
       layer.setIcon(
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet.png",
-          iconSize: [20, 20],
-          iconAnchor: [10, 10],
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
         })
       );
       previousselectedstreet = layer;
@@ -601,13 +601,13 @@ searchControl.on("search:locationfound", (e) => {
     });
     let feature = e.layer.feature;
 
-    if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
+    if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) { // marker year khe da
       // debugger;
       // pass;
       searchControl.showLocation(e.latlng,e.text);
       let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
       feature.fire('click');
-    } else {
+    } else { // marker year khe maru
       let content;
       if(years.length == 1){
         content = `<p> ${feature.properties.Name} appears only on the ${years[0]} map, which will now be displayed. </p>`;
@@ -619,7 +619,7 @@ searchControl.on("search:locationfound", (e) => {
         }
         content += "</select>";
         content +=
-          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
+          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupYearSelect("+ e.layer._leaflet_id +")'>OK</button></div>";
       }else{
         content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? </p>`;
 
@@ -631,7 +631,7 @@ searchControl.on("search:locationfound", (e) => {
         }
         content += "</select>";
         content +=
-          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupSelectYear("+ e.layer._leaflet_id +")'>OK</button></div>";
+          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupYearSelect("+ e.layer._leaflet_id +")'>OK</button></div>";
       }
 
       var popup = L.popup({
@@ -692,10 +692,10 @@ let baselayers = {
 
 let overlays = {
   // "Landmarks":L.layerGroup(),
-  "Just Maps": L.layerGroup(),
+  'Just Maps': L.layerGroup(),
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
-  "Battle of Nashville": L.layerGroup(),
+  'Battle of Nashville': L.layerGroup(),
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
@@ -814,6 +814,16 @@ function selectMode(elem) {
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
         
+      }
+      if(previousselectedlandmark){
+        previousselectedlandmark.setIcon(
+          L.icon({
+            iconUrl: "images/landmarks_streets/unselectedlandmark.png",
+            iconSize: [24, 28],
+            iconAnchor: [12, 28],
+          })
+        )
+        previousselectedlandmark = null;
       }
       if ($("#mode.select-selected")[0]) {
         if (
@@ -994,10 +1004,12 @@ function selectYear(elem) {
   }
 }
 
-function popupSelectYear(leaflet_id) {
+function popupYearSelect(leaflet_id) {
   let popupYear = $("#popupYear").val();
+  debugger;
   if (popupYear != "Select") {
     selectMode({ innerText: "Landmarks" });
+    $("#mode.select-selected")[0].innerText = "Landmarks";
     selectYear(popupYear);
     let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
     feature.fire('click');
@@ -1082,6 +1094,8 @@ updateZoomText();
 
 if (!debugMode) {
   selectMode({ innerText: "Just Maps" });
+  $("#mode.select-selected")[0].innerText = "Just Maps";
 } else {
   selectMode({ innerText: "Landmarks" });
+  $("#mode.select-selected")[0].innerText = "Landmarks";
 }
