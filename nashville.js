@@ -607,6 +607,8 @@ searchControl.on("search:locationfound", (e) => {
       searchControl.showLocation(e.latlng,e.text);
       let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
       feature.fire('click');
+      map.panTo(feature.getLatLng());
+      map.panBy([-200, 0]);
     } else { // marker year khe maru
       let content;
       if(years.length == 1){
@@ -644,8 +646,13 @@ searchControl.on("search:locationfound", (e) => {
         closeButton: false,
       });
       popup.setContent(content);
-      // popup.setLatLng(L.latLng(40.5, 55.5));
-      popup.setLatLng(map.getBounds().getCenter());
+      popup.setLatLng(L.latLng(40.5, 55.5));
+      let c = map.getBounds().getCenter();
+      c = map.latLngToLayerPoint(c);
+      c.x += 400/2;
+      popup.setLatLng(map.layerPointToLatLng(c));
+      
+
       // popup.setLatLng(e.latlng);
       popup.openOn(map); 
       if (searchControl._markerSearch) {
@@ -1015,6 +1022,7 @@ function popupYearSelect(leaflet_id) {
     feature.fire('click');
     map.panTo(feature.getLatLng());
     map.closePopup();
+    map.panBy([200, 0]);
   } else {
     alert("Please select year...");
   }
