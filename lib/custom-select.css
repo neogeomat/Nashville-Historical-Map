@@ -20,7 +20,7 @@
     position: absolute;
     content: "";
     top: 40%;
-    left: 150px;
+    left: 128px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
@@ -37,27 +37,29 @@
 /* style the items (options), including the selected item: */
 .select-items div,.select-selected {
     color: #fff;
-    /* padding: 8px 25px 8px 8px; */
-    padding: 4px 20px 4px 10px;
     border: 1px solid;
     text-align: left;
     width: 150px;
-    border-color: #666056;
+    border-color: #e8c2858f;
     cursor: pointer;
     background-color: #221d1f;
-    border-radius: 6px;
+    border-radius: 0px;
+    padding: 5px;
+	border-top:0;
 }
-
-#year{
+.select-selected {
+    border-top: 1px solid #e8c2858f;
+}
+/* #year{
   width: 60px;
-}
+} */
 #year::after{
-  left: 70px;
+  left: 128px;
 }
-#year + div > div {
+/* #year + div > div {
   width: 60px;
 }
-  
+  */ 
   /* Style items (options): */
   .select-items {
     position: absolute;

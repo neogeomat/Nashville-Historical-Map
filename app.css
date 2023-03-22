@@ -47,8 +47,8 @@
   position: absolute;
   height: 1em;
   width: 1em;
-  top: 0.5em;
-  right: 0.5em;
+  /* top: 0.5em;*/
+  right: 0.9em;
 }
 
 #logo {
@@ -75,9 +75,22 @@
   width: 1em;
   /* top: 10.5em; */
   /* bottom: 0.5em; */
-  right: 0.5em;
+  right: 0.9em;
 }
-
+div#about_img_inner img {
+    width: 50%;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+div#about_img_inner {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+}
+div#about_img {
+    float: left;
+    width: 100%;
+}
 body {
   font-family: "Source Sans Pro", sans-serif;
   border-top-left-radius: 5px;
@@ -122,7 +135,7 @@ body {
 }
 .informationPanal {
   grid-column: 1 / span 2;
-  margin-top: 10px;
+  margin-top: 30px;
   /* margin-bottom: 10px; */
 }
 .labeltxt {
@@ -250,9 +263,6 @@ body {
   background: #66f;
 }
 
-#overlayRadio{
-    margin-top: 10px;
-}
 
 .search-tooltip, #select_div, #legend_img{
   overflow-y: scroll;
@@ -365,4 +375,43 @@ body {
 
 #popup_btn>button{
   padding: 5px;
+}
+
+
+.radio-inner {
+    display: grid;
+    margin-top: 16px;
+    margin-bottom: 15px;
+}
+#year_outer {
+    margin-top: 20px;
+}
+#mode_text {
+    margin-top: 3px;
+    margin-bottom: -5px;
+}
+div#overlay_text {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+.inner-text::-webkit-scrollbar {
+    width: 5px;
+}
+.inner-text::-webkit-scrollbar-track {
+    border-radius: 5px;
+}
+.inner-text::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px lightgrey;
+}
+.inner-text {
+    overflow-y: scroll;
+    /* overflow-x: hidden; */
+    height: 150px;
+    text-align: justify;
+    scoll: lightgrey #221d1f;
+    scrollbar-width: thin;
+}
+input#searchtext10 {
+    background: transparent;
 }

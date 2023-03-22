@@ -2,21 +2,19 @@
 <html>
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
-    <!-- <script src="./bundle.js" type="text/javascript" charset="utf-8"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wPhSditxIw4NCaDAJBmIQyekLLnsJII&libraries=geometry"></script>
     <script src="lib/Leaflet.Coordinates-0.1.3.min.js"></script>
+    <script src="lib/Leaflet.Coordinates-0.1.3.min.js"></script>
     <script src="lib/leaflet.textpath.js"></script>
+    <script src="js/leaft.js"></script>
+    <script src="js/leaflet-draw.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/leaf-let-ajax.js"></script>
     <link rel="stylesheet" href="lib/Leaflet.Coordinates-0.1.3.css">
     <link rel="stylesheet" href="lib/tab.css">
-    <link rel="stylesheet" href=
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/leaft.css">
+    <link rel="stylesheet" href="css/leaf-let-draw.css">
+    <link rel="stylesheet" href="css/font-awsom.css">
     <script src="lib/tab.js"></script>
     <link rel="stylesheet" href="lib/leaflet-search.src.css">
     <link rel="stylesheet" type="text/css" href="./map.css" />
@@ -127,7 +125,7 @@
         <!-- <h1 class="title">Traveling Salesman</h1> -->
         <div class="instructions">
             <div id="control-head">
-            <div>
+            <div class="corner-image">
                 <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
                 <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
             </div>
@@ -136,28 +134,37 @@
                 <div class="grid-item logo">
                     <img src="images/leftPanalImages/han-logo-2jan2023.png" id='logo'>
                 </div>
-                <div class="grid-item labeltxt">
+                <div class="grid-item labeltxt" id="mode_text">
                     <span >Mode</span>
                 </div>
-                <div class="grid-item">
+              <!--   <div class="grid-item">
                     <div id='modeDiv' class="custom-select" onclick='selectMode(this)'>
                         <select name="mode" id="mode"></select>
+						 
                     </div>
-                </div>
-                <div class="grid-item labeltxt">
+                </div> -->
+				<div class="grid-item">
+				<div id='modeDiv'  class="custom-select" onclick='selectMode(this)'>
+				 <select name="mode" id="mode"> </select>
+   </div>
+   <select  name="mode" id="mode" class="form-select"></select>
+   </div>
+   
+                <div class="grid-item labeltxt" id="year_text">
                     <span>Year</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="year_outer">
                     <div id='yearDiv' class="custom-select" onclick='selectYear(this)'>
                         <select name='year' id='year'></select>
                     </div>
                     <span class="hidden"></span>
                 </div>
 
-                <div class="grid-item labeltxt" id="">
+                <div class="grid-item labeltxt" id="overlay_text">
                     <span>2016 Overlay</span>
                 </div> 
                 <div id='overlayRadio' >
+				  <div class="radio-inner">
                     <label class="onofflayer">
                         <input id="onRedioOverlay" type="radio" name="2016Overlay" value='on' onclick='select2016Overlay(this)'>On</input>
                         <span class="checkmark"></span>
@@ -168,6 +175,7 @@
                       </label>
                     <!-- <input type="radio" name="2016Overlay" value='on' onclick='select2016Overlay(this)'>On</input>
                     <input type="radio" name="2016Overlay" value='off' onclick='select2016Overlay(this)' checked>Off</input> -->
+					</div>
                     
                 </div>
                 <div class="grid-item">
@@ -183,12 +191,46 @@
             <div id="informationPanal" class="informationPanal">
                 <!-- Tab links -->
                 <div class="tab">
-                    <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
-                    <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
+				<button id="about_btn" class="tablinks" onclick="openCity(event, 'About')">About</button>
+                    <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button> <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
                     <button id="search_btn" class="tablinks" onclick="openCity(event, 'Search')">Search</button>
-                    <button id="support_btn" class="tablinks" onclick="openCity(event, 'Support')">Support</button>
                 </div>
                 <!-- Tab content -->
+				<div id="About" class="About tabcontent">
+                    
+                    <div id="about_head">
+                      <h3> How to Get around</h3>
+                    </div>
+					<div class="inner-text">
+					<p>Just Maps Mode: Maps of Nashville and Davidson County from 1871, 1903, 1929 and 1952 with the option to overlay a modern (2016) map for comparison.</p>
+					<p>
+					Landmarks Mode: Info and photos of historical buildings and other structures in existence at the time of the selected map.
+					</p>
+					<p>
+					Streets Mode: The origin of street names where known, former names where applicable, and some historical and geographic trivia.
+					</p>
+					<p>
+					Battle of Nashville Mode: A static map of the fortifications, earthworks and troop positions on December 15th, 1864 along with a modern map overlay.
+					</p>
+					<h3>The Making of</h3>
+					<p>
+					The atlas began way back in 2007 with a pair of maps drawn in Macromedia Freehand, a 2006-ish modern map and a 1952 map, and a rudimentary UI created in flash. Adobe's discouninuation of Freehand and Steve Jobs's 2010 Flash0killing public letter, "Thoughta on Flash", discouraged that particular vision and put the project on hold for a few years.
+					</p>
+					 <h3> Support</h3>
+					 <p>If you've enjoyed this site or found it useful, you may want to make a contribution to degray the ongoing costs of development and hosting. Any amount will be appreciated. Paypal can be used for one-time donations and Patreon for recurring donations.</p>
+					 
+					  <div id="about_img">
+					   <div id="about_img_inner">
+                        <img id="about_content" src="images/about/patreon.png" />
+						<img id="about_content" src="images/about/paypal.png" />
+						</div>
+                    </div>
+					 <h3> Copyrights</h3>
+					 <p>I own copyrights for none of the images displayed on the site. If you feel that a copyright has been infringed, please contact me at</p>
+					</div>
+                    <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
+                    <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
+                </div>
                 <div id="Selection" class="tabcontent">
                     <div id="select_div">
                         <!-- <h4 id="SelectionName"></h4>
@@ -222,6 +264,7 @@
                     </div>
                 </div>
                 
+				
                 <div id="Legend" class="legend tabcontent">
                     
                     <div id="legend_img">
@@ -376,4 +419,6 @@
         
     }
 </script>
+
+
 </html>
