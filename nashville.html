@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="lib/leaflet-search.src.css">
     <link rel="stylesheet" type="text/css" href="./map.css" />
     <link rel="stylesheet" type="text/css" href="./app.css" />
+    <script src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
     <title>Nashville Historical Map</title>   
     <style>
         .leaflet-control-search.search-exp{
@@ -95,6 +97,31 @@
 		.fa {
 			font-size: 32px;
 		}
+        #About span{
+            font-size: 28px;
+            font-weight: 500;
+            text-align: center;
+            padding-top: 10px;
+        }
+        #About p{
+            font-size: 18px;
+            padding: 10px;
+            text-align: justify;
+        }
+        #About .payment-icons{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        #About .payment-icons div{
+            width: 30%;
+        }
+        #mode, #year{
+            padding-top:7px;
+        }
+        #overlay-heading{
+            padding-bottom:10px;
+        }
 
         
 		
@@ -119,6 +146,7 @@
 		.footerdot:hover {
 			background-color: black;
 		} */
+		
 	</style>
 </head>
 
@@ -129,7 +157,7 @@
             <div id="control-head">
             <div>
                 <img src="images/leftPanalImages/ul-corner.png" id="ul-corner">
-                <img src="images/leftPanalImages/ur-corner.png" id="ur-corner"alt="">
+                <img src="images/leftPanalImages/ur-corner.png" id="ur-corner" alt="">
             </div>
 
             <div id="interact" class="grid-container">
@@ -139,7 +167,7 @@
                 <div class="grid-item labeltxt">
                     <span >Mode</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" onclick="void(0)">
                     <div id='modeDiv' class="custom-select" onclick='selectMode(this)'>
                         <select name="mode" id="mode"></select>
                     </div>
@@ -154,7 +182,7 @@
                     <span class="hidden"></span>
                 </div>
 
-                <div class="grid-item labeltxt" id="">
+                <div class="grid-item labeltxt" id="overlay-heading">
                     <span>2016 Overlay</span>
                 </div> 
                 <div id='overlayRadio' >
@@ -183,12 +211,28 @@
             <div id="informationPanal" class="informationPanal">
                 <!-- Tab links -->
                 <div class="tab">
+                    <button id="about_btn" class="tablinks" onclick="openCity(event, 'About')">About</button>
                     <button id="selection_btn" class="tablinks" onclick="openCity(event, 'Selection')">Selection</button>
                     <button id="legend_btn" class="tablinks" onclick="openCity(event, 'Legend')">Legend</button>
                     <button id="search_btn" class="tablinks" onclick="openCity(event, 'Search')">Search</button>
-                    <button id="support_btn" class="tablinks" onclick="openCity(event, 'Support')">Support</button>
+                    <!-- <button id="support_btn" class="tablinks" onclick="openCity(event, 'Support')">Support</button> -->
                 </div>
                 <!-- Tab content -->
+                
+                <div id="About" class="tabcontent">
+                    <span>Support</span>
+                    <p>
+                        If you’ve enjoyed this site or found it useful, you may want to make a
+                        contribution to defray the ongoing costs of development and hosting.
+                        Any amount will be appreciated. PayPal can be used for one-time
+                        donations and Patreon for recurring donations.
+                    </p>
+                    <div class="payment-icons">
+                        <!--<a href="https://www.patreon.com/bePatron?u=93136391" data-patreon-widget-type="become-patron-button">donate</a>-->
+                        <div><a href="https://patreon.com/NashvilleHistoricalAtlas?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link" target="_blank" ><img src="./images/about/patreon-button.png" alt="patreon" width="100%"></a></div>
+                        <div><a href="https://www.paypal.com/donate/?hosted_button_id=BPT7XS8GXJRUS" target="_blank"><img src="./images/about/paypal-button.png" alt="paypal" width="100%"></a></div>
+                    </div>
+                </div>
                 <div id="Selection" class="tabcontent">
                     <div id="select_div">
                         <!-- <h4 id="SelectionName"></h4>
@@ -222,8 +266,7 @@
                     </div>
                 </div>
                 
-                <div id="Legend" class="legend tabcontent">
-                    
+                <div id="Legend" class="legend tabcontent">                    
                     <div id="legend_img">
                         <img id="legend_content" src="images/legend/legendcontent_2jan2023.png" />
                     </div>

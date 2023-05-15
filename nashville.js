@@ -393,7 +393,7 @@ let landmarksLayer = L.geoJSON(null, {
           '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here.</p>'
         );
       }
-      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      openCity({ currentTarget: $("#about_btn")[0] }, "About");
       // $('#selection_btn').addClass('active');
     });
   },
@@ -512,7 +512,7 @@ let streetsLayer = L.geoJSON(streets_data, {
           '<p id="selection_description">' + prop["History"] + "</p>";
       }
       $("#select_div").append(contentSelection);
-      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      openCity({ currentTarget: $("#about_btn")[0] }, "About");
     });
   },
 });
@@ -759,13 +759,32 @@ $(document).ready(function () {
   });
 });
 function selectMode(elem) {
-  const mode = elem.innerText;
+  let mode = elem.innerText;
+  let nmode = '';
   for (let i in overlays) {
     map.removeLayer(overlays[i]);
   }
   $("#offRedioOverlay").prop("checked", true).trigger("click");
-  map.addLayer(overlays[mode]);
-  switch (mode) {
+  console.log("mode",mode.trim());
+  if (mode.trim() == 'Streets') {
+    nmode = 'Streets';
+  }
+  if (mode.trim() == 'Battle of Nashville') {
+    nmode = 'Battle of Nashville';
+  } 
+
+  if(mode.trim() == 'Landmarks') {
+    nmode = 'Landmarks';
+  }
+  if(mode.trim() == 'Just Maps') {
+    nmode = 'Just Maps';
+  }  
+  console.log(overlays);
+  console.log('testing mode');
+  console.log(nmode);
+  console.log(overlays[nmode]);
+  map.addLayer(overlays[nmode]);
+  switch (nmode) {
     case "Just Maps":
       // find previous map
       try {
@@ -807,8 +826,8 @@ function selectMode(elem) {
         // $("#overlayRadio > input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if (!$("#selection_btn.active")[0]) {
-        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      if (!$("#about_btn.active")[0]) {
+        openCity({ currentTarget: $("#about_btn")[0] }, "About");
       }
       break;
     case "Landmarks":
@@ -886,8 +905,8 @@ function selectMode(elem) {
         // $("#overlayRadio input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if (!$("#selection_btn.active")[0]) {
-        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      if (!$("#about_btn.active")[0]) {
+        openCity({ currentTarget: $("#about_btn")[0] }, "About");
       }
       break;
     case "Streets":
@@ -933,8 +952,8 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here.</p>'
       );
-      if (!$("#selection_btn.active")[0]) {
-        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      if (!$("#about_btn.active")[0]) {
+        openCity({ currentTarget: $("#about_btn")[0] }, "About");
       }
       break;
     case "Battle of Nashville":
@@ -988,24 +1007,41 @@ function selectMode(elem) {
   }
 }
 
-function selectYear(elem) {
+function selectYear(elem) {  
+  // alert('in function');
+  // // let elemNew = elem.innerText;
+  // // alert('first');
+  // // alert(elem);
+  // // alert(elemNew.trim());
+  // if(elem == null){
+  //   alert('in null');
+  //   var elemNew = document.getElementById('year').value;
+  //   elem = elemNew.trim();
+  //   alert(elem);
+  // }
+  // const year = elem.trim() || elem.trim();
   const year = elem.innerText || elem;
+  console.log(year,'shubham');
   for (let i in baselayers) {
     map.removeLayer(baselayers[i]);
   }
-  map.addLayer(baselayers[year]);
+
+  console.log('hhh',year.trim());
+  console.log('hhh',baselayers);
+  map.addLayer(baselayers[year.trim()]);
+
   // debugger;
   let l = csvAdjustData.filter((k) => {
     if (k.feature.properties["Maps Photo Should Appear on"]) {
-      return k.feature.properties["Maps Photo Should Appear on"].includes(year);
+      return k.feature.properties["Maps Photo Should Appear on"].includes(year.trim());
     }
   });
   landmarksLayer.clearLayers();
   l.forEach((m) => {
     m.addTo(landmarksLayer);
   });
-  $("#year.select-selected")[0].innerText = year;
-  if ($("#selection_btn").hasClass("active")) {
+  $("#year.select-selected")[0].innerText = year.trim();
+  if ($("#about_btn").hasClass("active")) {
     if (previousselectedlandmark) previousselectedlandmark.fireEvent("click");
     if (previousselectedstreet) previousselectedstreet.fireEvent("click");
   }
@@ -1100,6 +1136,8 @@ function updateZoomText() {
 }
 updateZoomText();
 
+window.onload = function() {
+
 if (!debugMode) {
   selectMode({ innerText: "Just Maps" });
   $("#mode.select-selected")[0].innerText = "Just Maps";
@@ -1107,3 +1145,7 @@ if (!debugMode) {
   selectMode({ innerText: "Landmarks" });
   $("#mode.select-selected")[0].innerText = "Landmarks";
 }
+
+}
+
+

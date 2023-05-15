@@ -12,6 +12,7 @@
   }
 
 .select-selected {
+  border-radius: 6px;
 /* background-color: #f2c885; */
 }
 
@@ -20,7 +21,7 @@
     position: absolute;
     content: "";
     top: 40%;
-    left: 150px;
+    left: 160px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
@@ -31,7 +32,7 @@
 /* Point the arrow upwards when the select box is open (active): */
 .select-selected, .select-arrow-active:after {
     border-color: transparent transparent #f2c885 transparent;
-    top: 10px;
+    top: 4px;
   }
   
 /* style the items (options), including the selected item: */
@@ -45,8 +46,29 @@
     border-color: #666056;
     cursor: pointer;
     background-color: #221d1f;
-    border-radius: 6px;
+/*    border-radius: 6px;*/
 }
+
+.select-items div{
+  background-color:#120e10;
+  color:#f2c885;
+  border-top: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.select-items div:last-child{
+      border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+    border-bottom: 1px solid #666056 !important;
+}
+
+.select-items div:first-child{
+      border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+    border-top: 1px solid #666056 !important;
+}
+
+
 
 #year{
   width: 60px;
