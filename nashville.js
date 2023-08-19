@@ -393,7 +393,7 @@ let landmarksLayer = L.geoJSON(null, {
           '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here.</p>'
         );
       }
-      openCity({ currentTarget: $("#about_btn")[0] }, "About");
+      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // $('#selection_btn').addClass('active');
     });
   },
@@ -442,8 +442,8 @@ let streetsLayer = L.geoJSON(streets_data, {
     let m = L.marker(latlng, {
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet.png",
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
+        iconSize: [24, 28],
+        iconAnchor: [12, 28],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -462,8 +462,8 @@ let streetsLayer = L.geoJSON(streets_data, {
         previousselectedstreet.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
-            iconSize: [30, 30],
-            iconAnchor: [15, 15],
+            iconSize: [24, 28],
+          iconAnchor: [12, 28],
           })
         );
       }
@@ -471,8 +471,8 @@ let streetsLayer = L.geoJSON(streets_data, {
       layer.setIcon(
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet.png",
-          iconSize: [30, 30],
-          iconAnchor: [15, 15],
+          iconSize: [24, 28],
+          iconAnchor: [12, 28],
         })
       );
       previousselectedstreet = layer;
@@ -512,7 +512,7 @@ let streetsLayer = L.geoJSON(streets_data, {
           '<p id="selection_description">' + prop["History"] + "</p>";
       }
       $("#select_div").append(contentSelection);
-      openCity({ currentTarget: $("#about_btn")[0] }, "About");
+      openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
     });
   },
 });
@@ -608,7 +608,7 @@ searchControl.on("search:locationfound", (e) => {
       let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
       feature.fire('click');
       map.panTo(feature.getLatLng());
-      map.panBy([-200, 0]);
+      // map.panBy([-200, 0]);
     } else { // marker year khe maru
       let content;
       if(years.length == 1){
@@ -826,8 +826,8 @@ function selectMode(elem) {
         // $("#overlayRadio > input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if (!$("#about_btn.active")[0]) {
-        openCity({ currentTarget: $("#about_btn")[0] }, "About");
+      if (!$("#selection_btn.active")[0]) {
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
     case "Landmarks":
@@ -905,8 +905,8 @@ function selectMode(elem) {
         // $("#overlayRadio input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if (!$("#about_btn.active")[0]) {
-        openCity({ currentTarget: $("#about_btn")[0] }, "About");
+      if (!$("#selection_btn.active")[0]) {
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
     case "Streets":
@@ -952,8 +952,8 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">Select a street marker on the map and information for that street will appear here.</p>'
       );
-      if (!$("#about_btn.active")[0]) {
-        openCity({ currentTarget: $("#about_btn")[0] }, "About");
+      if (!$("#selection_btn.active")[0]) {
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       }
       break;
     case "Battle of Nashville":
@@ -1040,8 +1040,8 @@ function selectYear(elem) {
   l.forEach((m) => {
     m.addTo(landmarksLayer);
   });
-  $("#year.select-selected")[0].innerText = year.trim();
-  if ($("#about_btn").hasClass("active")) {
+  $("#year.select-selected")[0].innerText = year;
+  if ($("#selection_btn").hasClass("active")) {
     if (previousselectedlandmark) previousselectedlandmark.fireEvent("click");
     if (previousselectedstreet) previousselectedstreet.fireEvent("click");
   }
