@@ -443,7 +443,7 @@ searchControl.on("search:locationfound", (e) => {
       let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
       feature.fire('click');
       map.panTo(feature.getLatLng());
-      // map.panBy([-200, 0]);
+      map.panBy([-200, 0]);s
     } else { // marker year khe maru
       let content;
       if(years.length == 1){
