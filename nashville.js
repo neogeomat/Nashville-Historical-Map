@@ -981,6 +981,8 @@ if (!debugMode) {
   $("#mode.select-selected")[0].innerText = "Landmarks";
 }
 
+$("#informationPanal").show();
+openCity(event, 'About');
 }
 
 
