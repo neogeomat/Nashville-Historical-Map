@@ -651,19 +651,19 @@ function selectMode(elem) {
         r.next().hide();
       }
 
-      if ($("#informationPanal").is(":visible")) {
-        $("#informationPanal").hide();
-        // $('.instructions')[0].style.height = 'auto';
-      }
+      // if ($("#informationPanal").is(":visible")) {
+      //   $("#informationPanal").hide();
+      //   // $('.instructions')[0].style.height = 'auto';
+      // }
 
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
         map.removeLayer(nashville2016OverlayTile1444_578);
         // $("#overlayRadio > input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
-      if (!$("#selection_btn.active")[0]) {
-        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
-      }
+      // if (!$("#selection_btn.active")[0]) {
+      //   openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      // }
       break;
     case "Landmarks":
       try {
