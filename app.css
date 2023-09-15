@@ -209,7 +209,8 @@ body {
 /* } */
 
 #About span{
-  font-size: 25px;
+  font-size: calc(var(--fontsize) + 9px);
+  font-family: "BloggerSans", Georgia;
   font-weight: 500;
   text-align: center;
   padding-top: 10px;
@@ -232,7 +233,7 @@ body {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  /* font-size: calc(var(--fontsize) + 2px); */
+  font-size: calc(var(--fontsize) + 9px);
 }
 #selection_subtitle, #selectionAltName {
   text-align: center;
