@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="lib/leaflet-search.src.css">
     <link rel="stylesheet" type="text/css" href="./map.css" />
     <link rel="stylesheet" type="text/css" href="./app.css" />
+    <link rel="stylesheet" type="text/css" href="./lib/imagePopupModal.css">
     <script src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
     <title>Nashville Historical Map</title>   
     <style>
@@ -313,6 +314,18 @@
         </div>
         <div id="map"></div>
     </div>
+    <!-- The Image Popup Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="img01">
+
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+    </div>
 </body>
 <script src="lib/leaflet.active-layers.min.js" type="text/javascript" charset="utf-8"></script>
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
@@ -324,6 +337,7 @@
 <script src="tile-layers.js"></script>
 <script src='nashville.js'></script>
 <script src="lib/custom-select.js"></script>
+<script src="app.js"></script>
 <link rel="stylesheet" href="lib/custom-select.css">
 
 <script>

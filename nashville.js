@@ -151,7 +151,7 @@ let landmarksLayer = L.geoJSON(null, {
         if (prop["Use Image?"] == "yes") {
           if (prop["Image File Name"])
             slideImage +=
-              '<img src="images/pictures/' + prop["Image File Name"] + '">';
+              '<img class="myImg" src="images/pictures/' + prop["Image File Name"] + '" onClick=imgPopupModal(this)>';
 
           if (prop["Year of Image"]) {
             slideImage +=
@@ -168,7 +168,7 @@ let landmarksLayer = L.geoJSON(null, {
         } else {
           if (prop["Test Photo File Name"])
             slideImage +=
-              '<img src="images/testimages/' +
+              '<img class="myImg" src="images/testimages/' +
               prop["Test Photo File Name"] +
               '">';
         }
@@ -181,7 +181,7 @@ let landmarksLayer = L.geoJSON(null, {
           prop["Alternate Image 1 Download Location"]
         ) {
           slideImage +=
-            '<div class="slide"><img src="images/pictures/' +
+            '<div class="slide"><img class="myImg" src="images/pictures/' +
             prop["Alternate Image 1 File Name"] +
             '"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 1 Download Location"] +
@@ -203,7 +203,7 @@ let landmarksLayer = L.geoJSON(null, {
           prop["Alternate Image 2 Download Location"]
         ) {
           slideImage +=
-            '<div class="slide"><img src="images/pictures/' +
+            '<div class="slide"><img class="myImg" src="images/pictures/' +
             prop["Alternate Image 2 File Name"] +
             '"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 2 Download Location"] +
