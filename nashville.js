@@ -168,9 +168,7 @@ let landmarksLayer = L.geoJSON(null, {
         } else {
           if (prop["Test Photo File Name"])
             slideImage +=
-              '<img class="myImg" src="images/testimages/' +
-              prop["Test Photo File Name"] +
-              '">';
+              '<img class="myImg" src="images/testimages/' + prop["Test Photo File Name"] + '" onClick=imgPopupModal(this)>';
         }
 
         slideImage += "</div>";
@@ -182,8 +180,7 @@ let landmarksLayer = L.geoJSON(null, {
         ) {
           slideImage +=
             '<div class="slide"><img class="myImg" src="images/pictures/' +
-            prop["Alternate Image 1 File Name"] +
-            '"><div id="img_attribution" class="captionText">' +
+            prop["Alternate Image 1 File Name"] +'"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 1 Download Location"] +
             ".</div></div>";
           if (
