@@ -235,6 +235,9 @@ let landmarksLayer_clone;
 // let csvAdjust = omnivore
 //   .csv(
 //     "data/Landmarks 6 (for dev 2) real coord downloaded.csv",
+$.get('https://nashhistatlas.org/wp-json/custom/v1/table-data/',data =>{
+  console.log(data);
+});
 let csvAdjust = omnivore
   .geojson(
     "data/Landmarks 6 (for dev 2).geojson",
