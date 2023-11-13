@@ -1,11 +1,24 @@
+L.CRS.myCRS = L.extend({}, L.CRS.Simple, {
+  transformation: new L.Transformation(factor, 0, factor, 0),
+});
 
 let map = L.map("map", {
   // minZoom: centZoom - zoomStep,
   // maxZoom: centZoom + 2*zoomStep,
   wheelPxPerZoomLevel: 60 * zoomStep,
-  crs: L.CRS.Simple,
-  zoomControl: false,
-  maxBounds: imageBounds,
+  // crs: L.CRS.Simple,
+  // crs: L.CRS.myCRS,
+  // crs: L.CRS.EPSG3857,
+  // zoomControl: false,
+  // maxBounds: imageBounds,
+  // maxBounds: [
+  //   [35.924257403088696,-87.110828523895506],
+  //   [36.455984334237499,-86.455106676699103]
+  // ],
+  maxBounds: [
+    L.CRS.EPSG3857.project(L.point([35.924257403088696,-87.110828523895506])),
+    L.CRS.EPSG3857.project(L.point([36.455984334237499,-86.455106676699103]))
+  ],
   maxBoundsViscosity: 0.5,
 });
 
@@ -49,7 +62,16 @@ zoomControl.getContainer().firstChild.after(zoomText);
 map.attributionControl.setPrefix(
   "Nashville Historical Atlas by William Gregg (wrgregg@gmail.com). &copy; 2023"
 );
-map.setView([45, 53], centZoom);
+// map.setView([45, 53], centZoom);
+// map.setView([36.17663, -86.733892], 10);
+// map.setView(L.CRS.EPSG3857.project(L.point([36.17663, -86.733892])), 10);
+var bounds = [
+  [0, 0],
+  [imageSize, imageSize],
+];
+map.fitBounds(bounds);
+
+map.setView([imageSize / 2, imageSize / 2], 0);
 
 var geojsonMarkerOptions = {
   radius: 8,
@@ -65,6 +87,7 @@ let landmarksLayer = L.geoJSON(null, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
     if (feature.properties) {
+      // debugger;
       var m = L.marker(latlng, {
         icon: L.icon({
           iconUrl: "images/landmarks_streets/unselectedlandmark.png",
@@ -73,10 +96,10 @@ let landmarksLayer = L.geoJSON(null, {
         }),
       });
       m.bindTooltip(feature.properties.Landmark, {
-        // permanent: true,
+        permanent: true,
         direction: "top",
         offset: [0, -42],
-      })
+      });
       // .openTooltip();
       m.layerName = "Landmark";
       feature.properties.Name = feature.properties.Landmark;
@@ -104,10 +127,10 @@ let landmarksLayer = L.geoJSON(null, {
         })
       );
       previousselectedlandmark = layer;
-      previousselectedlandmark.closeTooltip() ;  // firefox khe search:locationfound khe tooltip waa choniu issue 72 solved
+      previousselectedlandmark.closeTooltip(); // firefox khe search:locationfound khe tooltip waa choniu issue 72 solved
       // Update Side Panel
       // debugger;
-      
+
       let yearslandmark =
         layer.feature.properties["Maps Photo Should Appear on"].split(",");
       yearslandmark = yearslandmark.map((y) => {
@@ -120,8 +143,7 @@ let landmarksLayer = L.geoJSON(null, {
       ) {
         // landmark selected year khe lai laki malai check yaau
         var prop = layer.feature.properties;
-        
-        
+
         $("#select_div").html("");
         var contentSelection =
           '<h4 id="SelectionName">' + prop["Landmark"] + "</h4>";
@@ -151,7 +173,9 @@ let landmarksLayer = L.geoJSON(null, {
         if (prop["Use Image?"] == "yes") {
           if (prop["Image File Name"])
             slideImage +=
-              '<img class="myImg" src="images/pictures/' + prop["Image File Name"] + '" onClick=imgPopupModal(this)>';
+              '<img class="myImg" src="images/pictures/' +
+              prop["Image File Name"] +
+              '" onClick=imgPopupModal(this)>';
 
           if (prop["Year of Image"]) {
             slideImage +=
@@ -168,7 +192,9 @@ let landmarksLayer = L.geoJSON(null, {
         } else {
           if (prop["Test Photo File Name"])
             slideImage +=
-              '<img class="myImg" src="images/testimages/' + prop["Test Photo File Name"] + '" onClick=imgPopupModal(this)>';
+              '<img class="myImg" src="images/testimages/' +
+              prop["Test Photo File Name"] +
+              '" onClick=imgPopupModal(this)>';
         }
 
         slideImage += "</div>";
@@ -180,7 +206,8 @@ let landmarksLayer = L.geoJSON(null, {
         ) {
           slideImage +=
             '<div class="slide"><img class="myImg" src="images/pictures/' +
-            prop["Alternate Image 1 File Name"] +'"><div id="img_attribution" class="captionText">' +
+            prop["Alternate Image 1 File Name"] +
+            '"><div id="img_attribution" class="captionText">' +
             prop["Alternate Image 1 Download Location"] +
             ".</div></div>";
           if (
@@ -235,12 +262,12 @@ let landmarksLayer_clone;
 // let csvAdjust = omnivore
 //   .csv(
 //     "data/Landmarks 6 (for dev 2) real coord downloaded.csv",
-$.get('https://nashhistatlas.org/wp-json/custom/v1/table-data/',data =>{
-  console.log(data);
-});
+// $.get('https://nashhistatlas.org/wp-json/custom/v1/table-data/',data =>{
+//   console.log(data);
+// });
 let csvAdjust = omnivore
   .geojson(
-    "data/Landmarks 6 (for dev 2).geojson",
+    "data/Landmarks 6 (for dev 2) lat lng.geojson",
     {
       // latfield: "y",
       // lonfield: "x",
@@ -250,7 +277,7 @@ let csvAdjust = omnivore
   )
   .on("ready", function (layer) {
     csvAdjustData = csvAdjust.getLayers();
-    
+
     landmarksLayer_clone = cloneLayer(landmarksLayer);
     // landmarksLayer_clone.addTo(map);
     if (searchControl) {
@@ -297,7 +324,7 @@ let streetsLayer = L.geoJSON(streets_data, {
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet.png",
             iconSize: [24, 28],
-          iconAnchor: [12, 28],
+            iconAnchor: [12, 28],
           })
         );
       }
@@ -383,8 +410,7 @@ let searchControl = new L.Control.Search({
       '</b> --> <span class="result-arrow">></span></a>'
     );
   },
-  moveToLocation: function (latlng, title, val) {
-  }
+  moveToLocation: function (latlng, title, val) {},
   // sourceData: function(text, callResponse){
   //   let data = [];
   //   landmarksLayer_clone.getLayers().forEach(function(l){
@@ -413,21 +439,18 @@ let searchControl = new L.Control.Search({
 
   //   return {	//called to stop previous requests on map move
   // 		abort: function() {
-  // 			
+  //
   // 		}
   // 	};
   // }
 });
 searchControl.addTo(map);
 searchControl.on("search:locationfound", (e) => {
-  
   // check street or landmark
   if (e.layer.feature.properties.hasOwnProperty("Street")) {
     selectMode({ innerText: "Streets" });
     $("#mode.select-selected")[0].innerText = "Streets";
-  }else
-
-  if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
+  } else if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
     // debugger;
     let years =
       e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
@@ -436,39 +459,52 @@ searchControl.on("search:locationfound", (e) => {
     });
     let feature = e.layer.feature;
 
-    if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) { // marker year khe da
-      
+    if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
+      // marker year khe da
+
       // pass;
-      searchControl.showLocation(e.latlng,e.text);
-      let feature  = landmarksLayer.getLayers().find(f => f.feature.properties.Name == landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature.properties.Name);
-      feature.fire('click');
+      searchControl.showLocation(e.latlng, e.text);
+      let feature = landmarksLayer
+        .getLayers()
+        .find(
+          (f) =>
+            f.feature.properties.Name ==
+            landmarksLayer_clone.getLayer(e.layer._leaflet_id).feature
+              .properties.Name
+        );
+      feature.fire("click");
       map.panTo(feature.getLatLng());
       map.panBy([-200, 0]);
-    } else { // marker year khe maru
+    } else {
+      // marker year khe maru
       let content;
-      if(years.length == 1){
+      if (years.length == 1) {
         content = `<p> ${feature.properties.Name} appears only on the ${years[0]} map, which will now be displayed. </p>`;
         content += `<select id="popupYear" class="custom-select hidden">
         <option class="popup-mapchange-button">Select</option>`;
-  
+
         for (var i = 0; i < years.length; i++) {
           content += `<option class="popup-mapchange-button" value='${years[i]}' selected>${years[i]}</option>`;
         }
         content += "</select>";
         content +=
-          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupYearSelect("+ e.layer._leaflet_id +")'>OK</button></div>";
-      }else{
+          '<div id="popup_btn_div" style="text-align:right"><button onClick = \'map.closePopup()\'> Cancel </button>  <button onClick =\'popupYearSelect(' +
+          e.layer._leaflet_id +
+          ")'>OK</button></div>";
+      } else {
         content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? </p>`;
 
         content += `Year <select id="popupYear" class="custom-select">
         <option class="popup-mapchange-button">Select</option>`;
-  
+
         for (var i = 0; i < years.length; i++) {
           content += `<option class="popup-mapchange-button" value='${years[i]}'>${years[i]}</option>`;
         }
         content += "</select>";
         content +=
-          "<div id=\"popup_btn_div\" style=\"text-align:right\"><button onClick = 'map.closePopup()'> Cancel </button>  <button onClick ='popupYearSelect("+ e.layer._leaflet_id +")'>OK</button></div>";
+          '<div id="popup_btn_div" style="text-align:right"><button onClick = \'map.closePopup()\'> Cancel </button>  <button onClick =\'popupYearSelect(' +
+          e.layer._leaflet_id +
+          ")'>OK</button></div>";
       }
 
       var popup = L.popup({
@@ -484,12 +520,11 @@ searchControl.on("search:locationfound", (e) => {
       popup.setLatLng(L.latLng(40.5, 55.5));
       let c = map.getBounds().getCenter();
       c = map.latLngToLayerPoint(c);
-      c.x += 400/2;
+      c.x += 400 / 2;
       popup.setLatLng(map.layerPointToLatLng(c));
-      
 
       // popup.setLatLng(e.latlng);
-      popup.openOn(map); 
+      popup.openOn(map);
       if (searchControl._markerSearch) {
         searchControl._markerSearch.removeFrom(map);
       }
@@ -497,28 +532,27 @@ searchControl.on("search:locationfound", (e) => {
   }
 });
 
-map.on("popupopen", e => {
+map.on("popupopen", (e) => {
   // debugger;
-  
+
   // alert('popup opened');
   $(".instructions").addClass("noClick");
   $("#map").addClass("noClick");
-  $(".leaflet-marker-pane img").removeClass('leaflet-interactive');
+  $(".leaflet-marker-pane img").removeClass("leaflet-interactive");
   $(".leaflet-popup").addClass("yesClick");
-  $('.leaflet-popup').on('keypress',e=>{
-    
-    if(e.keyCode == 13) { // pressing enter
+  $(".leaflet-popup").on("keypress", (e) => {
+    if (e.keyCode == 13) {
+      // pressing enter
       // alert();
-      $('#popup_btn_div').children(1).click();
+      $("#popup_btn_div").children(1).click();
     }
   });
 });
-map.on("popupclose", e => {
-  
+map.on("popupclose", (e) => {
   // alert('popup closed');
   $(".instructions").removeClass("noClick");
   $("#map").removeClass("noClick");
-  $(".leaflet-marker-pane img").addClass('leaflet-interactive');
+  $(".leaflet-marker-pane img").addClass("leaflet-interactive");
   // $('.leaflet-popup').addClass('yesClick');
 });
 
@@ -530,14 +564,15 @@ let baselayers = {
   1929: nashville1929Tile1444_578,
   2016: nashville2016Tile1444_578,
   // "none":L.layerGroup()
+  osm: osm,
 };
 
 let overlays = {
   // "Landmarks":L.layerGroup(),
-  'Just Maps': L.layerGroup(),
+  "Just Maps": L.layerGroup(),
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
-  'Battle of Nashville': L.layerGroup(),
+  "Battle of Nashville": L.layerGroup(),
   // "2016 Overlay": nashville2016OverlayTile1444_578,
 };
 for (let i in baselayers) {
@@ -595,29 +630,29 @@ $(document).ready(function () {
 });
 function selectMode(elem) {
   let mode = elem.innerText;
-  let nmode = '';
+  let nmode = "";
   for (let i in overlays) {
     map.removeLayer(overlays[i]);
   }
   $("#offRedioOverlay").prop("checked", true).trigger("click");
-  console.log("mode",mode.trim());
-  if (mode.trim() == 'Streets') {
-    nmode = 'Streets';
+  // console.log("mode",mode.trim());
+  if (mode.trim() == "Streets") {
+    nmode = "Streets";
   }
-  if (mode.trim() == 'Battle of Nashville') {
-    nmode = 'Battle of Nashville';
-  } 
+  if (mode.trim() == "Battle of Nashville") {
+    nmode = "Battle of Nashville";
+  }
 
-  if(mode.trim() == 'Landmarks') {
-    nmode = 'Landmarks';
+  if (mode.trim() == "Landmarks") {
+    nmode = "Landmarks";
   }
-  if(mode.trim() == 'Just Maps') {
-    nmode = 'Just Maps';
-  }  
-  console.log(overlays);
-  console.log('testing mode');
-  console.log(nmode);
-  console.log(overlays[nmode]);
+  if (mode.trim() == "Just Maps") {
+    nmode = "Just Maps";
+  }
+  // console.log(overlays);
+  // console.log('testing mode');
+  // console.log(nmode);
+  // console.log(overlays[nmode]);
   map.addLayer(overlays[nmode]);
   switch (nmode) {
     case "Just Maps":
@@ -629,7 +664,6 @@ function selectMode(elem) {
       }
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
-        
       }
       // debugger;
       //
@@ -671,19 +705,18 @@ function selectMode(elem) {
       } catch (e) {
         map.previousYear = map.previousYear;
       }
-      
+
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
-        
       }
-      if(previousselectedlandmark){
+      if (previousselectedlandmark) {
         previousselectedlandmark.setIcon(
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedlandmark.png",
             iconSize: [24, 28],
             iconAnchor: [12, 28],
           })
-        )
+        );
         previousselectedlandmark = null;
       }
       if ($("#mode.select-selected")[0]) {
@@ -732,7 +765,6 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">Select a landmark marker on the map and information for that landmark will appear here.</p>'
       );
-      
 
       adjustHeight();
       if (map.hasLayer(nashville2016OverlayTile1444_578)) {
@@ -750,7 +782,7 @@ function selectMode(elem) {
       } catch (e) {
         map.previousYear = map.previousYear;
       }
-      
+
       for (let i in baselayers) {
         map.removeLayer(baselayers[i]);
       }
@@ -794,7 +826,6 @@ function selectMode(elem) {
     case "Battle of Nashville":
       if (map.previousYear) {
         map.addLayer(baselayers[map.previousYear]);
-        
       }
       if (!map.hasLayer(nashville2016Tile1444_578)) {
         map.addLayer(nashville2016Tile1444_578);
@@ -842,7 +873,7 @@ function selectMode(elem) {
   }
 }
 
-function selectYear(elem) {  
+function selectYear(elem) {
   // alert('in function');
   // // let elemNew = elem.innerText;
   // // alert('first');
@@ -856,19 +887,21 @@ function selectYear(elem) {
   // }
   // const year = elem.trim() || elem.trim();
   const year = elem.innerText || elem;
-  console.log(year,'shubham');
+  // console.log(year,'shubham');
   for (let i in baselayers) {
     map.removeLayer(baselayers[i]);
   }
 
-  console.log('hhh',year.trim());
-  console.log('hhh',baselayers);
+  // console.log('hhh',year.trim());
+  // console.log('hhh',baselayers);
   map.addLayer(baselayers[year.trim()]);
 
   // debugger;
   let l = csvAdjustData.filter((k) => {
     if (k.feature.properties["Maps Photo Should Appear on"]) {
-      return k.feature.properties["Maps Photo Should Appear on"].includes(year.trim());
+      return k.feature.properties["Maps Photo Should Appear on"].includes(
+        year.trim()
+      );
     }
   });
   landmarksLayer.clearLayers();
@@ -889,8 +922,14 @@ function popupYearSelect(leaflet_id) {
     selectMode({ innerText: "Landmarks" });
     $("#mode.select-selected")[0].innerText = "Landmarks";
     selectYear(popupYear);
-    let feature  = landmarksLayer.getLayers().find(e => e.feature.properties.Name == landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name);
-    feature.fire('click');
+    let feature = landmarksLayer
+      .getLayers()
+      .find(
+        (e) =>
+          e.feature.properties.Name ==
+          landmarksLayer_clone.getLayer(leaflet_id).feature.properties.Name
+      );
+    feature.fire("click");
     map.panTo(feature.getLatLng());
     map.closePopup();
     map.panBy([200, 0]);
@@ -967,24 +1006,27 @@ function updateZoomText() {
   } else {
     $("#zoomText").html("4x");
   }
-  
 }
 updateZoomText();
 
-window.onload = function() {
+window.onload = function () {
+  if (!debugMode) {
+    selectMode({ innerText: "Just Maps" });
+    $("#mode.select-selected")[0].innerText = "Just Maps";
+  } else {
+    selectMode({ innerText: "Landmarks" });
+    $("#mode.select-selected")[0].innerText = "Landmarks";
+  }
 
-if (!debugMode) {
-  selectMode({ innerText: "Just Maps" });
-  $("#mode.select-selected")[0].innerText = "Just Maps";
-} else {
-  selectMode({ innerText: "Landmarks" });
-  $("#mode.select-selected")[0].innerText = "Landmarks";
+  $("#informationPanal").show();
+  openCity(event, "About");
+
+  map.panBy([-300, 0]);
+};
+
+if (debugMode) {
+  map.addLayer(grid);
+  $(".instructions").hide();
+  map.fitBounds(landmarksLayer.getBounds());
+  map.setZoom(16);
 }
-
-$("#informationPanal").show();
-openCity(event, 'About');
-
-map.panBy([-300, 0]);
-}
-
-
