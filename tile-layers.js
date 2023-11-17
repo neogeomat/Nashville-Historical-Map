@@ -76,7 +76,7 @@ let nashville1952Tile1444_578 = L.tileLayer("data/1952Tiles1444-5.78/", {
   // tileSize: tileSize_578, // 725-750
   // tileSize: 2048,
   // tileSize: 1024,
-  tileSize: 1555, // 73340/38
+  // tileSize: 1555, // 73340/38
   // tileSize: 512,
   // tileSize: 0.001953125, //1/152
   // tileSize:256,
@@ -153,24 +153,6 @@ nashville2016OverlayTile1444_578.getTileUrl = function (coords) {
 
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
 
-L.GridLayer.DebugCoords = L.GridLayer.extend({
-  createTile: function (coords) {
-    var tile = document.createElement("div");
-    tile.innerHTML = [
-      coords.z,
-      coords.x,
-      coords.y,      
-      (1444 - (38 - coords.x - xshift) + (coords.y - yshift) * 38),
-    ].join(", ");
-    tile.style.outline = "1px solid red";
-    return tile;
-  },
-});
-
-L.gridLayer.debugCoords = function (opts) {
-  return new L.GridLayer.DebugCoords(opts);
-};
-let grid = L.gridLayer.debugCoords({ tileSize: 512 });
 
 // add the OpenStreetMap tiles
 let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -179,3 +161,8 @@ let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
 });
 // osm.addTo(map);
+
+// gdal tiles
+let gdalTiles = L.tileLayer('data/gdalTiles/{z}/{x}/{y}.png', {
+  tms: 1, opacity: 0.7, attribution: "", minZoom: 10
+});

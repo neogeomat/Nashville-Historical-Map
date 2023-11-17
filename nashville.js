@@ -1,24 +1,13 @@
-L.CRS.myCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(factor, 0, factor, 0),
-});
-
 let map = L.map("map", {
   // minZoom: centZoom - zoomStep,
   // maxZoom: centZoom + 2*zoomStep,
   wheelPxPerZoomLevel: 60 * zoomStep,
-  // crs: L.CRS.Simple,
-  // crs: L.CRS.myCRS,
   // crs: L.CRS.EPSG3857,
   // zoomControl: false,
-  // maxBounds: imageBounds,
   // maxBounds: [
-  //   [35.924257403088696,-87.110828523895506],
-  //   [36.455984334237499,-86.455106676699103]
+  //   L.CRS.EPSG3857.project(L.point([35.924257403088696,-87.110828523895506])),
+  //   L.CRS.EPSG3857.project(L.point([36.455984334237499,-86.455106676699103]))
   // ],
-  maxBounds: [
-    L.CRS.EPSG3857.project(L.point([35.924257403088696,-87.110828523895506])),
-    L.CRS.EPSG3857.project(L.point([36.455984334237499,-86.455106676699103]))
-  ],
   maxBoundsViscosity: 0.5,
 });
 
@@ -62,16 +51,13 @@ zoomControl.getContainer().firstChild.after(zoomText);
 map.attributionControl.setPrefix(
   "Nashville Historical Atlas by William Gregg (wrgregg@gmail.com). &copy; 2023"
 );
-// map.setView([45, 53], centZoom);
-// map.setView([36.17663, -86.733892], 10);
+
+map.setView([36.17663, -86.733892], 10);
 // map.setView(L.CRS.EPSG3857.project(L.point([36.17663, -86.733892])), 10);
 var bounds = [
   [0, 0],
   [imageSize, imageSize],
 ];
-map.fitBounds(bounds);
-
-map.setView([imageSize / 2, imageSize / 2], 0);
 
 var geojsonMarkerOptions = {
   radius: 8,
@@ -85,7 +71,6 @@ var geojsonMarkerOptions = {
 let previousselectedlandmark = null;
 let landmarksLayer = L.geoJSON(null, {
   pointToLayer: function (feature, latlng) {
-    // return L.circleMarker(latlng, geojsonMarkerOptions);
     if (feature.properties) {
       // debugger;
       var m = L.marker(latlng, {
@@ -96,7 +81,7 @@ let landmarksLayer = L.geoJSON(null, {
         }),
       });
       m.bindTooltip(feature.properties.Landmark, {
-        permanent: true,
+        // permanent: true,
         direction: "top",
         offset: [0, -42],
       });
@@ -149,8 +134,8 @@ let landmarksLayer = L.geoJSON(null, {
           '<h4 id="SelectionName">' + prop["Landmark"] + "</h4>";
         contentSelection += prop["Alternate Names"]
           ? '<p id="selectionAltName">Also known as ' +
-            prop["Alternate Names"] +
-            ".</p>"
+          prop["Alternate Names"] +
+          ".</p>"
           : "";
         var mannerofdestruction = prop["Manner of Destruction"]
           ? ", " + prop["Manner of Destruction"]
@@ -161,11 +146,11 @@ let landmarksLayer = L.geoJSON(null, {
         }
         contentSelection += prop["Construction"]
           ? '<p id="selection_subtitle">Built ' +
-            prop["Construction"] +
-            "" +
-            mannerofdestruction +
-            destruction +
-            ".</p>"
+          prop["Construction"] +
+          "" +
+          mannerofdestruction +
+          destruction +
+          ".</p>"
           : "";
         // code for first image
         contentSelection += '<div class="image-container">';
@@ -410,7 +395,7 @@ let searchControl = new L.Control.Search({
       '</b> --> <span class="result-arrow">></span></a>'
     );
   },
-  moveToLocation: function (latlng, title, val) {},
+  moveToLocation: function (latlng, title, val) { },
   // sourceData: function(text, callResponse){
   //   let data = [];
   //   landmarksLayer_clone.getLayers().forEach(function(l){
@@ -557,14 +542,15 @@ map.on("popupclose", (e) => {
 });
 
 let baselayers = {
-  1952: nashville1952Tile1444_578,
-  1864: nashville1864Tile1444_578,
-  1871: nashville1871Tile1444_578,
-  1903: nashville1903Tile1444_578,
-  1929: nashville1929Tile1444_578,
-  2016: nashville2016Tile1444_578,
-  // "none":L.layerGroup()
+  // 1952: nashville1952Tile1444_578,
+  // 1864: nashville1864Tile1444_578,
+  // 1871: nashville1871Tile1444_578,
+  // 1903: nashville1903Tile1444_578,
+  // 1929: nashville1929Tile1444_578,
+  // 2016: nashville2016Tile1444_578,
+  // "none":L.layerGroup(),
   osm: osm,
+  gdalTiles: gdalTiles,
 };
 
 let overlays = {
@@ -585,8 +571,9 @@ for (let i in overlays) {
   $("#mode").append(`<option value=${i}>${i}`);
 }
 
-nashville1952Tile1444_578.addTo(map);
-$("#year").children()[3].selected = true;
+// nashville1952Tile1444_578.addTo(map);
+gdalTiles.addTo(map);
+$("#year").children()[1].selected = true;
 let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display = "none";
 
@@ -874,27 +861,17 @@ function selectMode(elem) {
 }
 
 function selectYear(elem) {
-  // alert('in function');
-  // // let elemNew = elem.innerText;
-  // // alert('first');
-  // // alert(elem);
-  // // alert(elemNew.trim());
-  // if(elem == null){
-  //   alert('in null');
-  //   var elemNew = document.getElementById('year').value;
-  //   elem = elemNew.trim();
-  //   alert(elem);
-  // }
-  // const year = elem.trim() || elem.trim();
   const year = elem.innerText || elem;
   // console.log(year,'shubham');
   for (let i in baselayers) {
     map.removeLayer(baselayers[i]);
   }
 
-  // console.log('hhh',year.trim());
-  // console.log('hhh',baselayers);
   map.addLayer(baselayers[year.trim()]);
+  // debugger;
+  if (["osm", "gdalTiles"].includes(year)) {
+    return;
+  }
 
   // debugger;
   let l = csvAdjustData.filter((k) => {
@@ -1024,9 +1001,32 @@ window.onload = function () {
   map.panBy([-300, 0]);
 };
 
+setTimeout(1000, map.fitBounds(landmarksLayer.getBounds()));
+
 if (debugMode) {
-  map.addLayer(grid);
+  // map.addLayer(grid);
   $(".instructions").hide();
   map.fitBounds(landmarksLayer.getBounds());
-  map.setZoom(16);
+  // map.setZoom(16);
+}
+
+if (debugMode) {
+  L.GridLayer.DebugCoords = L.GridLayer.extend({
+    createTile: function (coords) {
+      var tile = document.createElement("div");
+      tile.innerHTML = [
+        coords.z,
+        coords.x,
+        coords.y,
+        1444 - (38 - coords.x - xshift) + (coords.y - yshift) * 38,
+      ].join(", ");
+      tile.style.outline = "1px solid red";
+      return tile;
+    },
+  });
+
+  L.gridLayer.debugCoords = function (opts) {
+    return new L.GridLayer.DebugCoords(opts);
+  };
+  let grid = L.gridLayer.debugCoords({ tileSize: 512 });
 }
