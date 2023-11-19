@@ -52,8 +52,7 @@ map.attributionControl.setPrefix(
   "Nashville Historical Atlas by William Gregg (wrgregg@gmail.com). &copy; 2023"
 );
 
-map.setView([36.17663, -86.733892], 10);
-// map.setView(L.CRS.EPSG3857.project(L.point([36.17663, -86.733892])), 10);
+map.setView([36.16663, -86.7644], 14);
 var bounds = [
   [0, 0],
   [imageSize, imageSize],
@@ -94,6 +93,7 @@ let landmarksLayer = L.geoJSON(null, {
   onEachFeature: function (feature, layer) {
     // previousselectedlandmark = null;
     layer.on("click", function (e) {
+      debugger;
       if (previousselectedlandmark != null) {
         previousselectedlandmark.setIcon(
           L.icon({
@@ -548,9 +548,10 @@ let baselayers = {
   // 1903: nashville1903Tile1444_578,
   // 1929: nashville1929Tile1444_578,
   // 2016: nashville2016Tile1444_578,
-  // "none":L.layerGroup(),
+  
+  "2016": gdalTilesFrom_2016_1x,
+  streets: gdalTiles,
   osm: osm,
-  gdalTiles: gdalTiles,
 };
 
 let overlays = {
@@ -559,10 +560,10 @@ let overlays = {
   Landmarks: landmarksLayer,
   Streets: streetsLayer,
   "Battle of Nashville": L.layerGroup(),
-  // "2016 Overlay": nashville2016OverlayTile1444_578,
+  // "2016 Overlay": gdalTilesFrom_2016_1x,
 };
 for (let i in baselayers) {
-  if (["1864", "2016"].indexOf(i) < 0) {
+  if (["1864"].indexOf(i) < 0) { // 1864 is battle of nashville overlay, 2016 is 2016 overlay
     $("#year").append(`<option value=${i}>${i}`);
   } else {
   }
@@ -572,8 +573,10 @@ for (let i in overlays) {
 }
 
 // nashville1952Tile1444_578.addTo(map);
-gdalTiles.addTo(map);
-$("#year").children()[1].selected = true;
+// gdalTilesFrom_2016_1x.addTo(map);
+const defaultBaselayerElem = $("#year").children()[0];
+defaultBaselayerElem.selected = true;
+baselayers[defaultBaselayerElem.innerText].addTo(map);
 let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
 layerSwitcher.getContainer().style.display = "none";
 

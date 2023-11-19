@@ -164,5 +164,10 @@ let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // gdal tiles
 let gdalTiles = L.tileLayer('data/gdalTiles/{z}/{x}/{y}.png', {
-  tms: 1, opacity: 0.7, attribution: "", minZoom: 10
+  tms: 1, opacity: 0.7, attribution: "", minZoom: 14, maxZoom: 18
+});
+
+// 2016 1x gdal tiles
+let gdalTilesFrom_2016_1x = L.tileLayer('data/2016GdalTilesFrom1x/{z}/{x}/{y}.png', {
+  tms: 1, opacity: 0.7, attribution: "", minZoom: 14, maxZoom
 });
