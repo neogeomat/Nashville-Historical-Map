@@ -134,8 +134,8 @@ let landmarksLayer = L.geoJSON(null, {
           '<h4 id="SelectionName">' + prop["Landmark"] + "</h4>";
         contentSelection += prop["Alternate Names"]
           ? '<p id="selectionAltName">Also known as ' +
-          prop["Alternate Names"] +
-          ".</p>"
+            prop["Alternate Names"] +
+            ".</p>"
           : "";
         var mannerofdestruction = prop["Manner of Destruction"]
           ? ", " + prop["Manner of Destruction"]
@@ -146,11 +146,11 @@ let landmarksLayer = L.geoJSON(null, {
         }
         contentSelection += prop["Construction"]
           ? '<p id="selection_subtitle">Built ' +
-          prop["Construction"] +
-          "" +
-          mannerofdestruction +
-          destruction +
-          ".</p>"
+            prop["Construction"] +
+            "" +
+            mannerofdestruction +
+            destruction +
+            ".</p>"
           : "";
         // code for first image
         contentSelection += '<div class="image-container">';
@@ -240,6 +240,19 @@ let landmarksLayer = L.geoJSON(null, {
       // $('#selection_btn').addClass('active');
     });
   },
+  filter: function (geoJsonFeature) {
+    if (
+      geoJsonFeature.geometry.coordinates[0] &&
+      geoJsonFeature.geometry.coordinates[1]
+    ) {
+      // check for 0 or missing value in lat/lng column
+      // console.log('geoJsonFeature: ', geoJsonFeature);
+    }
+    return (
+      geoJsonFeature.geometry.coordinates[0] &&
+      geoJsonFeature.geometry.coordinates[1]
+    );
+  },
 });
 // landmarksLayer.addTo(map);
 let csvAdjustData = [];
@@ -247,38 +260,57 @@ let landmarksLayer_clone;
 // let csvAdjust = omnivore
 //   .csv(
 //     "data/Landmarks 6 (for dev 2) real coord downloaded.csv",
-// $.get('https://nashhistatlas.org/wp-json/custom/v1/table-data/',data =>{
-//   console.log(data);
-// });
-let csvAdjust = omnivore
-  .geojson(
-    "data/Landmarks 6 (for dev 2) lat lng.geojson",
-    {
-      // latfield: "y",
-      // lonfield: "x",
-      // delimiter: ",",
-    },
-    landmarksLayer
-  )
-  .on("ready", function (layer) {
-    csvAdjustData = csvAdjust.getLayers();
+$.get("https://nashhistatlas.org/wp-json/custom/v1/table-data/", (data) => {
+  // console.log(data);
+  geoJsonData = GeoJSON.parse(data, { Point: ["lat", "lng"] });
+  // console.log(geoJsonData);
+  landmarksLayer.addData(geoJsonData);
+  landmarksLayer_clone = cloneLayer(landmarksLayer);
+  csvAdjustData = landmarksLayer.getLayers();
+  // landmarksLayer_clone.addTo(map);
+  if (searchControl) {
+    // setLayer use ya mate. source code thik maju.
+    searchControl.options.layer = L.layerGroup([
+      landmarksLayer_clone,
+      // streetsLayer_clone,
+    ]);
+    searchControl._layer = L.layerGroup([
+      landmarksLayer_clone,
+      // streetsLayer_clone,
+    ]);
+  } else {
+    $("#Search").html("Search Control not working");
+  }
+});
+// let csvAdjust = omnivore
+//   .geojson(
+//     "data/Landmarks 6 (for dev 2) lat lng.geojson",
+//     {
+//       // latfield: "y",
+//       // lonfield: "x",
+//       // delimiter: ",",
+//     },
+//     landmarksLayer
+//   )
+//   .on("ready", function (layer) {
+//     csvAdjustData = csvAdjust.getLayers();
 
-    landmarksLayer_clone = cloneLayer(landmarksLayer);
-    // landmarksLayer_clone.addTo(map);
-    if (searchControl) {
-      // setLayer use ya mate. source code thik maju.
-      searchControl.options.layer = L.layerGroup([
-        landmarksLayer_clone,
-        // streetsLayer_clone,
-      ]);
-      searchControl._layer = L.layerGroup([
-        landmarksLayer_clone,
-        // streetsLayer_clone,
-      ]);
-    } else {
-      $("#Search").html("Search Control not working");
-    }
-  });
+//     landmarksLayer_clone = cloneLayer(landmarksLayer);
+//     // landmarksLayer_clone.addTo(map);
+//     if (searchControl) {
+//       // setLayer use ya mate. source code thik maju.
+//       searchControl.options.layer = L.layerGroup([
+//         landmarksLayer_clone,
+//         // streetsLayer_clone,
+//       ]);
+//       searchControl._layer = L.layerGroup([
+//         landmarksLayer_clone,
+//         // streetsLayer_clone,
+//       ]);
+//     } else {
+//       $("#Search").html("Search Control not working");
+//     }
+//   });
 // csvAdjust.addTo(map);
 
 let previousselectedstreet = null;
@@ -395,7 +427,7 @@ let searchControl = new L.Control.Search({
       '</b> --> <span class="result-arrow">></span></a>'
     );
   },
-  moveToLocation: function (latlng, title, val) { },
+  moveToLocation: function (latlng, title, val) {},
   // sourceData: function(text, callResponse){
   //   let data = [];
   //   landmarksLayer_clone.getLayers().forEach(function(l){
@@ -548,8 +580,8 @@ let baselayers = {
   // 1903: nashville1903Tile1444_578,
   // 1929: nashville1929Tile1444_578,
   // 2016: nashville2016Tile1444_578,
-  
-  "1952": gdalTilesFrom_2016_2x,
+
+  1952: gdalTilesFrom_2016_2x,
   streets: gdalTiles,
   osm: osm,
 };
@@ -563,7 +595,8 @@ let overlays = {
   // "2016 Overlay": gdalTilesFrom_2016_1x,
 };
 for (let i in baselayers) {
-  if (["1864"].indexOf(i) < 0) { // 1864 is battle of nashville overlay, 2016 is 2016 overlay
+  if (["1864"].indexOf(i) < 0) {
+    // 1864 is battle of nashville overlay, 2016 is 2016 overlay
     $("#year").append(`<option value=${i}>${i}`);
   } else {
   }
