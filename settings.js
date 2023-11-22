@@ -7,8 +7,8 @@ var no_of_image_linear = 38;
 var imageSize = tileSize * no_of_image_linear;
 var factor = tileSize / imageSize;
   
-const debugMode = true;
-// const debugMode = false;
+// const debugMode = true;
+const debugMode = false;
 let imageBounds = [
   [0, 0],
   [115, 105],

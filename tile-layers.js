@@ -168,6 +168,6 @@ let gdalTiles = L.tileLayer('data/gdalTiles/{z}/{x}/{y}.png', {
 });
 
 // 2016 1x gdal tiles
-let gdalTilesFrom_2016_1x = L.tileLayer('data/2016GdalTilesFrom2x/{z}/{x}/{y}.png', {
+let gdalTilesFrom_2016_2x = L.tileLayer('data/2016GdalTilesFrom2x/{z}/{x}/{y}.png', {
   tms: 1, opacity: 0.7, attribution: "", minZoom: 14, maxZoom:18
 });

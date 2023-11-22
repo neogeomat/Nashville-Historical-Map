@@ -549,7 +549,7 @@ let baselayers = {
   // 1929: nashville1929Tile1444_578,
   // 2016: nashville2016Tile1444_578,
   
-  "2016": gdalTilesFrom_2016_1x,
+  "1952": gdalTilesFrom_2016_2x,
   streets: gdalTiles,
   osm: osm,
 };
@@ -1004,12 +1004,12 @@ window.onload = function () {
   map.panBy([-300, 0]);
 };
 
-setTimeout(1000, map.fitBounds(landmarksLayer.getBounds()));
+// setTimeout(1000, map.fitBounds(landmarksLayer.getBounds()));
 
 if (debugMode) {
   // map.addLayer(grid);
   $(".instructions").hide();
-  map.fitBounds(landmarksLayer.getBounds());
+  // map.fitBounds(landmarksLayer.getBounds());
   // map.setZoom(16);
 }
 
