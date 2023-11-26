@@ -1,3 +1,6 @@
+const xshift = 4227,
+  yshift = 6408;
+
 let nashville1864Tile1444_578 = L.tileLayer("data/1864Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
@@ -70,16 +73,38 @@ let nashville1952Tile1444_578 = L.tileLayer("data/1952Tiles1444-5.78/", {
   minZoom: centZoom - zoomStep,
   maxZoom: centZoom + 2 * zoomStep,
   tms: true,
-  tileSize: tileSize_578, // 725-750
-  maxNativeZoom: 8,
-  minNativeZoom: 8,
+  // tileSize: tileSize_578, // 725-750
+  // tileSize: 2048,
+  // tileSize: 1024,
+  // tileSize: 1555, // 73340/38
+  // tileSize: 512,
+  // tileSize: 0.001953125, //1/152
+  // tileSize:256,
+  // tileSize: 128,
+  // tileSize: 19456, // only 2 tiles
+  // tileSize: 9728,
+  maxNativeZoom: 14,
+  minNativeZoom: 14,
   zoomReverse: true,
 });
+
+coorxt = [];
+cooryt = [];
+coort = [];
 nashville1952Tile1444_578.getTileUrl = function (coords) {
   
   // debugger;
+  // console.log(coords);
+  coorxt.push(coords.x);
+  cooryt.push(coords.y);
+
+  let tileNumber = (1444 - (38 - coords.x - xshift) + (coords.y - yshift) * 38);
+  coort.push(tileNumber);
+  // console.log('tileNumber: ', tileNumber);
+
   return (
-    this._url + "1952-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
+    // this._url + "1952-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
+    this._url + "1952-" + tileNumber + ".png"
   );
 };
 
@@ -128,27 +153,7 @@ nashville2016OverlayTile1444_578.getTileUrl = function (coords) {
 
 // map.fitBounds([[36.15,-86.7985],[36.17885,-86.76469]]);
 
-L.GridLayer.DebugCoords = L.GridLayer.extend({
-  createTile: function (coords) {
-    var tile = document.createElement("div");
-    tile.innerHTML = [
-      coords.z,
-      coords.x,
-      coords.y,
-      1444 - (38 - coords.x + 1) + (coords.y - 1) * 38,
-    ].join(", ");
-    tile.style.outline = "1px solid red";
-    return tile;
-  },
-});
 
-L.gridLayer.debugCoords = function (opts) {
-  return new L.GridLayer.DebugCoords(opts);
-};
-let grid = L.gridLayer.debugCoords({ tileSize: 1024 });
-if (debugMode) {
-  // map.addLayer(grid);
-}
 // add the OpenStreetMap tiles
 let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -156,3 +161,13 @@ let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
 });
 // osm.addTo(map);
+
+// gdal tiles
+let gdalTiles = L.tileLayer('data/gdalTiles/{z}/{x}/{y}.png', {
+  tms: 1, opacity: 0.7, attribution: "", minZoom: 14, maxZoom: 18
+});
+
+// 2016 1x gdal tiles
+let gdalTilesFrom_2016_2x = L.tileLayer('data/2016GdalTilesFrom2x/{z}/{x}/{y}.png', {
+  tms: 1, opacity: 0.7, attribution: "", minZoom: 14, maxZoom:18
+});
