@@ -265,7 +265,8 @@ let landmarksLayer_clone;
 //     "data/Landmarks 6 (for dev 2) real coord downloaded.csv",
 $.get("https://nashhistatlas.org/wp-json/custom/v1/table-data/", (data) => {
   // console.log(data);
-  geoJsonData = GeoJSON.parse(data, { Point: ["lat", "lng"] });
+  // geoJsonData = GeoJSON.parse(data, { Point: ["lat", "lng"] });
+  geoJsonData = GeoJSON.parse(data, { Point: ["qgisY", "qgisX"] });
   // console.log(geoJsonData);
   landmarksLayer.addData(geoJsonData);
   landmarksLayer_clone = cloneLayer(landmarksLayer);
