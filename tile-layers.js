@@ -65,7 +65,7 @@ nashville1929Tile1444_578.getTileUrl = function (coords) {
   
   // debugger;
   return (
-    this._url + "1929-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
+    this._url + "/1929-" + (1444 - (38 - coords.x - 1) + coords.y * 38) + ".png"
   );
 };
 
