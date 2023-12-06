@@ -3,7 +3,9 @@ let map = L.map("map", {
   // maxZoom: centZoom + 2*zoomStep,
   wheelPxPerZoomLevel: 60 * zoomStep,
   // crs: L.CRS.EPSG3857,
-  // zoomControl: false,
+  crs: L.CRS.Simple,
+  zoomControl: false,
+  maxBounds: imageBounds,
   // maxBounds: [
   //   L.CRS.EPSG3857.project(L.point([35.924257403088696,-87.110828523895506])),
   //   L.CRS.EPSG3857.project(L.point([36.455984334237499,-86.455106676699103]))
@@ -52,11 +54,12 @@ map.attributionControl.setPrefix(
   "Nashville Historical Atlas by William Gregg (wrgregg@gmail.com). &copy; 2023"
 );
 
-map.setView([36.16663, -86.7644], 14);
-var bounds = [
-  [0, 0],
-  [imageSize, imageSize],
-];
+// map.setView([36.16663, -86.7644], 14);
+map.setView([45,53],centZoom);
+// var bounds = [
+//   [0, 0],
+//   [imageSize, imageSize],
+// ];
 
 var geojsonMarkerOptions = {
   radius: 8,
@@ -574,16 +577,16 @@ map.on("popupclose", (e) => {
 });
 
 let baselayers = {
-  // 1952: nashville1952Tile1444_578,
-  // 1864: nashville1864Tile1444_578,
-  // 1871: nashville1871Tile1444_578,
-  // 1903: nashville1903Tile1444_578,
-  // 1929: nashville1929Tile1444_578,
-  // 2016: nashville2016Tile1444_578,
+  1952: nashville1952Tile1444_578,
+  1864: nashville1864Tile1444_578,
+  1871: nashville1871Tile1444_578,
+  1903: nashville1903Tile1444_578,
+  1929: nashville1929Tile1444_578,
+  2016: nashville2016Tile1444_578,
 
-  1952: gdalTilesFrom_2016_2x,
-  streets: gdalTiles,
-  osm: osm,
+  // 1952: gdalTilesFrom_2016_2x,
+  // streets: gdalTiles,
+  // osm: osm,
 };
 
 let overlays = {
