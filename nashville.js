@@ -615,7 +615,7 @@ for (let i in overlays) {
 
 // nashville1952Tile1444_578.addTo(map);
 // gdalTilesFrom_2016_1x.addTo(map);
-const defaultBaselayerElem = $("#year").children()[0];
+const defaultBaselayerElem = $("#year").children()[3];
 defaultBaselayerElem.selected = true;
 baselayers[defaultBaselayerElem.innerText].addTo(map);
 let layerSwitcher = L.control.activeLayers(baselayers, overlays).addTo(map);
