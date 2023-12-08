@@ -159,13 +159,16 @@ let landmarksLayer = L.geoJSON(null, {
         contentSelection += '<div class="image-container">';
         var slideImage = '<div class="slide">';
         if (prop["Use Image?"] == "yes") {
-          if (prop["Image File Name"])
+          if (prop["Image File Name"]){
             slideImage +=
               '<img class="myImg" src="images/pictures/' +
               prop["Image File Name"] +
               '" onClick=imgPopupModal(this)>';
-
-          if (prop["Year of Image"]) {
+          }
+          
+          if(prop["Image Caption"]){
+            slideImage += '<div id="img_attribution" class="captionText">' + prop["Image Caption"] + '</div>';
+          }else if (prop["Year of Image"]) {
             slideImage +=
               '<div id="img_attribution" class="captionText">' +
               prop["Year of Image"];
@@ -177,6 +180,7 @@ let landmarksLayer = L.geoJSON(null, {
                 " Courtesy " + prop["Image Download Location"] + ".</div>";
             }
           }
+          
         } else {
           if (prop["Test Photo File Name"])
             slideImage +=
