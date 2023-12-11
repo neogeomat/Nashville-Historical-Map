@@ -322,6 +322,11 @@ $.get("https://nashhistatlas.org/wp-json/custom/v1/table-landmarks/", (data) => 
 // csvAdjust.addTo(map);
 
 let previousselectedstreet = null;
+
+$.get("https://nashhistatlas.org/wp-json/custom/v1/table-streets/", (data) => {
+  
+streets_data = GeoJSON.parse(data, { Point: ["qgisY", "qgisX"] });
+});
 let streetsLayer = L.geoJSON(streets_data, {
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
