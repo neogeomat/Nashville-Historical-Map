@@ -322,12 +322,7 @@ $.get("https://nashhistatlas.org/wp-json/custom/v1/table-landmarks/", (data) => 
 // csvAdjust.addTo(map);
 
 let previousselectedstreet = null;
-
-$.get("https://nashhistatlas.org/wp-json/custom/v1/table-streets/", (data) => {
-  
-streets_data = GeoJSON.parse(data, { Point: ["qgisY", "qgisX"] });
-});
-let streetsLayer = L.geoJSON(streets_data, {
+let streetsLayer = L.geoJSON(null,{
   pointToLayer: function (feature, latlng) {
     // return L.circleMarker(latlng, geojsonMarkerOptions);
     let m = L.marker(latlng, {
@@ -408,8 +403,13 @@ let streetsLayer = L.geoJSON(streets_data, {
   },
 });
 
-let streetsLayer_clone = cloneLayer(streetsLayer);
+$.get("https://nashhistatlas.org/wp-json/custom/v1/table-streets/", (data) => {
+  
+streets_data = GeoJSON.parse(data, { Point: ["qgisY", "qgisX"] });
+streetsLayer.addData(streets_data);
 
+let streetsLayer_clone = cloneLayer(streetsLayer);
+});
 let searchControl = new L.Control.Search({
   position: "topright",
   propertyName: "Name",
