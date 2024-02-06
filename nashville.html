@@ -75,7 +75,9 @@
 			font-size: 14px;
 			position: absolute;
 			padding: 12px 12px;
-			bottom: -30px;
+			/* bottom: -30px; */
+            /*bottom: -38px;*/
+            bottom: -31px; /*shubham_20_12_23*/
 			width: 100%;
 			text-align: center;
 		}
@@ -105,6 +107,48 @@
         #overlay-heading{
             padding-bottom:10px;
         }
+        .show-more{
+            color:#37c9f7;
+        }
+        .cancel-button{
+            background-color:white;
+            color:black;
+            border:2px solid #9e9e9e;
+            padding: 5px 17px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .ok-button{
+            background-color:black;
+            color:white;
+            border:2px solid #9e9e9e;
+            padding: 5px 17px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #popupYear{
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            background: transparent;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 20 20' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: -3px;
+            background-color: white;
+            color: black;
+            border: 2px solid #9e9e9e;
+            padding: 5px 72px 5px 7px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        /*.cancel-button:hover{*/
+        /*    color: white;*/
+        /*    background-color: #3d3b3b;*/
+        /*}*/
+        /*.ok-button:hover{*/
+        /*    color: white;*/
+        /*    background-color: #3d3b3b;*/
+        /*}*/
 	</style>
 </head>
 
@@ -178,29 +222,51 @@
                 <!-- Tab content -->
                 
                 <div id="About" class="tabcontent">
-                    <!-- <div id="about_div"> -->
-                        <span>How to Get around</span>
-                        <p>
-                            <b>Just Maps Mode:</b> Maps of Nashville and Davidson County from 1871, 1903, 1929 and 1952, with the option to overlay a modern (2016) map for comparison.<br><br>
+                    <div id="about_div">
+                        <!--<h2 style='text-align:center;'>How to Get around</h2>-->
+                        <div class="para">
+                            <!-- <h2 style='text-align:center;'>How to Get around</h2> -->
+                            
+                            
+                            <!-- <b>Just Maps Mode:</b> Maps of Nashville and Davidson County from 1871, 1903, 1929 and 1952, with the option to overlay a modern (2016) map for comparison.<br><br>
+                                
+                                <b>Landmarks:</b> Info and photos of historical buildings and other structures in existence at the time of the selected map. <br><br>
+                                
+                                <b>Streets:</b> The origin of street names where known, former names where applicable, and some historical and geographic trivia. <br><br>
+                                
+                                <b>Battle of Nashville:</b> A static map of the fortiﬁcations, earthworks and troop positions on December 15th, 1864, along with a modern map overlay. 
+                                <br> -->
+                                
+                            <div class="main-heading">How to Get around</div>
+                            <div class="heading">Mode Menu</div>
+                            <div class="content">Switching modes using the Mode menu:</div>
+                            <div class="content">Just Maps mode does what it says, displaying maps only. The maps depict Nashville and Davidson County in 1871, 1903, 1929 and 1952, with the option to overlay a relatively modern (2016) map for comparison.</div>
+                            <div class="content">Landmarks mode displays info about and photos of historical buildings and other structures in existence at the time of the selected map.</div>
+                            <div class="content">Streets mode covers the origin of street names where known, former names where applicable, and some street-related historical and geographic trivia.</div>
+                            <div class="content">Battle of Nashville Mode: A static map (for now) of the fortifications, earthworks and troop positions on December 15th, 1864, along with an optional modern-map overlay.</div>
+                            <div class="heading">Year Menu</div>
+                            <div class="content">The year menu controls which year is displayed in Just Maps and Landmarks modes. In Streets mode the year is set to 2016 and in Battle of Nashville mode the year is set to 1864.</div>
+                            <div class="heading">2016 Overlay</div>
+                            <div class="content">The 2016 overlay option allows the user in Just Maps and Battle of Nashville modes to compare historical maps with a modern map overlay.</div>
 
-                            <b>Landmarks:</b> Info and photos of historical buildings and other structures in existence at the time of the selected map. <br><br>
-                            
-                            <b>Streets:</b> The origin of street names where known, former names where applicable, and some historical and geographic trivia. <br><br>
-                            
-                            <b>Battle of Nashville:</b> A static map of the fortiﬁcations, earthworks and troop positions on December 15th, 1864, along with a modern map overlay. 
-                        </p>
-                        <div style="text-align: right;">
+
+
+                        <!-- <div style="text-align: right;">
                             <a href="#" class="show-more">Show More</a>
+                        </div> -->
                         </div>
-                        <div class="more-content" style="display: none;">
-                            <span>The Concept</span>
-                            <p>
+                        <!-- <div class="more-content para" style="display: none;"> -->
+                        <div class="more-content para">
+                            <!-- <span>The Concept</span> -->
+                            <!-- <p>
                                 Having an interest in history, questions would occur to me as I drove around my city. What sed to occupy that vacant lot? Why does this street make a sudden turn? Wat did this eighborhood look like 1000 years ago? <br><br>
 
                                 Atlases, and especially historical atlases, normally take the world, a country, or occasionally a state or province as their scope, but every place no matter the size has its own story. What would a historical atlas of a city look like? What if the city getting that detailed historical treatment was a mid-size Southern city instead of a coastal metropolis? What would a more holistic, graphic and map-based approach to local history look like?
-                            </p>
+                            </p> -->
 
-                            <span>The Making of</span>
+                            
+
+                            <!-- <span>The Making of</span>
                             <p>
                                 The atlas began way back in 2007 with a pair of maps drawn in Macromedia Freehand, a 2006-ish modern map and a 1952 map, and a rudimentary UI created in Flash. Adobe’s disconinuation of Freehand and Steve Jobs’s 2010 Flash-killing public letter, "Thoughts on Flash", discouraged that particular vision and put the project on hold for a few years. <br><br>
 
@@ -246,7 +312,7 @@
                                 donations and Patreon for recurring donations.
                             </p>
                             <div class="payment-icons">
-                                <!--<a href="https://www.patreon.com/bePatron?u=93136391" data-patreon-widget-type="become-patron-button">donate</a>-->
+                                <a href="https://www.patreon.com/bePatron?u=93136391" data-patreon-widget-type="become-patron-button">donate</a> old comment
                                 <div><a href="https://patreon.com/NashvilleHistoricalAtlas?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link" target="_blank" ><img src="./images/about/patreon-button.png" alt="patreon" width="100%"></a></div>
                                 <div><a href="https://www.paypal.com/donate/?hosted_button_id=BPT7XS8GXJRUS" target="_blank"><img src="./images/about/paypal-button.png" alt="paypal" width="100%"></a></div>
                             </div>
@@ -254,9 +320,42 @@
                             <p>I own copyrights for none of the images displayed on the site. If you feel 
                                 that a copyright has been infringed, please contact me at 
                                 wrgregg@gmail.com.
-                            </p>
+                            </p> -->
+
+                            <div class="main-heading">The Concept</div>
+
+                            <div class="content">Having an interest in history, questions would occur to me as I drove around my city. What used to occupy that vacant lot? Why does this street make a sudden jog? What did this neighborhood look like 100 years ago?</div> 
+                            <div class="content">Atlases, and especially historical atlases, normally take the world or a country as their scope, but every place no matter the size has its own story. What kind of information would a historical atlas of a city contain? What would a map-based, infrastructure-focused approach to local history look like?</div>
+
+
+                            <div class="main-heading">Support</div>
+                            <div class="content">If you’ve enjoyed this site or found it useful, you may want to make a contribution to defray the ongoing costs of development and hosting. Any amount will be appreciated. PayPal can be used for one-time donations and Patreon for recurring donations.</div>
+
+                            <div class="content">
+                                <div class="payment-icons">
+                                    <div><a href="https://patreon.com/NashvilleHistoricalAtlas?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link" target="_blank" ><img src="./images/about/patreon-button.png" alt="patreon" width="100%"></a></div>
+                                    <div><a href="https://www.paypal.com/donate/?hosted_button_id=BPT7XS8GXJRUS" target="_blank"><img src="./images/about/paypal-button.png" alt="paypal" width="100%"></a></div>
+                                </div>
+                            </div>
+
+                            <div class="main-heading">The Atlas Store</div>
+                            <div class="content">Nashville-themed t-shirts, maps, tote bags and caps, some historical and some not: <a style="color:#37c9f7;" href="https://mero-district.com">https://mero-district.com.</a></div>
+
+                            <div class="main-heading">About the Creator</div>
+                            <div class="content">I’m a lifelong fan of maps and history, and since the dawn of the internet era, online interactives. Since 1989 I’ve lived with my wife Sheryl in East Nashville and currently hold a day job as a UX designer.</div>
+                            
+                            <div style="display:flex;">
+                                <img id="creator_img" src="images/about/Creator.png" alt="Creator" style="width:50%; margin-left: -5px;"/>
+                                <div class="content" style="font-size: 10pt; width: 50%; display: flex; align-items: end; padding-left: 5px;">
+                                My parents and me on a train trip during that brief interval between JFK and the Beatles. I’m holding a copy of Rand McNally’s 1962 “Book of the United States”, probably a recent Christmas present
+                                </div>
+                            </div>
+
+                            <div class="main-heading">About the Developer</div>
+                            <div class="content" >Amrit Karmacharya is a survey officer with the Government of Nepal. He has a background in crowdsourcing, Arcgis products, OSM, PHP, and data visualization, and a masters in geoinformatics from Jaume I University.</div>
+                            
                         </div>
-                    <!-- </div> -->
+                    </div>
                 </div>
                 <div id="Selection" class="tabcontent">
                     <div id="select_div">
@@ -298,7 +397,7 @@
                     <!-- <div id="uparrow"><img src="images/legend/expandedlegendbar.png"></div>
                     <div id="downarrow" style="display: none;"><img src="images/legend/collapsedlegendbar.png"></div> -->
                 </div>
-                <div id="Search" class="tabcontent">
+                <div id="Search" class="tabcontent" style="display:none;">
                     <div id="search_div">
                     <p>Enter a search term.</p>
                     <!-- <input type="radio" name="landmark" />
@@ -318,21 +417,29 @@
     <div id="myModal" class="modal">
 
         <!-- The Close Button -->
-        <span class="close">&times;</span>
+        <!--<span class="close">&times;</span>-->
 
         <!-- Modal Content (The Image) -->
         <div id="modal-header">
-            <img class="modal-content image-clickable" id="img01">
+            <!--<i class="fa close" style="font-size: 25px;">&#xf00d;</i>-->
+            <div class="image-clickable-container">
+                <div style="position: relative;">
+                    <div class="close" style="z-index: 1100;">
+                        <img src="images/modalclosebutton.png">
+                    </div>
+                    <img class="modal-content image-clickable" id="img01" style="border: 5px solid black;">
+                </div>
+            </div>
         </div>
 
         <!-- Modal Caption (Image Text) -->
-        <div id="caption"></div>
+        <!-- <div id="caption"></div> -->
     </div>
 </body>
 <script src="lib/leaflet.active-layers.min.js" type="text/javascript" charset="utf-8"></script>
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 <!-- <script src="data/vector/Landmarks 4 (for dev).js"></script> -->
-<script src="data/vector/Streets 3 (for dev) geojson.js"></script>
+<!-- <script src="data/vector/Streets 3 (for dev) geojson.js"></script> -->
 <script src="lib/geojson.js"></script>
 <script src="lib/leaflet-search.src.js"></script>
 <script src="lib/leaflet-clonelayer.js"></script>
@@ -348,8 +455,15 @@
     var coll = document.getElementsByClassName("collapsible");
     var i;
     $( document ).ready(function(){
-        $('#Selection').show();
+        // $('#Selection').show();
         // $('#selection_btn').css('border-bottom','none');
+        
+        // shubham_18_12_23
+        $('#searchtext10').keyup(function(){
+            $(this).attr('style','');
+            $(this).attr('style','width:346px;');
+            console.log('checking');
+        })
     });
 
     for (i = 0; i < coll.length; i++) {

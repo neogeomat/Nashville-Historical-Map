@@ -91,7 +91,8 @@
   margin: 6px;
 }
 
-.leaflet-popup button, .leaflet-popup select{
+/*.leaflet-popup button, */
+.leaflet-popup select{
   font-family: 'BloggerSans';
   background-color: white;
 }
