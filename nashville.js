@@ -394,7 +394,7 @@ let streetsLayer = L.geoJSON(null,{
       icon: L.icon({
         iconUrl: "images/landmarks_streets/unselectedstreet_new.png",
         iconSize: [24, 24],
-        iconAnchor: [12, 24],
+        iconAnchor: [12, 12],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -414,7 +414,7 @@ let streetsLayer = L.geoJSON(null,{
           L.icon({
             iconUrl: "images/landmarks_streets/unselectedstreet_new.png",
             iconSize: [24, 24],
-            iconAnchor: [12, 28],
+            iconAnchor: [12, 12],
           })
         );
       }
@@ -423,7 +423,7 @@ let streetsLayer = L.geoJSON(null,{
         L.icon({
           iconUrl: "images/landmarks_streets/selectedstreet_new.png",
           iconSize: [24, 24],
-          iconAnchor: [12, 28],
+          iconAnchor: [12, 12],
         })
       );
       previousselectedstreet = layer;
