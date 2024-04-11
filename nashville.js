@@ -13,6 +13,8 @@ let map = L.map("map", {
   maxBoundsViscosity: 0.5,
 });
 
+console.log(map, 'shubham top map');
+
 let zoomControl = L.control
   .zoom({
     zoomInText:
@@ -77,8 +79,8 @@ let landmarksLayer = L.geoJSON(null, {
       // debugger;
       var m = L.marker(latlng, {
         icon: L.icon({
-          iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-          iconSize: [24, 28],
+          iconUrl: "images/landmarks_streets/unselectedlandmark_new.png",
+          iconSize: [23, 28],
           iconAnchor: [12, 28],
         }),
       });
@@ -100,8 +102,8 @@ let landmarksLayer = L.geoJSON(null, {
       if (previousselectedlandmark != null) {
         previousselectedlandmark.setIcon(
           L.icon({
-            iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-            iconSize: [24, 28],
+            iconUrl: "images/landmarks_streets/unselectedlandmark_new.png",
+            iconSize: [23, 28],
             iconAnchor: [12, 28],
           })
         );
@@ -109,8 +111,8 @@ let landmarksLayer = L.geoJSON(null, {
 
       layer.setIcon(
         L.icon({
-          iconUrl: "images/landmarks_streets/selectedlandmark.png",
-          iconSize: [24, 28],
+          iconUrl: "images/landmarks_streets/selectedlandmark_new.png",
+          iconSize: [23, 28],
           iconAnchor: [12, 28],
         })
       );
@@ -160,6 +162,7 @@ let landmarksLayer = L.geoJSON(null, {
         var slideImage = '<div class="slide">';
         if (prop["Use Image?"] == "yes") {
           if (prop["Image File Name"]){
+            console.log(prop,'test picture shubham');
             slideImage +=
               '<img class="myImg" src="images/pictures/' +
               prop["Image File Name"] +
@@ -167,10 +170,10 @@ let landmarksLayer = L.geoJSON(null, {
           }
           
           if(prop["Image Caption"]){
-            slideImage += '<div id="img_attribution" class="captionText">' + prop["Image Caption"] + '</div>';
+            slideImage += '<div id="img_attribution" class="captionText s1">' + prop["Image Caption"] + '</div>';
           }else if (prop["Year of Image"]) {
             slideImage +=
-              '<div id="img_attribution" class="captionText">' +
+              '<div id="img_attribution" class="captionText s2">' +
               prop["Year of Image"];
             if (prop["Image Type"]) {
               slideImage += " " + prop["Image Type"] + ".";
@@ -192,15 +195,19 @@ let landmarksLayer = L.geoJSON(null, {
         slideImage += "</div>";
         // debugger;
         // code for 2nd image
+        console.log(prop["Use Alternate Image 1?"],'test shubham');
+        console.log(prop["Alternate image 1 caption"],'test 2 shubham');
         if (
           prop["Use Alternate Image 1?"] == "yes" &&
-          prop["Alternate Image 1 Download Location"]
+          // prop["Alternate Image 1 Download Location"]
+          prop["Alternate image 1 caption"]
         ) {
           slideImage +=
             '<div class="slide"><img class="myImg" src="images/pictures/' +
             prop["Alternate Image 1 File Name"] +
-            '"><div id="img_attribution" class="captionText">' +
-            prop["Alternate Image 1 Download Location"] +
+            '" onClick=imgPopupModal(this)><div id="img_attribution" class="captionText s3">' +
+            // prop["Alternate Image 1 Download Location"] +
+            prop["Alternate image 1 caption"] +
             ".</div></div>";
           if (
             prop["Use Alternate Image 2?"] != "yes" &&
@@ -216,13 +223,15 @@ let landmarksLayer = L.geoJSON(null, {
         // code for 3rd image
         if (
           prop["Use Alternate Image 2?"] == "yes" &&
-          prop["Alternate Image 2 Download Location"]
+          // prop["Alternate Image 2 Download Location"]
+          prop["Alternate image 2 caption"]
         ) {
           slideImage +=
             '<div class="slide"><img class="myImg" src="images/pictures/' +
             prop["Alternate Image 2 File Name"] +
-            '"><div id="img_attribution" class="captionText">' +
-            prop["Alternate Image 2 Download Location"] +
+            '" onClick=imgPopupModal(this)><div id="img_attribution" class="captionText s4">' +
+            // prop["Alternate Image 2 Download Location"] +
+            prop["Alternate image 2 caption"] +
             ".</div></div>";
           slideImage +=
             '<a class="previous" onclick="moveSlides(-1)"><img src="images/leftPanalImages/previous-enabled.png" /></a>';
@@ -232,10 +241,66 @@ let landmarksLayer = L.geoJSON(null, {
         contentSelection += slideImage + "</div>";
         //
         if (prop["Description"]) {
-          contentSelection +=
-            '<p id="selection_description">' + prop["Description"] + "</p>";
+          // console.log(prop["Description"], 'shubham_prop_desc_1');
+            //shubham_20_12_23 start
+            // var text = prop["Description"];
+            // var myArray = text.split(".");
+            
+            // contentSelection += '<div id="selection_description">';
+            // var new_data = '';
+
+            // for(let i=0; i<myArray.length; i++){              
+            //   if(myArray[i] != null){
+
+            //     var lastword = myArray[i].split(" ");
+            //     var lastword = lastword[lastword.length - 1];
+            //     var lastword = lastword.length;
+            //     // console.log(lastword,'shubham_lastword');
+            //     if(lastword < 4){ // condition place
+            //       // console.log(myArray[i],'shubham_data_short');
+            //       var new_data = new_data + myArray[i] + '.';
+            //       // console.log(myArray[i],'shubham_item testing lenght small');
+            //     }
+            //     else{
+            //       // console.log(myArray[i],'shubham_data_long');
+            //       contentSelection += '<div style="padding:2px 0px">' + new_data + myArray[i] + ".</div>";
+            //       // console.log(myArray[i],'shubham_item testing');
+            //       var new_data = '';
+            //     }
+            //   }              
+            // }
+            // contentSelection += '</div>';
+            //shubham_20_12_23 end
+          contentSelection += '<p id="selection_description">' + prop["Description"] + "</p>";  //shubham_20_12_23
+          
         }
         $("#select_div").append(contentSelection);
+        
+        //shubham_20_12_23 start
+        $('#selection_description').css({"white-space": "normal"});
+        
+        var check_image_desc = $('.image-container').html();
+        
+        let result = check_image_desc.includes("img_attribution");
+        if(!result){
+            $('#selection_description').css({"margin-top": "8px"});
+            console.log('not included','shubham_height_div');
+        }
+        else{
+            element = document.getElementById('img_attribution');
+            height_div = element.offsetHeight; // shubham_18_12_23
+            console.log(height_div,'shubham_height_div1133');
+            console.log($('#img_attribution').height(),'shubham_height_div1133555');
+            console.log($('#img_attribution').html());
+            var textLength = $('#img_attribution').text();
+            if(height_div > 16){
+                $('#img_attribution').before('<br><br>');
+            }
+            else if(textLength.length > 68){
+                $('#img_attribution').before('<br><br>');
+            }
+        }
+        //shubham_20_12_23 end
 
         displaySlide(1);
       } else {
@@ -327,9 +392,9 @@ let streetsLayer = L.geoJSON(null,{
     // return L.circleMarker(latlng, geojsonMarkerOptions);
     let m = L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "images/landmarks_streets/unselectedstreet.png",
-        iconSize: [24, 28],
-        iconAnchor: [12, 28],
+        iconUrl: "images/landmarks_streets/unselectedstreet_new.png",
+        iconSize: [24, 24],
+        iconAnchor: [12, 24],
       }),
     });
     m.bindTooltip(`${feature.properties.Street} ${feature.properties.Type}`, {
@@ -347,8 +412,8 @@ let streetsLayer = L.geoJSON(null,{
       if (previousselectedstreet != null) {
         previousselectedstreet.setIcon(
           L.icon({
-            iconUrl: "images/landmarks_streets/unselectedstreet.png",
-            iconSize: [24, 28],
+            iconUrl: "images/landmarks_streets/unselectedstreet_new.png",
+            iconSize: [24, 24],
             iconAnchor: [12, 28],
           })
         );
@@ -356,8 +421,8 @@ let streetsLayer = L.geoJSON(null,{
 
       layer.setIcon(
         L.icon({
-          iconUrl: "images/landmarks_streets/selectedstreet.png",
-          iconSize: [24, 28],
+          iconUrl: "images/landmarks_streets/selectedstreet_new.png",
+          iconSize: [24, 24],
           iconAnchor: [12, 28],
         })
       );
@@ -387,17 +452,59 @@ let streetsLayer = L.geoJSON(null,{
 
       if (prop["img_attribution"]) {
         slideImage +=
-          '<div id="img_attribution" class="captionText">' +
+          '<div id="img_attribution" class="captionText s5">' +
           prop["img_attribution"];
       }
       slideImage += "</div>";
 
       contentSelection += slideImage + "</div>";
       if (prop["History"]) {
-        contentSelection +=
-          '<p id="selection_description">' + prop["History"] + "</p>";
+        // console.log(prop["History"], 'shubham_prop_desc_2');
+          
+          //shubham_20_12_23 start
+            // var text = prop["History"];
+            // var myArray = text.split(".");
+            
+            // contentSelection += '<div id="selection_description">';
+            // var new_data = '';
+
+            // for(let i=0; i<myArray.length; i++){              
+            //   if(myArray[i] != null){
+            //     if(myArray[i].length < 20){
+            //       var new_data = myArray[i] + '.';
+            //       // console.log(myArray[i],'shubham_item testing lenght small');
+            //     }
+            //     else{
+            //       contentSelection += '<div style="padding:2px 0px">' + new_data + myArray[i] + ".</div>";
+            //       // console.log(myArray[i],'shubham_item testing');
+            //       var new_data = '';
+            //     }
+            //   }              
+            // }
+            // contentSelection += '</div>';
+          //shubham_20_12_23 end
+        contentSelection += '<p id="selection_description">' + prop["History"] + "</p>"; //shubham_20_12_23
       }
-      $("#select_div").append(contentSelection);
+        $("#select_div").append(contentSelection);
+      
+        //shubham_20_12_23 start
+        $('#selection_description').css({"white-space": "normal"});
+        var check_image_desc = $('.image-container').html();
+        $('#selection_description').css({"white-space": ""});
+        let result = check_image_desc.includes("img_attribution");
+        if(!result){
+            $('#selection_description').css({"margin-top": "8px"});
+        }
+        else{        
+          height_div = document.getElementById('img_attribution').offsetHeight; // shubham_18_12_23
+          console.log(height_div,'shubham_height_div1122');
+          if(height_div > 16){
+              $('#img_attribution').before('<br><br>');
+          }
+        }
+        //shubham_20_12_23 end
+        
+        
       openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
     });
   },
@@ -475,19 +582,24 @@ let searchControl = new L.Control.Search({
   // }
 });
 searchControl.addTo(map);
+console.log(searchControl,'shubham searchControl');
 searchControl.on("search:locationfound", (e) => {
+    console.log(e,'shubham_top years');
   // check street or landmark
   if (e.layer.feature.properties.hasOwnProperty("Street")) {
     selectMode({ innerText: "Streets" });
     $("#mode.select-selected")[0].innerText = "Streets";
   } else if (e.layer.feature.properties.hasOwnProperty("Landmark")) {
     // debugger;
+    console.log(e.layer.feature.properties["Maps Photo Should Appear on"], 'shubham years 00');
     let years =
       e.layer.feature.properties["Maps Photo Should Appear on"].split(",");
     years = years.map((y) => {
       return y.trim();
     });
     let feature = e.layer.feature;
+    
+      console.log(years,'shubham years 0');
 
     if (years.indexOf($("#year.select-selected")[0].innerText.trim()) >= 0) {
       // marker year khe da
@@ -508,6 +620,7 @@ searchControl.on("search:locationfound", (e) => {
     } else {
       // marker year khe maru
       let content;
+      console.log(years,'shubham years 1');
       if (years.length == 1) {
         content = `<p> ${feature.properties.Name} appears only on the ${years[0]} map, which will now be displayed. </p>`;
         content += `<select id="popupYear" class="custom-select hidden">
@@ -518,9 +631,7 @@ searchControl.on("search:locationfound", (e) => {
         }
         content += "</select>";
         content +=
-          '<div id="popup_btn_div" style="text-align:right"><button onClick = \'map.closePopup()\'> Cancel </button>  <button onClick =\'popupYearSelect(' +
-          e.layer._leaflet_id +
-          ")'>OK</button></div>";
+          '<div id="popup_btn_div" style="text-align:right"><button class="cancel-button" onmousedown=\'cancel_button()\' onClick = \'map.closePopup()()\'> Cancel </button>  <button class="ok-button" onmousedown=\'ok_button()\'  onClick =\'popupYearSelect(' + e.layer._leaflet_id + ")'>OK</button></div>";
       } else {
         content = `<p>${feature.properties.Name} does not appear on the current map. Which map do you want to switch to? </p>`;
 
@@ -532,7 +643,7 @@ searchControl.on("search:locationfound", (e) => {
         }
         content += "</select>";
         content +=
-          '<div id="popup_btn_div" style="text-align:right"><button onClick = \'map.closePopup()\'> Cancel </button>  <button onClick =\'popupYearSelect(' +
+          '<br><div id="popup_btn_div" style="text-align:right; padding-top:25px;"><button class="cancel-button" onmousedown=\'cancel_button()\' onClick = \'map.closePopup()()\'> Cancel </button>  <button class="ok-button" onmousedown=\'ok_button()\'  onClick =\'popupYearSelect(' +
           e.layer._leaflet_id +
           ")'>OK</button></div>";
       }
@@ -592,7 +703,7 @@ let baselayers = {
   1871: nashville1871Tile1444_578,
   1903: nashville1903Tile1444_578,
   1929: nashville1929Tile1444_578,
-  2016: nashville2016Tile1444_578,
+//   2016: nashville2016Tile1444_578,
 
   // 1952: gdalTilesFrom_2016_2x,
   // streets: gdalTiles,
@@ -654,15 +765,25 @@ if (debugMode) {
 }
 function adjustHeight() {
   let adjheight = $("#map").height() - $("#control-head").height() - 120;
+  $("#about_div").height(adjheight); //shubham
   $("#select_div").height(adjheight);
   $("#legend_img").height(adjheight);
   $("#search_div").height(adjheight + 10);
   $(".search-tooltip").height(adjheight - $(".search-input").height() - 100);
 }
 $(document).ready(function () {
-  $(window).resize(function () {
-    adjustHeight();
-  });
+    $(window).resize(function () {
+        adjustHeight();
+    });
+    // $('.ok-button').click(function(){ // shubham_20_12_23
+    //     $('.ok-button').attr('style','background-color: white; color: black;');
+    //     console.log('testing on ok button');
+    // });
+    // $('.cancel-button').click(function(){ // shubham_20_12_23
+    //     // $('.ok-button').attr('style','background-color: black; color: white;');
+    //     map.closePopup();
+    //     console.log('testing on cancel button');
+    // });
 });
 function selectMode(elem) {
   let mode = elem.innerText;
@@ -731,6 +852,10 @@ function selectMode(elem) {
         // $("#overlayRadio > input")[1].checked = true; // check the off button
         $("#offRedioOverlay").prop("checked", true).trigger("click");
       }
+
+      $("#select_div").html( //shubham_04_01_2024
+        '<p id="no_selection_description">In Landmarks or Streets modes this tab will display information about the selected marker.</p>'
+      );
       // if (!$("#selection_btn.active")[0]) {
       //   openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
       // }
@@ -748,8 +873,8 @@ function selectMode(elem) {
       if (previousselectedlandmark) {
         previousselectedlandmark.setIcon(
           L.icon({
-            iconUrl: "images/landmarks_streets/unselectedlandmark.png",
-            iconSize: [24, 28],
+            iconUrl: "images/landmarks_streets/unselectedlandmark_new.png",
+            iconSize: [23, 28],
             iconAnchor: [12, 28],
           })
         );
@@ -902,9 +1027,9 @@ function selectMode(elem) {
       $("#select_div").html(
         '<p id="no_selection_description">For now the map of the Battle of Nashville is not interactive and shows only the positions of the armies on the first day of fighting, December 15th, 1864. Check back later for an enhanced map of the battle.</p>'
       );
-      // if(!$("#selection_btn.active")[0]){
-      //   openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
-      // }
+      if(!$("#selection_btn.active")[0]){
+        openCity({ currentTarget: $("#selection_btn")[0] }, "Selection");
+      }
       break;
   }
 }
@@ -941,10 +1066,18 @@ function selectYear(elem) {
   }
 }
 
+function cancel_button(){ //shubham_20_12_23
+    $('.cancel-button').attr('style','background-color: black; color: white;');
+}
+function ok_button(){ //shubham_20_12_23
+    $('.ok-button').attr('style','background-color: white; color: black;');
+}
+
 function popupYearSelect(leaflet_id) {
   let popupYear = $("#popupYear").val();
-  debugger;
+//   debugger;
   if (popupYear != "Select") {
+      console.log(popupYear,'shubham 1')
     selectMode({ innerText: "Landmarks" });
     $("#mode.select-selected")[0].innerText = "Landmarks";
     selectYear(popupYear);
@@ -960,6 +1093,7 @@ function popupYearSelect(leaflet_id) {
     map.closePopup();
     map.panBy([200, 0]);
   } else {
+    $('.ok-button').attr('style','background-color: black; color: white;'); //shubham_20_12_23
     alert("Please select year...");
   }
 }
@@ -983,6 +1117,7 @@ function select2016Overlay($elem) {
   }
 }
 function zoomInMap() {
+  console.log(map,'shubham_map');
   // map.zoomIn(zoomStep);
   $zoomText = parseFloat($("#zoomText").html());
   // debugger;
@@ -1023,15 +1158,48 @@ function zoomOutMap() {
 
 map.on("zoomend", updateZoomText);
 function updateZoomText() {
-  if (map.getZoom() == centZoom) {
-    $("#zoomText").html("1x");
-  } else if (map.getZoom() < centZoom) {
-    $("#zoomText").html("0.5x");
-  } else if (map.getZoom() <= centZoom + zoomStep) {
-    $("#zoomText").html("2x");
-  } else {
-    $("#zoomText").html("4x");
-  }
+    // $('.leaflet-marker-pane img').attr('style','width:20px');
+    if (map.getZoom() == centZoom) {
+        $("#zoomText").html("1x");
+        console.log('1x');
+        // document.querySelectorAll('.leaflet-marker-pane img').forEach(function(button) {
+          //     image_check = $(button).attr('src');
+          //     let result = image_check.includes("/selected");
+          //     if(!result){
+            //     $(button).attr('src','images/landmarks_streets/unselectedlandmark_2x.png');
+            //     }
+            // });
+          } else if (map.getZoom() < centZoom) {
+            $("#zoomText").html("0.5x");
+            console.log('0.5x');
+            // document.querySelectorAll('.leaflet-marker-pane img').forEach(function(button) {
+              //     image_check = $(button).attr('src');
+        //     let result = image_check.includes("/selected");
+        //     if(!result){
+        //     $(button).attr('src','images/landmarks_streets/unselectedlandmark_2x.png');
+        //     }
+        // });
+    } else if (map.getZoom() <= centZoom + zoomStep) {
+        $("#zoomText").html("2x");
+        console.log('2x');
+        // document.querySelectorAll('.leaflet-marker-pane img').forEach(function(button) {
+          //     image_check = $(button).attr('src');
+          //     let result = image_check.includes("/selected");
+          //     if(!result){
+            //     $(button).attr('src','images/landmarks_streets/unselectedlandmark_2x.png');
+            //     }
+            // });
+          } else {
+            $("#zoomText").html("4x");
+            console.log('4x');
+        // document.querySelectorAll('.leaflet-marker-pane img').forEach(function(button) {
+        //     image_check = $(button).attr('src');
+        //     let result = image_check.includes("/selected");
+        //     if(!result){
+        //     $(button).attr('src','images/landmarks_streets/unselectedlandmark_2x.png');
+        //     }
+        // });
+    }
 }
 updateZoomText();
 
@@ -1046,6 +1214,8 @@ window.onload = function () {
 
   $("#informationPanal").show();
   openCity(event, "About");
+  $('#about_btn').addClass('active');
+  adjustHeight();
 
   map.panBy([-300, 0]);
 };
