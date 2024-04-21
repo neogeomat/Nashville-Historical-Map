@@ -30,6 +30,7 @@
   position: absolute;
   z-index: 1000;
   /* height: calc(100vh - 5vh); */
+  height: 95vh; /* shubham 18_12_23 */
   /* font-size: 16px; */
   font-size: var(--fontsize);
   font-family: "BloggerSans", Georgia;
@@ -47,8 +48,10 @@
   position: absolute;
   height: 1em;
   width: 1em;
-  top: 0.5em;
-  right: 0.5em;
+  /*top: 0.5em;*/
+  /*right: 0.5em;*/
+  top: 0.9em; /* shubham_15_12_23 */
+  right: 1.0em; /* shubham_15_12_23 */
 }
 
 #logo {
@@ -75,7 +78,8 @@
   width: 1em;
   /* top: 10.5em; */
   /* bottom: 0.5em; */
-  right: 0.5em;
+  /*right: 0.5em;*/
+  right: 1.0em; /* shubham_15_12_23 */
 }
 
 body {
@@ -208,6 +212,11 @@ body {
   /* width: 280px; */
 /* } */
 
+#About{
+    /*height: 600px;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 #About span{
   font-size: calc(var(--fontsize) + 9px);
   font-family: "BloggerSans", Georgia;
@@ -215,11 +224,24 @@ body {
   text-align: center;
   padding-top: 10px;
 }
-#About p{
+#About .para{
   font-size: var(--fontsize);
   font-family: "BloggerSans", Georgia;
-  padding: 10px;
-  text-align: justify;
+  padding: 0px 10px;
+  /* text-align: justify; */
+}
+#About .para .main-heading{
+  padding: 10px 0px 5px 0px
+  ;text-align:center;
+  font-size: 19pt;
+}
+#About .para .heading{
+  padding: 7px 0px 5px 0px;
+  font-size: 15pt;
+}
+#About .para .content{
+  padding: 5px 0px;
+  font-size: 12pt;
 }
 #About .payment-icons{
   display: flex;
@@ -228,6 +250,9 @@ body {
 }
 #About .payment-icons div{
   width: 30%;
+}
+#About #about_div{
+  padding: 5px;
 }
 #SelectionName {
   text-align: center;
@@ -255,7 +280,8 @@ body {
 }
 
 #selection_description{
-  margin-top: 30px;
+  /* margin-top: 30px;*/  /* shubham 21_12_23 */
+  margin-top: 29px; /* shubham 21_12_23 */
   white-space: pre-line;
 }
 .hidden {
